@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>788</width>
+    <height>408</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QMdiArea" name="mdiArea"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>788</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuCai_dat">
+    <property name="title">
+     <string>&amp;Cai dat</string>
+    </property>
+    <addaction name="actionSQL"/>
+   </widget>
+   <addaction name="menuCai_dat"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionDan_nhap"/>
+   <addaction name="actionPhieu_DK"/>
+   <addaction name="actionKham_SB"/>
+   <addaction name="actionDong_Phi"/>
+   <addaction name="actionTiem"/>
+  </widget>
+  <action name="actionSQL">
+   <property name="text">
+    <string>&amp;SQL</string>
+   </property>
+  </action>
+  <action name="actionCoding_Style">
+   <property name="text">
+    <string>Coding Style</string>
+   </property>
+  </action>
+  <action name="actionDan_nhap">
+   <property name="text">
+    <string>Dan nhap</string>
+   </property>
+  </action>
+  <action name="actionPhieu_DK">
+   <property name="text">
+    <string>Phieu DK</string>
+   </property>
+  </action>
+  <action name="actionKham_SB">
+   <property name="text">
+    <string>Kham SB</string>
+   </property>
+  </action>
+  <action name="actionDong_Phi">
+   <property name="text">
+    <string>Dong Phi</string>
+   </property>
+  </action>
+  <action name="actionTiem">
+   <property name="text">
+    <string>Tiem</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
