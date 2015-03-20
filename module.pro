@@ -24,8 +24,7 @@ SOURCES += main.cpp\
     dongphi.cpp \
     tiemngua.cpp \
     danhsachboqua.cpp \
-    dialog_jumstt.cpp \
-    testwg.cpp
+    dialog_jumstt.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -38,8 +37,7 @@ HEADERS  += mainwindow.h \
     dongphi.h \
     tiemngua.h \
     danhsachboqua.h \
-    dialog_jumstt.h \
-    testwg.h
+    dialog_jumstt.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -48,5 +46,4 @@ FORMS    += mainwindow.ui \
     khamsobo.ui \
     dongphi.ui \
     tiemngua.ui \
-    danhsachboqua.ui \
-    testwg.ui
+    danhsachboqua.ui
