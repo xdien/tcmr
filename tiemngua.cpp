@@ -8,7 +8,7 @@ tiemngua::tiemngua(QWidget *parent) :
 {
     ui->setupUi(this);
     //this->update();
-    stt = new managerSTT();
+    stt = new managerSTT("tiemngua");
     ngay = QDate::currentDate();
     //this->updatebar();
     qDebug() << stt->getcurrentindex();
@@ -45,13 +45,13 @@ tiemngua::~tiemngua()
 */
 void tiemngua::updateMainContent(int stt)
 {
-    query.exec("select ma_phieu,stt from hoa_don where date(ngay_lap) = current_date and stt ='"+QString::number(stt) +"'");
+    query.exec("select phieu_tiem.ma_phieu,stt,phieu_tiem.ma_bn from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where date(ngay_lap) = current_date and stt ='"+QString::number(stt) +"'");
     if(query.next()){
         ui->pushButton_2->setEnabled(true);
         maphieu = query.value(0).toString();
+        ma_bn = query.value(2).toString();
         this->infobenh(maphieu);
         this->infothuoc(maphieu);
-        this->showMuiTiem(maphieu);
     }else{
         QMessageBox invali;
         invali.setText("Chua co benh nhan nao trong phong doi");
@@ -104,16 +104,16 @@ void tiemngua::infothuoc(QString maphieu)
 //        query.lastError();
 //    }
 
-    dsthuoc.setQuery("select thuoc.ten_thuoc,lieu_dung from phieu_tiem \
+    dsthuoc.setQuery("select thuoc.ten_thuoc,lieu_dung,thuoc.ma_thuoc from phieu_tiem \
                      right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu \
                      left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
                      left join do_tuoi on do_tuoi.ma_dotuoi =thuoc.ma_dotuoi where phieu_tiem.ma_phieu ='"+maphieu+"'");
 }
 /*hien thi cac mui tiem da tiem va ngay tiem*/
-void tiemngua::showMuiTiem(QString ma_bnI){
-    querymodel.setQuery(" select * from tt_benh_nhan \
-                        left join phieu_tiem on phieu_tiem.ma_bn = tt_benh_nhan.ma_bn \
-                        right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu where ma_bn = '"+ma_bnI+"'");
+void tiemngua::showMuiTiem(QString ma_bnI, QString mat){
+    querymodel.setQuery(" select tiem.ma_thuoc from tiem left join tt_benh_nhan on tt_benh_nhan.ma_bn = tiem.ma_bn \
+                        left join phieu_tiem on phieu_tiem.ma_phieu = tiem.ma_phieu where \
+                        phieu_tiem.ngay_tiem is not null and phieu_tiem.ma_bn = '"+ma_bnI+"' and tiem.ma_thuoc = '"+mat+"'");
     ui->treeView->setModel(&querymodel);
 }
 
@@ -149,6 +149,7 @@ void tiemngua::on_pushButton_clicked()
     }else{
         qDebug() << query.lastError().text();
     }
+    this->cleanFroms();
 }
 void tiemngua::cleanFroms()
 {
@@ -217,4 +218,9 @@ void tiemngua::on_danhsanhcho_clicked(const QModelIndex &index)
 {
     this->updateMainContent(this->danhsachchomodel.index(index.row(),0).data().toInt());
     stt->setIDX(this->danhsachchomodel.index(index.row(),0).data().toInt());
+}
+
+void tiemngua::on_tableView_clicked(const QModelIndex &index)
+{
+            this->showMuiTiem(ma_bn,this->dsthuoc.index(index.row(),2).data().toString());
 }

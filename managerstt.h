@@ -12,11 +12,12 @@ class managerSTT
 {
 public:
     int STT;
-    managerSTT();
+    managerSTT(QString beginGroup_name);
     int getcurrentindex();
     int next();
     ~managerSTT();
     void setIDX(int stt);
+    void setbeginGroupName(QString name);
 private:
     QDomElement root;
     QDomDocument doc;
@@ -25,6 +26,7 @@ private:
     QFile xmlFile;
     int arridx, idx, tmpidx;
     QString date;
+    QString group_name;
 };
 
 #endif // MANAGERSTT_H

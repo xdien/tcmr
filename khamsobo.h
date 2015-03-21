@@ -37,17 +37,17 @@ private slots:
 
 private:
     void loaddanhsach_chokham();
-    manageIndex *manageindex;
+    manageIndex id;
     Ui::khamsobo *ui;
     QSqlQuery query;
     QSqlQueryModel danhsachCho,danhsachBenhdk,danhsachBenh,danhsach_goiyThuoc;
     void setcurentidx();
     managerSTT *stt;
-    int col,row,sodong;
+    int col,row,sodong,chu_ky;
     QString mot,hai,ba;
     QModelIndex idx;
-    QDate ngay_sinh;
-    QString ma_bn,ma_benh,ma_nv,ma_phieu,ma_thuoc;
+    QDate ngay_sinh,ngay_hen;
+    QString ma_bn,ma_benh,ma_nv,ma_phieu,ma_thuoc,ma_phieuhen,ktimdc,ngay_taihen;
     int do_tuoi, thuoc_num;
     QStandardItemModel itemModel_thuocDChon,itemModel_benhDChon;
     void infoTTbenhNhan(QString ma_phieu);
@@ -55,6 +55,8 @@ private:
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);
+    void lapphieuHen(QString mabn, QString manv, QString maPHIEUTIEM, QString mabenh);
+    QString tinh_ngayTaiHen(QString mathuoc);
 };
 
 #endif // KHAMSOBO_H

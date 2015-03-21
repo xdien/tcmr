@@ -26,7 +26,7 @@ public slots:
     void updateMainContent(int stt);
     void infobenh(QString maphieu);
     void infothuoc(QString maphieu);
-    void showMuiTiem(QString ma_bnI);
+    void showMuiTiem(QString ma_bnI, QString mat);
     void cleanFroms();
     void receivers_stt(QString stt);
 
@@ -40,6 +40,8 @@ private slots:
     void getID();
 
     void on_danhsanhcho_clicked(const QModelIndex &index);
+
+    void on_tableView_clicked(const QModelIndex &index);
 
 private:
     QSqlQuery query;

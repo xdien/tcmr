@@ -7,15 +7,13 @@
 #include <QSettings>
 #include <QDate>
 
-managerSTT::managerSTT()
+managerSTT::managerSTT(QString beginGroup_name)
 {
     QSettings sett("stt.ini",QSettings::IniFormat);
     idx = 0;
     arridx = 0;
-    sett.beginGroup("STT");
-//    sett.beginReadArray("ignore");
-//    sett.setArrayIndex(0);
-//    sett.setValue("tt","sadasd");
+    group_name = beginGroup_name;
+    sett.beginGroup(group_name);
     tmpidx = sett.value("index").toInt();
     date = sett.value("date").toString();
     if(tmpidx <= 0|| date != QDate::currentDate().toString("dd/MM/yyyy")){
@@ -25,6 +23,9 @@ managerSTT::managerSTT()
     }else{
         idx = sett.value("index").toInt();
     }
+}
+void managerSTT::setbeginGroupName(QString name){
+    group_name = name;
 }
 
 managerSTT::~managerSTT()
@@ -37,7 +38,7 @@ int managerSTT::getcurrentindex()
 int managerSTT::next()
 {
     QSettings sett("stt.ini",QSettings::IniFormat);
-    sett.beginGroup("STT");
+    sett.beginGroup(group_name);
     idx = sett.value("index").toInt();
     idx = idx +1;
     sett.setValue("index", QString::number(idx));
@@ -46,7 +47,7 @@ int managerSTT::next()
 void managerSTT::setIDX(int stt)
 {
     QSettings sett("stt.ini",QSettings::IniFormat);
-    sett.beginGroup("STT");
+    sett.beginGroup(group_name);
     idx = stt;
     sett.setValue("index", QString::number(stt));
 }

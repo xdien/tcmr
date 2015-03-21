@@ -8,6 +8,7 @@
 #include <QtSql>
 #include <QStandardItemModel>
 #include "manageindex.h"
+#include "managerstt.h"
 
 namespace Ui {
 class Dangkyphieutiem;
@@ -34,6 +35,10 @@ private slots:
 
     void on_listView_benh_doubleClicked(const QModelIndex &index);
 
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_tiemKiem_clicked();
+
 private:
     Ui::Dangkyphieutiem *ui;
     QString thuocdiachi(QString nhapvao);
@@ -51,11 +56,12 @@ private:
     //lay ma dia chi tu combox
     QString getAdrrCode();
     QString getSex();
-     QStandardItemModel itemModel;
-     QList<QStandardItem *> prepareRow(const QString &first, const QString &second, const QString &third);
-     QList<QStandardItem *> preparedRow;
-     QString mot,hai,ba;
-     manageIndex id;
+    QStandardItemModel itemModel;
+    QList<QStandardItem *> prepareRow(const QString &first, const QString &second, const QString &third);
+    QList<QStandardItem *> preparedRow;
+    QString mot,hai,ba;
+    manageIndex id;
+    managerSTT *stt;
 };
 
 #endif // DANGKYPHIEUTIEM_H

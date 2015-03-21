@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>810</width>
-    <height>657</height>
+    <width>998</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -60,9 +60,9 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>50</y>
-      <width>461</width>
-      <height>421</height>
+      <y>70</y>
+      <width>421</width>
+      <height>301</height>
      </rect>
     </property>
     <property name="title">
@@ -208,39 +208,12 @@
       </size>
      </property>
     </widget>
-    <widget class="QTreeView" name="treeView_benhdk">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>280</y>
-       <width>220</width>
-       <height>138</height>
-      </rect>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>220</width>
-       <height>220</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QTreeView" name="treeView_thuocgoiY">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>280</y>
-       <width>199</width>
-       <height>138</height>
-      </rect>
-     </property>
-    </widget>
-    <zorder>groupBox</zorder>
    </widget>
    <widget class="QPushButton" name="khongduak">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>560</y>
+      <x>290</x>
+      <y>420</y>
       <width>173</width>
       <height>35</height>
      </rect>
@@ -265,8 +238,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>570</y>
+      <x>790</x>
+      <y>410</y>
       <width>159</width>
       <height>35</height>
      </rect>
@@ -279,17 +252,17 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>30</y>
-      <width>251</width>
-      <height>511</height>
+      <y>60</y>
+      <width>231</width>
+      <height>431</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>570</y>
+      <x>530</x>
+      <y>440</y>
       <width>81</width>
       <height>35</height>
      </rect>
@@ -301,8 +274,8 @@
    <widget class="QListView" name="danhsach_chonthuoc">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>480</y>
+      <x>740</x>
+      <y>340</y>
       <width>211</width>
       <height>61</height>
      </rect>
@@ -311,11 +284,50 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>500</y>
+      <x>640</x>
+      <y>430</y>
       <width>113</width>
       <height>22</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QTreeView" name="treeView_benhdk">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>40</y>
+      <width>220</width>
+      <height>138</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>220</width>
+      <height>220</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QTreeView" name="treeView_thuocgoiY">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>190</y>
+      <width>199</width>
+      <height>138</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_khogtimdc">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>400</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Khong hte tiem</string>
     </property>
    </widget>
   </widget>
@@ -324,7 +336,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>810</width>
+     <width>998</width>
      <height>19</height>
     </rect>
    </property>

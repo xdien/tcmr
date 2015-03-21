@@ -18,11 +18,16 @@ Dangkyphieutiem::Dangkyphieutiem(QWidget *parent) :
     table_thuoc = new QSqlQueryModel();
     //ui->tableView_loaithuoc->setModel(table_thuoc);
     ui->listView_duocchon->setModel(&itemModel);
+    stt = new managerSTT("dangkytt");
 }
 
 Dangkyphieutiem::~Dangkyphieutiem()
 {
     delete ui;
+    delete list_benh;
+    delete cmb_tp;
+    delete stt;
+    delete table_thuoc;
 }
 
 void Dangkyphieutiem::on_comboBox_tp_currentIndexChanged(int index)
@@ -189,46 +194,33 @@ void Dangkyphieutiem::on_luu_tt_clicked()
     query.exec("select * from nv_dangnhap");
     if(query.next())
     {
-        ma_nv = query.value(0).toString();
-        ma_dc = this->getAdrrCode();
-        gioitinh = this->getSex();
-        ten_bn = ui->ten->text();
-        ma_bn = id.getNextIndexCode("tt_benh_nhan","BN");
-        QString str;
-        str = "insert into tt_benh_nhan values('"+ma_bn+"', '"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"' )";
-        query.exec(str);
-        //lay stt lieu tiem trong phieu tiem truoc cua benh nhan
-        query.exec("select * from stt_lieu where ma_bn = '" + ma_bn+ "'");
-        if(query.next())
-        {
-            stt_lieu = query.value(0).toInt();
-            stt_lieu = stt_lieu +1;
-        }else{
-            stt_lieu =1;
-        }
-       // ma_thuoc = ui->tableView_loaithuoc->model()->index(ui->tableView_loaithuoc->currentIndex().row(),2).data().toString();
-
-        //lay ma phieu tiem neu ma phieu tiem = null thi gan ma_pt = 0
-        ma_pt = id.getNextIndexCode("phieu_tiem","PT");
-        //insert phieu tiem
-        query.exec("insert into phieu_tiem values('"+ma_pt+"','"+ma_bn+"','"+ma_nv+"',NULL,'"+QString::number(stt_lieu)+"',current_date)");//lap phieu
-        thuoc_num = itemModel.rowCount();
-        for(int i =0;i<thuoc_num;i++){
-            ma_thuoc = itemModel.index(i,1).data().toString();
-            query.exec("insert into muon_tiem values('"+ma_pt+"','"+ma_thuoc+"')");
-            qDebug()<<i;
-        }
+        //kiem tra xem co nhap vao ma bn k, neu co thi lap theo ma_bn
+//            ma_pt = id.getNextIndexCode("phieu_tiem","PT");
+//            //insert phieu tiem
+//            query.exec("insert into phieu_tiem values('"+ma_pt+"','"+ui->line_mabn->text()+"','"+ma_nv+"',NULL,'"+QString::number(stt_lieu)+"',current_date)");//lap phieu
+            ma_nv = query.value(0).toString();
+            ma_dc = this->getAdrrCode();
+            gioitinh = this->getSex();
+            ten_bn = ui->ten->text();
+            ma_bn = id.getNextIndexCode("tt_benh_nhan","BN");
+            QString str;
+            str = "insert into tt_benh_nhan values('"+ma_bn+"', '"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"','"+QString::number(stt->getcurrentindex())+"',current_date,NULL)";
+            if(query.exec(str))
+                stt->next();
+            //lay ma phieu tiem neu ma phieu tiem = null thi gan ma_pt = 0
+//            ma_pt = id.getNextIndexCode("phieu_tiem","PT");
+//            //insert phieu tiem
+//            query.exec("insert into phieu_tiem values('"+ma_pt+"','"+ma_bn+"','"+ma_nv+"',NULL,'"+QString::number(stt_lieu)+"',current_date)");//lap phieu
+            thuoc_num = itemModel.rowCount();
+            for(int i =0;i<thuoc_num;i++){
+                ma_thuoc = itemModel.index(i,1).data().toString();
+                query.exec("insert into muon_tiem values('"+ma_thuoc+"','"+ma_bn+"')");
+                qDebug()<<i;
+            }
     }else{
         qDebug() << "Can't get id NHAN_VIEN";
     }
     qDebug() << query.lastError().text();
-     //insert cac loai thuoc duoc chon theo phieu tiem
-//     thuoc_num = itemModel.rowCount();
-//     for(int i =0;i<thuoc_num;i++){
-//         ma_thuoc = itemModel.index(i,1).data().toString();
-//         query.exec("insert into tiem values('"+ma_thuoc+"','"+QString::number(ma_pt)+"',NULL,NULL)");
-//         qDebug()<<i;
-//     }
 
 }
 QString Dangkyphieutiem::getAdrrCode()
@@ -269,4 +261,21 @@ void Dangkyphieutiem::on_listView_benh_doubleClicked(const QModelIndex &index)
     hai = this->list_benh->index(index.row(),1).data().toString();
     ba = "";
     itemModel.appendRow(this->prepareRow(mot,hai,ba));
+}
+
+void Dangkyphieutiem::on_pushButton_3_clicked()
+{
+    qDebug() << id.getNextIndexCode("tt_benh_nhan","BN");
+}
+
+void Dangkyphieutiem::on_pushButton_tiemKiem_clicked()
+{
+    query.exec("select * from tt_benh_nhan where ma_bn = '"+ui->line_mabn->text()+"'");
+    if(query.next())
+    {
+        ui->kq_timkiem->setText("Tim thay");
+        ma_bn = query.value(0).toString();
+    }else{
+        ui->kq_timkiem->setText("khong tim thay");
+    }
 }

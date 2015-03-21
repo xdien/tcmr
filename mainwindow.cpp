@@ -7,7 +7,6 @@
 #include <dangkyphieutiem.h>
 #include "khamsobo.h"
 #include "tiemngua.h"
-#include "testwg.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
