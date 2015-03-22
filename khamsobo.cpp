@@ -68,7 +68,8 @@ void khamsobo::on_pushButton_clicked()
         }
         //lap phieu tiem
         ma_phieu = id.getNextIndexCode("phieu_tiem","PT");
-        if(query.exec("INSERT INTO phieu_tiem( ma_phieu, ma_bn, ma_nv, ngay_lap_pt) VALUES ('"+ ma_phieu +"', '"+ma_bn+"', '"+ma_nv+"', current_date)"))
+        //query.exec("")
+        if(query.exec("INSERT INTO phieu_tiem( ma_phieu, ma_bn, ma_nv, ngay_lap_pt, phieu_tiem_lan_dau) VALUES ('"+ ma_phieu +"', '"+ma_bn+"', '"+ma_nv+"', current_date)"))
         {
             //Nhap vao danh sach thuoc duoc chon
             thuoc_num = itemModel_thuocDChon.rowCount();
@@ -77,6 +78,7 @@ void khamsobo::on_pushButton_clicked()
                 query.exec("insert into tiem values('"+ma_thuoc+"','"+ma_phieu+"','"+ma_nv+"','"+ma_bn+"')");
                 qDebug()<<query.lastError().text();
             }
+            //query.exec("")
             if(!query.exec("update tt_benh_nhan set lap_phieu = 'TRUE' where ma_bn = '"+ma_bn+"'"))
                 qDebug() << query.lastError().text();
             this->loaddanhsach_chokham();
@@ -169,17 +171,6 @@ VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ 
 VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'FALSE',current_date)");
 
         }
-        //lap phieu hen// khong lap phieu hen cho truogn hop nay neu ben hnhan k du dk co cho quay ve
-//        if(ui->checkBox_khogtimdc->isChecked())
-//            ktimdc = "TRUE";
-//        else
-//            ktimdc = "FALSE";
-//        ngay_taihen = this->tinh_ngayTaiHen()
-//        ma_phieuhen =  id.getNextIndexCode("phieu_hen","PH");
-//        query.exec("INSERT INTO phieu_hen( \
-//                   ma_phieuhen, ma_bn, ma_nv, mui_thu, ngay_tai_hen, ngay_lap, khong_the_tiem) \
-//           VALUES ('"+ma_phieuhen+"', ?, ?, ?, ?, current_date, "+ktimdc +");");
-//        qDebug()<< query.lastError().text();
         this->loaddanhsach_chokham();
         //tra ve benh nhan ke tiep
         this->setcurentidx();

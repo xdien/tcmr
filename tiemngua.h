@@ -29,6 +29,7 @@ public slots:
     void showMuiTiem(QString ma_bnI, QString mat);
     void cleanFroms();
     void receivers_stt(QString stt);
+    void updateDScho();
 
 private slots:
     void on_pushButton_2_clicked();
@@ -44,20 +45,25 @@ private slots:
     void on_tableView_clicked(const QModelIndex &index);
 
 private:
-    QSqlQuery query;
+    QSqlQuery query,query_tmp,query_ham;
     Ui::tiemngua *ui;
     QDate ngay;
-    QString thongbao,ma_phieu;
+    QString thongbao,ma_phieu,ma_hoadon;
     //int stt;
     QSqlTableModel muitiem;
     QSqlQueryModel dsthuoc,querymodel,danhsachchomodel;
     QString tiem_thuocID;
     managerSTT *stt;
-    QString maphieu;
+    QString maphieu,ma_thuoc;
     QString MaHD;
     QString ma_bn;
-    int col,row;
+    QDate ngay_hen;
+    int col,row,chu_ky,sl_nhac_lai;
     QModelIndex idx;
+    QString tinh_ngayTaiHen(QString mathuoc);
+    void capnhatPhieuTiem();
+    QStringList  tinh_ngayhentheoDS(QString ma_phieu);
+    QString tinhSoTTLieu(QString mathuoc,QString mabn);
 };
 
 #endif // TIEMNGUA_H

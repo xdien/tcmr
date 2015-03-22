@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>833</width>
-    <height>393</height>
+    <width>831</width>
+    <height>337</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>310</y>
+      <x>140</x>
+      <y>260</y>
       <width>84</width>
       <height>35</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>310</y>
+      <x>330</x>
+      <y>260</y>
       <width>84</width>
       <height>35</height>
      </rect>
@@ -66,8 +66,8 @@
    <widget class="QTreeView" name="treeView">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>210</y>
+      <x>440</x>
+      <y>220</y>
       <width>381</width>
       <height>91</height>
      </rect>
@@ -280,24 +280,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>833</width>
-     <height>19</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuMo_rong">
-    <property name="title">
-     <string>&amp;Mo rong</string>
-    </property>
-    <addaction name="actionChon_nguoi_khong_theo_tt"/>
-   </widget>
-   <addaction name="menuMo_rong"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionChon_nguoi_khong_theo_tt">
    <property name="text">
     <string>&amp;Danh sach bo qua</string>

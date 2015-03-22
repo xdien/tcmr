@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>998</width>
-    <height>564</height>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -331,17 +331,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>998</width>
-     <height>19</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

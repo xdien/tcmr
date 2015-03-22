@@ -10,13 +10,8 @@ tiemngua::tiemngua(QWidget *parent) :
     //this->update();
     stt = new managerSTT("tiemngua");
     ngay = QDate::currentDate();
-    //this->updatebar();
-    qDebug() << stt->getcurrentindex();
-    danhsachchomodel.setQuery("select hoa_don.stt,tt_benh_nhan.ten from hoa_don \
-                              left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu \
-                              left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
-                              where ngay_tiem is null");
-            ui->danhsanhcho->setModel(&danhsachchomodel);
+    this->updateDScho();
+    ui->danhsanhcho->setModel(&danhsachchomodel);
     //this->initializeModel(&muitiem);
     //ui->tableView->setModel(&muitiem);
     ui->tableView->setModel(&dsthuoc);
@@ -45,10 +40,11 @@ tiemngua::~tiemngua()
 */
 void tiemngua::updateMainContent(int stt)
 {
-    query.exec("select phieu_tiem.ma_phieu,stt,phieu_tiem.ma_bn from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where date(ngay_lap) = current_date and stt ='"+QString::number(stt) +"'");
+    query.exec("select phieu_tiem.ma_phieu,stt,phieu_tiem.ma_bn,ma_hd from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where date(ngay_lap) = current_date and stt ='"+QString::number(stt) +"'");
     if(query.next()){
         ui->pushButton_2->setEnabled(true);
         maphieu = query.value(0).toString();
+        ma_hoadon = query.value(3).toString();
         ma_bn = query.value(2).toString();
         this->infobenh(maphieu);
         this->infothuoc(maphieu);
@@ -85,25 +81,6 @@ left join benh on benh.ma_benh = co_benh.ma_benh where phieu_tiem.ma_phieu ='" +
 }
 void tiemngua::infothuoc(QString maphieu)
 {
-//    QString strquery;
-//    strquery = "select thuoc.ten_thuoc,thuoc.ma_thuoc,thuoc.dung_tich,benh.ten_benh,do_tuoi.do_tuoi,do_tuoi.lieu_dung,phieu_tiem.ma_bn from \
-//phieu_tiem left join thuoc on thuoc.ma_thuoc = phieu_tiem.ma_thuoc \
-//left join phong_ngua on phong_ngua.ma_thuoc = thuoc.ma_thuoc \
-//left join benh on benh.ma_benh = phong_ngua.ma_benh \
-//left join do_tuoi on do_tuoi.ma_dotuoi = thuoc.ma_dotuoi where phieu_tiem.ma_phieu = '"+maphieu+"'";
-//    query.exec(strquery);
-//    if(query.next()){
-//        ui->tenthuoc->setText(query.value(0).toString());//ten thuoc
-//        ui->dungtich->setText(query.value(2).toString());
-//        ui->hieuluc->setText(query.value(3).toString());
-//        ui->dotuoi->setText(query.value(4).toString());
-//        ui->lieudung->setText(query.value(5).toString());
-//        ma_bn = query.value(6).toString();
-//        qDebug() << "ma benh nhan la " << ma_bn;
-//    }else{
-//        query.lastError();
-//    }
-
     dsthuoc.setQuery("select thuoc.ten_thuoc,lieu_dung,thuoc.ma_thuoc from phieu_tiem \
                      right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu \
                      left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
@@ -123,11 +100,22 @@ void tiemngua::on_pushButton_2_clicked()
     /*
      * Nut tiep theo luu thong tin ngay tiem,
      * */
-    if(!query.exec("update phieu_tiem set ngay_tiem= current_date where ma_phieu = '"+maphieu+"'"))
+    //cap nhat ngay tiem cho bang "tiem"
+    query.exec("select ma_thuoc from tiem where ma_phieu ='"+maphieu+"'");
+    while(query.next())
+    {
+        ma_thuoc = query.value(0).toString();
+        query_tmp.exec("update tiem set ngay_tiem = current_date, stt_lieu = '"+this->tinhSoTTLieu(ma_thuoc,ma_bn)+"',ngay_hen_kt = '"+ this->tinh_ngayTaiHen(ma_thuoc)+ "' where ma_phieu = '"+maphieu+"'");
+    }
+    qDebug() << query.lastError().text();
+    qDebug() << query_tmp.lastError().text();
+    query.exec("update tt_benh_nhan set da_tiemlandau = TRUE where ma_bn = '"+ma_bn+"'");
+    if(!query.exec("update hoa_don set da_tiem= TRUE where ma_hd = '"+ma_hoadon+"'"))
         qDebug() << query.lastError().text();
     this->cleanFroms();
-    danhsachchomodel.setQuery("select * from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where ngay_tiem is null");
+    //danhsachchomodel.setQuery("select * from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where ngay_tiem is null");
     //drop cac bang duoc cap nhat trong bang bo_qua
+    this->updateDScho();
     this->setcurentidx();
     this->updateMainContent(ui->danhsanhcho->model()->index(ui->danhsanhcho->currentIndex().row(),0).data().toInt());
 }
@@ -201,9 +189,6 @@ void tiemngua::getID()
 
 void tiemngua::setcurentidx()
 {
-//    index = ui->danhsanhcho->currentIndex();
-//    row = index.row() + 1;
-//    row = index.row();
     row = stt->getcurrentindex();
     col = 0;
     idx  = ui->danhsanhcho->model()->index(row,col);
@@ -211,7 +196,6 @@ void tiemngua::setcurentidx()
     ui->danhsanhcho->setCurrentIndex(idx);
     ui->danhsanhcho->setFocus();
     ui->danhsanhcho->clicked(idx);
-    //qDebug()<<ui->danhsanhcho->model()->index(ui->danhsanhcho->currentIndex().row(),0).data().toString();
 }
 
 void tiemngua::on_danhsanhcho_clicked(const QModelIndex &index)
@@ -223,4 +207,43 @@ void tiemngua::on_danhsanhcho_clicked(const QModelIndex &index)
 void tiemngua::on_tableView_clicked(const QModelIndex &index)
 {
             this->showMuiTiem(ma_bn,this->dsthuoc.index(index.row(),2).data().toString());
+}
+void tiemngua::updateDScho()
+{
+    danhsachchomodel.setQuery("select hoa_don.stt,tt_benh_nhan.ten from hoa_don \
+                              left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu \
+                              left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
+                              where hoa_don.ngay_lap = current_date  and hoa_don.da_tiem is null");
+}
+QString tiemngua::tinh_ngayTaiHen(QString mathuoc)
+{
+    query_ham.exec("select chu_ky,sl_nhac_lai from thuoc where ma_thuoc = '"+mathuoc+"'" );
+    if(query_ham.next())
+    {
+        sl_nhac_lai = query_ham.value(1).toInt();
+        if(sl_nhac_lai > 0){
+            chu_ky = query_ham.value(0).toInt();
+            return ngay_hen.currentDate().addDays(chu_ky).toString();
+        }
+    }
+    else
+        return "NULL";
+}
+void tiemngua::capnhatPhieuTiem()
+{
+
+
+
+}
+QString tiemngua::tinhSoTTLieu(QString mathuoc,QString mabn)
+{
+    query_ham.exec("select count(ma_thuoc) from tiem where ma_bn ='"+mabn+"' and ma_thuoc ='"+mathuoc+"'");
+    if(query_ham.next())
+    {
+        return query_ham.value(0).toString();
+    }
+    else{
+        return "0";
+    }
+
 }

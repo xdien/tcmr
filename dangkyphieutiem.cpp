@@ -194,10 +194,6 @@ void Dangkyphieutiem::on_luu_tt_clicked()
     query.exec("select * from nv_dangnhap");
     if(query.next())
     {
-        //kiem tra xem co nhap vao ma bn k, neu co thi lap theo ma_bn
-//            ma_pt = id.getNextIndexCode("phieu_tiem","PT");
-//            //insert phieu tiem
-//            query.exec("insert into phieu_tiem values('"+ma_pt+"','"+ui->line_mabn->text()+"','"+ma_nv+"',NULL,'"+QString::number(stt_lieu)+"',current_date)");//lap phieu
             ma_nv = query.value(0).toString();
             ma_dc = this->getAdrrCode();
             gioitinh = this->getSex();

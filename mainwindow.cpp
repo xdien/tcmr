@@ -7,6 +7,7 @@
 #include <dangkyphieutiem.h>
 #include "khamsobo.h"
 #include "tiemngua.h"
+#include "tracuuphieuhen.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -63,4 +64,11 @@ void MainWindow::on_actionTiem_triggered()
     tiemngua *ss = new tiemngua();
     ui->mdiArea->addSubWindow(ss);
     ss->showMaximized();
+}
+
+void MainWindow::on_actionTrC_phieu_hen_triggered()
+{
+    tracuuPhieuHen *phieuhen;
+    phieuhen = new tracuuPhieuHen();
+    phieuhen->show();
 }

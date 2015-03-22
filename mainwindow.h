@@ -31,6 +31,8 @@ private slots:
 
     void on_actionTiem_triggered();
 
+    void on_actionTrC_phieu_hen_triggered();
+
 private:
     Ui::MainWindow *ui;
     QSqlQuery query;

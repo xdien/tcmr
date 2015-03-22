@@ -53,6 +53,7 @@
    <addaction name="actionKham_SB"/>
    <addaction name="actionDong_Phi"/>
    <addaction name="actionTiem"/>
+   <addaction name="actionTrC_phieu_hen"/>
   </widget>
   <action name="actionSQL">
    <property name="text">
@@ -87,6 +88,11 @@
   <action name="actionTiem">
    <property name="text">
     <string>Tiem</string>
+   </property>
+  </action>
+  <action name="actionTrC_phieu_hen">
+   <property name="text">
+    <string>TrC phieu hen</string>
    </property>
   </action>
  </widget>

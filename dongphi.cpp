@@ -8,7 +8,7 @@ dongphi::dongphi(QWidget *parent) :
     ui->setupUi(this);
     qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem \
                      left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
-left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn \
+                     left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn \
                      left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu \
                      where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date");
     ui->tableView->setModel(&qrmodel);

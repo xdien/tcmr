@@ -57,6 +57,7 @@ private:
                                                     const QString &third);
     void lapphieuHen(QString mabn, QString manv, QString maPHIEUTIEM, QString mabenh);
     QString tinh_ngayTaiHen(QString mathuoc);
+    bool lalandau;
 };
 
 #endif // KHAMSOBO_H
