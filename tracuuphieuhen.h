@@ -27,8 +27,7 @@ private slots:
 private:
     Ui::tracuuPhieuHen *ui;
     QSqlQuery query;
-    QStandardItemModel itemtDSbenh, itemtDSthuoc;
-    QSqlQueryModel thuocModel;
+    QStandardItemModel itemtDSbenh, itemtDSthuoc,thuocModel;
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);

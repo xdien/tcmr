@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     tiemngua.cpp \
     danhsachboqua.cpp \
     dialog_jumstt.cpp \
-    tracuuphieuhen.cpp
+    tracuuphieuhen.cpp \
+    managenv.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     tiemngua.h \
     danhsachboqua.h \
     dialog_jumstt.h \
-    tracuuphieuhen.h
+    tracuuphieuhen.h \
+    managenv.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -49,4 +51,5 @@ FORMS    += mainwindow.ui \
     dongphi.ui \
     tiemngua.ui \
     danhsachboqua.ui \
-    tracuuphieuhen.ui
+    tracuuphieuhen.ui \
+    managenv.ui

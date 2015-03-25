@@ -35,7 +35,20 @@
     </property>
     <addaction name="actionSQL"/>
    </widget>
+   <widget class="QMenu" name="menuBao_cao">
+    <property name="title">
+     <string>Bao cao</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHe_thong">
+    <property name="title">
+     <string>He tho&amp;ng</string>
+    </property>
+    <addaction name="actionQl_nv"/>
+   </widget>
    <addaction name="menuCai_dat"/>
+   <addaction name="menuBao_cao"/>
+   <addaction name="menuHe_thong"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
@@ -93,6 +106,11 @@
   <action name="actionTrC_phieu_hen">
    <property name="text">
     <string>TrC phieu hen</string>
+   </property>
+  </action>
+  <action name="actionQl_nv">
+   <property name="text">
+    <string>ql nv</string>
    </property>
   </action>
  </widget>

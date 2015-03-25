@@ -261,14 +261,3 @@ void Dangkyphieutiem::on_pushButton_3_clicked()
     qDebug() << id.getNextIndexCode("tt_benh_nhan","BN");
 }
 
-void Dangkyphieutiem::on_pushButton_tiemKiem_clicked()
-{
-    query.exec("select * from tt_benh_nhan where ma_bn = '"+ui->line_mabn->text()+"'");
-    if(query.next())
-    {
-        ui->kq_timkiem->setText("Tim thay");
-        ma_bn = query.value(0).toString();
-    }else{
-        ui->kq_timkiem->setText("khong tim thay");
-    }
-}

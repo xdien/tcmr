@@ -36,9 +36,6 @@ private slots:
     void on_listView_benh_doubleClicked(const QModelIndex &index);
 
     void on_pushButton_3_clicked();
-
-    void on_pushButton_tiemKiem_clicked();
-
 private:
     Ui::Dangkyphieutiem *ui;
     QString thuocdiachi(QString nhapvao);

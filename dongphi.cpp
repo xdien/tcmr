@@ -41,9 +41,9 @@ void dongphi::on_tableView_clicked(const QModelIndex &index)
                left join benh on benh.ma_benh = phong_ngua.ma_benh where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
     if(query.next())
     {
-            ui->loaithuoc->setText(query.value(0).toString());
+            //ui->loaithuoc->setText(query.value(0).toString());
             ui->sotien->setText(query.value(1).toString());
-            ui->loaibenh->setText(query.value(2).toString());
+            //ui->loaibenh->setText(query.value(2).toString());
       qDebug()<<"thanh cong";
     }
 

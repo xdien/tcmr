@@ -33,6 +33,8 @@ private slots:
 
     void on_actionTrC_phieu_hen_triggered();
 
+    void on_actionQl_nv_triggered();
+
 private:
     Ui::MainWindow *ui;
     QSqlQuery query;

@@ -8,6 +8,7 @@
 #include "khamsobo.h"
 #include "tiemngua.h"
 #include "tracuuphieuhen.h"
+#include "managenv.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -71,4 +72,11 @@ void MainWindow::on_actionTrC_phieu_hen_triggered()
     tracuuPhieuHen *phieuhen;
     phieuhen = new tracuuPhieuHen();
     phieuhen->show();
+}
+
+void MainWindow::on_actionQl_nv_triggered()
+{
+    ManageNV *nv;
+    nv = new ManageNV();
+    nv->show();
 }
