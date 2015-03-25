@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QtSql>
 #include <QDebug>
+#include "manageindex.h"
+#include "managerstt.h"
 
 namespace Ui {
 class dongphi;
@@ -28,9 +30,11 @@ private:
     Ui::dongphi *ui;
     QSqlQueryModel qrmodel;
     QSqlQuery query;
-    QString ma_bn;
+    QString ma_bn,ma_hd;
     QString ma_phieu,ma_nv;
-    int ma_hd,stt;
+    manageIndex id;
+    int stt;
+    managerSTT *stt_hd;
 };
 
 #endif // DONGPHI_H

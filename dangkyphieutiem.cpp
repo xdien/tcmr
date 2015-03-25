@@ -200,13 +200,10 @@ void Dangkyphieutiem::on_luu_tt_clicked()
             ten_bn = ui->ten->text();
             ma_bn = id.getNextIndexCode("tt_benh_nhan","BN");
             QString str;
-            str = "insert into tt_benh_nhan values('"+ma_bn+"', '"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"','"+QString::number(stt->getcurrentindex())+"',current_date,NULL)";
+            str = "INSERT INTO tt_benh_nhan(ma_bn, ten, gioi_tinh, ma_dc, dc_chi_tiet, sn, stt, ngay_lap, \
+                    lap_phieu, da_tiemlandau, tai_hen) values('"+ma_bn+"', '"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"','"+QString::number(stt->getcurrentindex())+"',current_date,NULL,NULL,NULL)";
             if(query.exec(str))
                 stt->next();
-            //lay ma phieu tiem neu ma phieu tiem = null thi gan ma_pt = 0
-//            ma_pt = id.getNextIndexCode("phieu_tiem","PT");
-//            //insert phieu tiem
-//            query.exec("insert into phieu_tiem values('"+ma_pt+"','"+ma_bn+"','"+ma_nv+"',NULL,'"+QString::number(stt_lieu)+"',current_date)");//lap phieu
             thuoc_num = itemModel.rowCount();
             for(int i =0;i<thuoc_num;i++){
                 ma_thuoc = itemModel.index(i,1).data().toString();

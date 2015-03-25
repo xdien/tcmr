@@ -58,6 +58,8 @@ private:
     void lapphieuHen(QString mabn, QString manv, QString maPHIEUTIEM, QString mabenh);
     QString tinh_ngayTaiHen(QString mathuoc);
     bool lalandau;
+    void loadchitietBN_M(QModelIndex indexx);
+    void loadchitietBN_C(QModelIndex indexx);
 };
 
 #endif // KHAMSOBO_H

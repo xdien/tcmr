@@ -39,7 +39,7 @@
     <string>lap phieu tiem</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="ma_bn">
    <property name="geometry">
     <rect>
      <x>150</x>

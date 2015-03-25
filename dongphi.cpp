@@ -6,6 +6,7 @@ dongphi::dongphi(QWidget *parent) :
     ui(new Ui::dongphi)
 {
     ui->setupUi(this);
+    stt_hd = new managerSTT("dongphi");
     qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem \
                      left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
                      left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn \
@@ -56,26 +57,16 @@ void dongphi::on_pushButton_6_clicked()
     {
         ma_nv = query.value(0).toString();
         //lay ma_hd sau do tang len 1
-        query.exec("select MA_HD from hoa_don order by MA_HD desc limit 1");
-        if(query.next())
-        {
-            ma_hd = query.value(0).toInt();
-            ma_hd = ma_hd +1;
-        }else{
-            ma_hd =0;
-        }
+        ma_hd = id.getNextIndexCode("hoa_don","HD");
         //lay stt tu trong hoa_don sau do tang 1 neu k co thi gan = 0
-        query.exec("select STT from hoa_don order by STT desc limit 1");
-        if(query.next())
-        {
-            stt = query.value(0).toInt();
-            stt = stt +1;
-        }else{
-            stt = 0;
-        }
-        QString str ="insert into hoa_don values('"+QString::number(ma_hd)+"','"+ma_phieu+"','"+ma_nv+"',current_date,'"+ui->sotien->text()+"','0','"+QString::number(stt)+"')";
-        query.exec(str);
-        qDebug() << query.lastError().text();
+        stt = stt_hd->getcurrentindex();
+        QString str ="insert into hoa_don( \
+                ma_hd, ma_phieu, ma_nv, ngay_lap, so_tien, xac_nhan, stt) \
+values('"+ma_hd+"','"+ma_phieu+"','"+ma_nv+"',current_date,'"+ui->sotien->text()+"','0','"+QString::number(stt)+"')";
+        if(query.exec(str))
+                stt_hd->next();
+        else
+                qDebug() << query.lastError().text();
         qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem \
                          left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
     left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn \

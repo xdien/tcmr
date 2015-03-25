@@ -69,18 +69,19 @@ void khamsobo::on_pushButton_clicked()
         //lap phieu tiem
         ma_phieu = id.getNextIndexCode("phieu_tiem","PT");
         //query.exec("")
-        if(query.exec("INSERT INTO phieu_tiem( ma_phieu, ma_bn, ma_nv, ngay_lap_pt, phieu_tiem_lan_dau) VALUES ('"+ ma_phieu +"', '"+ma_bn+"', '"+ma_nv+"', current_date)"))
+        if(query.exec("INSERT INTO phieu_tiem( ma_phieu, ma_bn, ma_nv, ngay_lap_pt) VALUES ('"+ ma_phieu +"', '"+ma_bn+"', '"+ma_nv+"', current_date)"))
         {
             //Nhap vao danh sach thuoc duoc chon
             thuoc_num = itemModel_thuocDChon.rowCount();
             for(int i =0;i<thuoc_num;i++){
                 ma_thuoc = itemModel_thuocDChon.index(i,1).data().toString();
-                query.exec("insert into tiem values('"+ma_thuoc+"','"+ma_phieu+"','"+ma_nv+"','"+ma_bn+"')");
-                qDebug()<<query.lastError().text();
+                query.exec("INSERT INTO tiem(\
+                           ma_thuoc, ma_phieu, ma_nv, ma_bn) values('"+ma_thuoc+"','"+ma_phieu+"','"+ma_nv+"','"+ma_bn+"')");
             }
-            //query.exec("")
             if(!query.exec("update tt_benh_nhan set lap_phieu = 'TRUE' where ma_bn = '"+ma_bn+"'"))
                 qDebug() << query.lastError().text();
+            //cap nhat lai benh dang ky
+            //query.exec("update muon_tiem set ")
             this->loaddanhsach_chokham();
             //tra ve benh nhan ke tiep
             this->setcurentidx();
@@ -95,17 +96,14 @@ void khamsobo::on_pushButton_clicked()
 
 void khamsobo::on_listView_dsCho_clicked(const QModelIndex &index)
 {
-    stt->setIDX(index.row());
-    ui->ten->setText(this->danhsachCho.index(index.row(),1).data().toString());
-    ngay_sinh = this->danhsachCho.index(index.row(),2).data().toDate();
-    do_tuoi = ngay_sinh.daysTo(QDate::currentDate());
-    do_tuoi = do_tuoi / 365;
+    //kiem tra co phai la benh nhanh moi or cu truy van thuoc khac nhau
     ma_bn = this->danhsachCho.index(index.row(),3).data().toString();//lay ma benh nhan
-    ui->tuoi->setText(QString::number(do_tuoi));
-    ma_phieu = this->danhsachCho.index(index.row(),2).data().toString();
-    danhsachBenhdk.setQuery("select ten_benh,benh.ma_benh from muon_tiem left join benh on benh.ma_benh = muon_tiem.ma_benh \
-                            where muon_tiem.ma_bn = '"+ma_bn+"'");
-            this->disableEdit(true);
+    query.exec("select * from tt_benh_nhan where tai_hen is true");
+    if(query.next())
+        this->loadchitietBN_C(index);
+    else{
+        this->loadchitietBN_M(index);
+    }
 }
 
 void khamsobo::on_pushButton_3_clicked()
@@ -214,4 +212,44 @@ QString khamsobo::tinh_ngayTaiHen(QString mathuoc)
     }
     else
         return "2015-01-01";
+}
+void khamsobo::loadchitietBN_M(QModelIndex indexx)
+{
+    stt->setIDX(indexx.row());
+    ui->ten->setText(this->danhsachCho.index(indexx.row(),1).data().toString());
+    ngay_sinh = this->danhsachCho.index(indexx.row(),2).data().toDate();
+    do_tuoi = ngay_sinh.daysTo(QDate::currentDate());
+    do_tuoi = do_tuoi / 365;
+    ui->tuoi->setText(QString::number(do_tuoi));
+    //ma_phieu = this->danhsachCho.index(indexx.row(),2).data().toString();
+    danhsachBenhdk.setQuery("select ten_benh,benh.ma_benh from muon_tiem left join benh on benh.ma_benh = muon_tiem.ma_benh \
+                            where muon_tiem.ma_bn = '"+ma_bn+"'");
+            this->disableEdit(true);
+}
+
+void khamsobo::loadchitietBN_C(QModelIndex indexx)
+{
+    itemModel_thuocDChon.clear();
+    stt->setIDX(indexx.row());
+    ui->ten->setText(this->danhsachCho.index(indexx.row(),1).data().toString());
+    ngay_sinh = this->danhsachCho.index(indexx.row(),2).data().toDate();
+    do_tuoi = ngay_sinh.daysTo(QDate::currentDate());
+    do_tuoi = do_tuoi / 365;
+    ui->tuoi->setText(QString::number(do_tuoi));
+    //ma_phieu = this->danhsachCho.index(indexx.row(),2).data().toString();
+    danhsachBenhdk.setQuery("select ten_benh,benh.ma_benh from muon_tiem left join benh on benh.ma_benh = muon_tiem.ma_benh \
+                            where muon_tiem.ma_bn = '"+ma_bn+"'");
+            this->disableEdit(true);
+ //           itemModel_thuocDChon.appendRow(this->prepareRow());
+    //lay danh sach thuoc ngay tai hen
+    query.exec("select thuoc.ten_thuoc,thuoc.ma_thuoc from tiem left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc where ngay_dk_tai_hen = current_date and ma_bn = '"+ma_bn+"'");
+    while(query.next()){
+        mot =  query.value(0).toString();//lay ten thuoc tu model
+        hai = query.value(1).toString();//lay ma thuoc tu moel
+        ba = "";
+        //itemModel_benhDChon.findItems()
+        itemModel_thuocDChon.appendRow(this->prepareRow(mot,hai,ba));
+    }
+
+
 }

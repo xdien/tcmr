@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QtSql>
 #include <QDebug>
+#include "managerstt.h"
 
 namespace Ui {
 class tracuuPhieuHen;
@@ -21,6 +22,8 @@ public:
 private slots:
     void on_pushButton_2_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::tracuuPhieuHen *ui;
     QSqlQuery query;
@@ -29,6 +32,9 @@ private:
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);
+    int mui_tiem,stt_benh;
+    QString ma_bn;
+    managerSTT *stt;
 };
 
 #endif // TRACUUPHIEUHEN_H
