@@ -24,6 +24,10 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_dsbenh_clicked(const QModelIndex &index);
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::tracuuPhieuHen *ui;
     QSqlQuery query;
@@ -32,8 +36,11 @@ private:
                                                     const QString &second,
                                                     const QString &third);
     int mui_tiem,stt_benh;
-    QString ma_bn;
+    QString ma_bn,ma_benh;
+    QSqlQueryModel danhsachgoiYBenh;
     managerSTT *stt;
+    QList<QStandardItem *> tmp;
+    QStringList dsbenhmoi;
 };
 
 #endif // TRACUUPHIEUHEN_H

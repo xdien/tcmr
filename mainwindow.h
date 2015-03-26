@@ -5,6 +5,7 @@
 #include <QSqlQuery>
 #include "login.h"
 #include "dongphi.h"
+#include <QtSql>
 
 namespace Ui {
 class MainWindow;
@@ -34,10 +35,14 @@ private slots:
     void on_actionTrC_phieu_hen_triggered();
 
     void on_actionQl_nv_triggered();
+    void trangthaiSQL();
+
+    void on_actionQl_benh_triggered();
 
 private:
     Ui::MainWindow *ui;
     QSqlQuery query;
+    QSqlDatabase db;
 };
 
 #endif // MAINWINDOW_H

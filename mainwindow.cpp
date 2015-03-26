@@ -9,12 +9,16 @@
 #include "tiemngua.h"
 #include "tracuuphieuhen.h"
 #include "managenv.h"
+#include "managetiemngua.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+    db = QSqlDatabase::database("qt_sql_default_connection");
+    //connect(db.driver()->,SIGNAL(disconnectNotify()),this,SLOT(trangthaiSQL()));
 }
 
 MainWindow::~MainWindow()
@@ -79,4 +83,15 @@ void MainWindow::on_actionQl_nv_triggered()
     ManageNV *nv;
     nv = new ManageNV();
     nv->show();
+}
+void MainWindow::trangthaiSQL()
+{
+    ui->statusBar->showMessage("ngat ket noi");
+}
+
+void MainWindow::on_actionQl_benh_triggered()
+{
+    ManageTiemNgua *mntiem;
+    mntiem = new ManageTiemNgua();
+    mntiem->show();
 }

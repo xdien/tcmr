@@ -45,6 +45,7 @@
      <string>He tho&amp;ng</string>
     </property>
     <addaction name="actionQl_nv"/>
+    <addaction name="actionQl_benh"/>
    </widget>
    <addaction name="menuCai_dat"/>
    <addaction name="menuBao_cao"/>
@@ -110,7 +111,12 @@
   </action>
   <action name="actionQl_nv">
    <property name="text">
-    <string>ql nv</string>
+    <string>&amp;ql nv</string>
+   </property>
+  </action>
+  <action name="actionQl_benh">
+   <property name="text">
+    <string>ql benh</string>
    </property>
   </action>
  </widget>
