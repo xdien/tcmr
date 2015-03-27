@@ -10,6 +10,7 @@
 #include "tracuuphieuhen.h"
 #include "managenv.h"
 #include "managetiemngua.h"
+#include "managechucvu.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -94,4 +95,11 @@ void MainWindow::on_actionQl_benh_triggered()
     ManageTiemNgua *mntiem;
     mntiem = new ManageTiemNgua();
     mntiem->show();
+}
+
+void MainWindow::on_actionQL_Chuc_Vu_triggered()
+{
+    ManageChucVu *chuc_vu;
+    chuc_vu = new ManageChucVu();
+    chuc_vu->show();
 }

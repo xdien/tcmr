@@ -39,6 +39,8 @@ private slots:
 
     void on_actionQl_benh_triggered();
 
+    void on_actionQL_Chuc_Vu_triggered();
+
 private:
     Ui::MainWindow *ui;
     QSqlQuery query;

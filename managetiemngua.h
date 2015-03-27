@@ -1,6 +1,7 @@
 #ifndef MANAGETIEMNGUA_H
 #define MANAGETIEMNGUA_H
 
+#include <QKeyEvent>
 #include <QWidget>
 #include <QtSql>
 #include "manageindex.h"
@@ -31,6 +32,8 @@ private:
     QSqlRelationalTableModel phong_ngua;
     QSqlRelation rela;
     Ui::ManageTiemNgua *ui;
+    QSqlDatabase db;
+    void keyPressEvent(QKeyEvent *e);
 };
 
 #endif // MANAGETIEMNGUA_H
