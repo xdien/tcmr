@@ -58,13 +58,13 @@ void khamsobo::on_pushButton_clicked()
                 ma_benh = itemModel_benhDChon.index(i,1).data().toString();
                 query.exec("INSERT INTO co_benh( \
                            ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham) \
-                        VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'TRUE',current_date)");
+                        VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', TRUE,current_date)");
             }
         }else{
-            ma_benh = "1";
+            ma_benh = "BH_00000000";
             query.exec("INSERT INTO co_benh( \
                        ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham) \
-                    VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'TRUE',current_date)");
+                    VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', TRUE,current_date)");
         }
         //lap phieu tiem
         ma_phieu = id.getNextIndexCode("phieu_tiem","PT");

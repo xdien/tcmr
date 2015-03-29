@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Quan ly nv</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -55,5 +55,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>tableView</sender>
+   <signal>viewportEntered()</signal>
+   <receiver>pushButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>661</x>
+     <y>38</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>775</x>
+     <y>411</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

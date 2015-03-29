@@ -47,6 +47,7 @@
     <addaction name="actionQl_nv"/>
     <addaction name="actionQl_benh"/>
     <addaction name="actionQL_Chuc_Vu"/>
+    <addaction name="actionNhap_thuoc"/>
    </widget>
    <addaction name="menuCai_dat"/>
    <addaction name="menuBao_cao"/>
@@ -122,7 +123,12 @@
   </action>
   <action name="actionQL_Chuc_Vu">
    <property name="text">
-    <string>QL Chuc Vu</string>
+    <string>QL &amp;Chuc Vu</string>
+   </property>
+  </action>
+  <action name="actionNhap_thuoc">
+   <property name="text">
+    <string>Nhap thuoc</string>
    </property>
   </action>
  </widget>

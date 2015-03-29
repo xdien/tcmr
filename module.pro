@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     tracuuphieuhen.cpp \
     managenv.cpp \
     managetiemngua.cpp \
-    managechucvu.cpp
+    managechucvu.cpp \
+    nhapthuoc.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -45,7 +46,8 @@ HEADERS  += mainwindow.h \
     tracuuphieuhen.h \
     managenv.h \
     managetiemngua.h \
-    managechucvu.h
+    managechucvu.h \
+    nhapthuoc.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -58,4 +60,5 @@ FORMS    += mainwindow.ui \
     tracuuphieuhen.ui \
     managenv.ui \
     managetiemngua.ui \
-    managechucvu.ui
+    managechucvu.ui \
+    nhapthuoc.ui

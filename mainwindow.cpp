@@ -103,3 +103,9 @@ void MainWindow::on_actionQL_Chuc_Vu_triggered()
     chuc_vu = new ManageChucVu();
     chuc_vu->show();
 }
+
+void MainWindow::on_actionNhap_thuoc_triggered()
+{
+    NhapThuoc *nhapthuoc = new NhapThuoc();
+    nhapthuoc->show();
+}

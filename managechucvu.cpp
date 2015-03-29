@@ -10,7 +10,7 @@ ManageChucVu::ManageChucVu(QWidget *parent) :
     ui->setupUi(this);
     tablemodel = new QSqlTableModel();
     tablemodel->setTable("chuc_vu");
-    tablemodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    tablemodel->setEditStrategy(QSqlTableModel::OnRowChange);
     ui->tableView_cv->setModel(tablemodel);
     tablemodel->select();
     //set chuc vu;
@@ -20,6 +20,7 @@ ManageChucVu::ManageChucVu(QWidget *parent) :
     chuc_vu->setRelation(0,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
     chuc_vu->select();
     ui->tableView->setModel(chuc_vu);
+    ui->tableView_cv->hideColumn(0);
     ui->tableView->setItemDelegate(new QSqlRelationalDelegate);
 }
 
@@ -65,17 +66,18 @@ void ManageChucVu::keyPressEvent(QKeyEvent *e)
 
 void ManageChucVu::on_pushButton_clicked()
 {
-    if(chuc_vu->submitAll())
+    if(!chuc_vu->submitAll())
         qDebug() << "loi submit" << chuc_vu->lastError().text();
-    if(tablemodel->submitAll())
+    if(!tablemodel->submitAll())
         qDebug() << "loi submit phan_quyen: "<< tablemodel->lastError().text();
     this->update_phanquyen();
 }
 void ManageChucVu::update_phanquyen()
 {
     chuc_vu->setRelation(0,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
-    chuc_vu->select();
+
     ui->tableView->setModel(chuc_vu);
+    chuc_vu->select();
     //ui->tableView->setItemDelegate(new QSqlRelationalDelegate);
 }
 
@@ -88,4 +90,9 @@ void ManageChucVu::on_tableView_customContextMenuRequested(const QPoint &pos)
     menu.addAction("Menu Item 1");
     menu.exec(pos);
     qDebug() << "Customenu";
+}
+
+void ManageChucVu::on_tableView_cv_pressed(const QModelIndex &index)
+{
+    qDebug() << "nhan";
 }

@@ -28,24 +28,10 @@ void ManageNV::on_pushButton_clicked()
 {
     //ui->tableView->
     row = ui->tableView->currentIndex().row();
-//    qDebug() << testmodel->index(row,2).data().toString();
-//    testmodel->setData(model_idx,"dsadasd");
-//    chuc_vu = testmodel->index(row,1).sibling(0,0).data().toString();
-//    ten = testmodel->index(row,2).data().toString();
-//    mk = testmodel->index(row,3).data().toString();
-//    ten_dn = testmodel->index(row,4).data().toString();
-//    sdt = testmodel->index(row,5).data().toString();
-//    cmnd = testmodel->index(row,6).data().toString();
-//    que_quan = testmodel->index(row,7).data().toString();
-//    //testmodel->insertRows()
-//    query.exec("INSERT INTO nhan_vien(\
-//               ma_nv, ma_cv, ten_nv, mat_khau, ten_dn, sdt, cmnd, que_quan)\
-//            VALUES ('"+ma_nv+"', '"+chuc_vu+"', '"+ten+"', '"+mk+"', '"+ten_dn+"', '"+sdt+"', '"+cmnd+"', '"+que_quan+"')");
-//            qDebug() << query.lastError().text();
-//    testmodel->select();
-    testmodel->submitAll();
-    //testmodel->setItemData(QModelIndex(1,1))
-    //testmodel->submitAll();
+    if(!testmodel->submitAll())
+    {
+        qDebug() << "Loi khong the luu: " << testmodel->lastError().text();
+    }
 }
 
 void ManageNV::keyPressEvent(QKeyEvent *e)

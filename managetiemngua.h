@@ -24,6 +24,8 @@ private slots:
     void up_bang_phongNgua();
     void on_tableView_phong_pressed(const QModelIndex &index);
 
+    void on_pushButton_2_clicked();
+
 private:
     manageIndex id;
     QString ma_benh;
@@ -34,6 +36,7 @@ private:
     Ui::ManageTiemNgua *ui;
     QSqlDatabase db;
     void keyPressEvent(QKeyEvent *e);
+    int rowCount;
 };
 
 #endif // MANAGETIEMNGUA_H

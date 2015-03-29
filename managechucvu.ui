@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Quan ly chuc vu</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <item>
@@ -55,5 +55,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>tableView_cv</sender>
+   <signal>viewportEntered()</signal>
+   <receiver>pushButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>243</x>
+     <y>242</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>296</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

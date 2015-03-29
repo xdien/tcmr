@@ -6,6 +6,7 @@
 #include "login.h"
 #include "dongphi.h"
 #include <QtSql>
+#include "nhapthuoc.h"
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +41,8 @@ private slots:
     void on_actionQl_benh_triggered();
 
     void on_actionQL_Chuc_Vu_triggered();
+
+    void on_actionNhap_thuoc_triggered();
 
 private:
     Ui::MainWindow *ui;

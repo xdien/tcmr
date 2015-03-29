@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Quan ly phong ngua</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_4">
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>GroupBox</string>
+      <string>Cac loai benh</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
@@ -67,7 +67,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>GroupBox</string>
+      <string>Thuoc gi tri benh gi</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>

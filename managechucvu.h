@@ -24,6 +24,8 @@ private slots:
 
     void on_tableView_customContextMenuRequested(const QPoint &pos);
 
+    void on_tableView_cv_pressed(const QModelIndex &index);
+
 private:
     manageIndex id;
     QString ma_cv;

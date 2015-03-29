@@ -11,6 +11,7 @@ manageIndex::~manageIndex()
 
 QString manageIndex::getNextIndexCode(QString tableName, QString prefix)
 {
+    num_prefix = "00000000";
     query.exec("select * from "+tableName+" order by 1 desc limit 1");
     if(query.next())
     {
