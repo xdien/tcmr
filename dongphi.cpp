@@ -12,7 +12,7 @@ dongphi::dongphi(QWidget *parent) :
                      left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn \
                      left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu \
                      where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date");
-    ui->tableView->setModel(&qrmodel);
+    ui->treeView->setModel(&qrmodel);
     //set danh sach thuoc
     ui->treeView_danhsachthuoc->setModel(&danhsachthuoc);
     ui->sotien->setEnabled(false);
@@ -23,15 +23,15 @@ dongphi::~dongphi()
     delete ui;
 }
 
-void dongphi::on_tableView_doubleClicked(const QModelIndex &index)
+void dongphi::on_treeView_doubleClicked(const QModelIndex &index)
 {
 
 }
 
-void dongphi::on_tableView_clicked(const QModelIndex &index)
+void dongphi::on_treeView_clicked(const QModelIndex &index)
 {
-    ma_bn = ui->tableView->model()->index(index.row(),0).data().toString();
-    ma_phieu = ui->tableView->model()->index(index.row(),3).data().toString();
+    ma_bn = ui->treeView->model()->index(index.row(),0).data().toString();
+    ma_phieu = ui->treeView->model()->index(index.row(),3).data().toString();
     danhsachthuoc.setQuery("select thuoc.ten_thuoc,don_gia.gia from phieu_tiem \
                            right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu \
                            left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \

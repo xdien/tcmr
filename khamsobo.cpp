@@ -15,7 +15,15 @@ khamsobo::khamsobo(QWidget *parent) :
     ui->listView_benhduocchon->setModel(&itemModel_benhDChon);
     ui->danhsach_chonthuoc->setModel(&itemModel_thuocDChon);
     this->disableEdit(false);
-
+    //lay ket noi database hien tai
+    db = QSqlDatabase::database("qt_sql_default_connection");
+    if(!db.driver()->hasFeature(QSqlDriver::EventNotifications))
+    {
+        qDebug() << "chu y sqlDriver nay khong ho tro notifi";
+    }else{
+        db.driver()->subscribeToNotification("khamsobo");
+        connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(codkMoi()));
+   }
 }
 
 khamsobo::~khamsobo()
@@ -23,7 +31,7 @@ khamsobo::~khamsobo()
     delete ui;
 }
 void khamsobo::loaddanhsach_chokham(){
-    danhsachCho.setQuery("select stt,ten,sn,ma_bn from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null");
+    danhsachCho.setQuery("select stt,ten,sn,ma_bn from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null order by stt limit 20");
 }
 
 void khamsobo::setcurentidx()
@@ -97,12 +105,15 @@ void khamsobo::on_pushButton_clicked()
 void khamsobo::on_listView_dsCho_clicked(const QModelIndex &index)
 {
     //kiem tra co phai la benh nhanh moi or cu truy van thuoc khac nhau
-    ma_bn = this->danhsachCho.index(index.row(),3).data().toString();//lay ma benh nhan
-    query.exec("select * from tt_benh_nhan where tai_hen is true");
-    if(query.next())
-        this->loadchitietBN_C(index);
-    else{
-        this->loadchitietBN_M(index);
+    if(index.isValid())
+    {
+        ma_bn = this->danhsachCho.index(index.row(),3).data().toString();//lay ma benh nhan
+        query.exec("select * from tt_benh_nhan where tai_hen is true");
+        if(query.next())
+            this->loadchitietBN_C(index);
+        else{
+            this->loadchitietBN_M(index);
+        }
     }
 }
 
@@ -257,12 +268,37 @@ void khamsobo::loadchitietBN_C(QModelIndex indexx)
         //itemModel_benhDChon.findItems()
         itemModel_thuocDChon.appendRow(this->prepareRow(mot,hai,ba));
     }
-
-
 }
 
 void khamsobo::on_pushButton_2_clicked()
 {
     //xoa mot thuoc trong danh sach
     itemModel_thuocDChon.removeRow(ui->danhsach_chonthuoc->currentIndex().row());
+}
+
+void khamsobo::codkMoi()
+{
+    //qDebug() << "co song";
+    query_notify.exec("select count(ma_bn) from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null");
+    if(query_notify.next())
+    {
+        //neu co nhieu hon 1 benh nhan thi k lam gi
+        qDebug() << query_notify.value(0).toInt();
+        if(query_notify.value(0).toInt() == 1 )
+        {
+            //set idex dau tien va click
+            row = 0;
+            idx  = ui->listView_dsCho->model()->index(row,col);
+            ui->listView_dsCho->selectionModel()->select(idx, QItemSelectionModel::Select);
+            ui->listView_dsCho->setCurrentIndex(idx);
+            ui->listView_dsCho->setFocus();
+            ui->listView_dsCho->clicked(idx);
+        }
+        //gioi han 20
+        if(query_notify.value(0).toInt() <= 20 )
+        {
+            this->loaddanhsach_chokham();
+        }
+        emit setThongBao(QString::fromUtf8("Số lượng người chờ là :")+query_notify.value(0).toString());
+    }
 }

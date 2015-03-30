@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    db = QSqlDatabase::database("qt_sql_default_connection");
+    //db = QSqlDatabase::database("qt_sql_default_connection");
     //connect(db.driver()->,SIGNAL(disconnectNotify()),this,SLOT(trangthaiSQL()));
 }
 
@@ -54,6 +54,7 @@ void MainWindow::on_actionKham_SB_triggered()
     khamsobo *moi;
     moi = new khamsobo();
     ui->mdiArea->addSubWindow(moi);
+    connect(moi,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
     moi->showMaximized();
 }
 

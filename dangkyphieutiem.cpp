@@ -203,13 +203,18 @@ void Dangkyphieutiem::on_luu_tt_clicked()
             str = "INSERT INTO tt_benh_nhan(ma_bn, ten, gioi_tinh, ma_dc, dc_chi_tiet, sn, stt, ngay_lap, \
                     lap_phieu, da_tiemlandau, tai_hen) values('"+ma_bn+"', '"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"','"+QString::number(stt->getcurrentindex())+"',current_date,NULL,NULL,NULL)";
             if(query.exec(str))
+            {
                 stt->next();
+                //tao su kien notify cho khamsobo
+                query.exec("NOTIFY khamsobo");
+            }
             thuoc_num = itemModel.rowCount();
             for(int i =0;i<thuoc_num;i++){
                 ma_thuoc = itemModel.index(i,1).data().toString();
                 query.exec("insert into muon_tiem values('"+ma_thuoc+"','"+ma_bn+"')");
                 qDebug()<<i;
             }
+
     }else{
         qDebug() << "Can't get id NHAN_VIEN";
     }

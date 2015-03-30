@@ -25,7 +25,7 @@ public:
     void setcurentidx();
 public slots:
     void updateMainContent(int stt);
-    void infobenh(QString maphieu);
+    void infobenh(QString maphieu, QString mabn);
     void infothuoc(QString maphieu, QString mabn);
     void showMuiTiem(QString ma_bnI, QString mat);
     void cleanFroms();
@@ -44,6 +44,7 @@ private slots:
     void on_danhsanhcho_clicked(const QModelIndex &index);
 
     void on_tableView_clicked(const QModelIndex &index);
+
 
 private:
     QSqlQuery query,query_tmp,query_ham;
@@ -69,6 +70,8 @@ private:
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);
+    QSqlQueryModel danhsachbenh;
+    QString strquery;
 };
 
 #endif // TIEMNGUA_H

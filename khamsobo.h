@@ -19,7 +19,8 @@ class khamsobo : public QMainWindow
 public:
     explicit khamsobo(QWidget *parent = 0);
     ~khamsobo();
-
+signals:
+    void setThongBao(QString thongbao);
 private slots:
     void on_pushButton_clicked();
 
@@ -37,11 +38,13 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+        void codkMoi();
+
 private:
     void loaddanhsach_chokham();
     manageIndex id;
     Ui::khamsobo *ui;
-    QSqlQuery query;
+    QSqlQuery query,query_notify;
     QSqlQueryModel danhsachCho,danhsachBenhdk,danhsachBenh,danhsach_goiyThuoc;
     void setcurentidx();
     managerSTT *stt;
@@ -62,6 +65,7 @@ private:
     bool lalandau;
     void loadchitietBN_M(QModelIndex indexx);
     void loadchitietBN_C(QModelIndex indexx);
+    QSqlDatabase db;
 };
 
 #endif // KHAMSOBO_H

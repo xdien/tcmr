@@ -16,38 +16,24 @@ tiemngua::tiemngua(QWidget *parent) :
     //ui->tableView->setModel(&muitiem);
     ui->tableView->setModel(&dsthuoc);
     ui->treeView_ngayhen->setModel(&item_ngayhen);
+    ui->danhsachbenh->setModel(&danhsachbenh);
 }
 
 tiemngua::~tiemngua()
 {
     delete ui;
 }
-/*truy van hoa don cung voi thong tin thuoc, cap nhat vao
- * statusBar()
-*/
-//void tiemngua::updatebar(){
-//    QString queryhd ="select hoa_don.stt,ten,tiem_thuoc.ma_thuoc from `hoa_don` left join phieu_tiem on \
-//hoa_don.ma_phieu = phieu_tiem.ma_phieu left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
-//left join tiem_thuoc on tiem_thuoc.ma_phieu = phieu_tiem.ma_phieu where date(ngay_lap) = current_date order by stt limit 2 offset 1";
-//    query.exec(queryhd);
-//    if(query.next())
-//    {
-//        thongbao = "STT ke tiep: " + query.value(0).toString() + " | Ten: " + query.value(1).toString() + " | Ma thuoc: "+query.value(2).toString();
-//        ui->statusbar->showMessage(thongbao);
-//    }
-//}
-/*
- * cap nhat noi dung cho khung chuong trinh
-*/
+
 void tiemngua::updateMainContent(int stt)
 {
+    item_ngayhen.clear();
     query.exec("select phieu_tiem.ma_phieu,stt,phieu_tiem.ma_bn,ma_hd from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where date(ngay_lap) = current_date and stt ='"+QString::number(stt) +"'");
     if(query.next()){
         ui->pushButton_2->setEnabled(true);
         maphieu = query.value(0).toString();
         ma_hoadon = query.value(3).toString();
         ma_bn = query.value(2).toString();
-        this->infobenh(maphieu);
+        this->infobenh(maphieu,ma_bn);
         this->infothuoc(maphieu,ma_bn);
     }else{
         QMessageBox invali;
@@ -63,10 +49,10 @@ void tiemngua::updateMainContent(int stt)
  * nhanh 1: truy van den nguoi benh bi benh gi
  * nhanh 2: truy van loai thuoc su dung
 */
-void tiemngua::infobenh(QString maphieu)
+void tiemngua::infobenh(QString maphieu, QString mabn)
 {
-    QString strquery;
-    strquery = "select ten, co_benh.cs_tim, co_benh.cs_ha, benh.ten_benh, co_benh.chu_y from phieu_tiem \
+
+    strquery = "select ten, co_benh.cs_tim, co_benh.cs_ha, benh.ten_benh, co_benh.chu_y,tt_benh_nhan.ma_bn from phieu_tiem \
 left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
 left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn \
 left join benh on benh.ma_benh = co_benh.ma_benh where phieu_tiem.ma_phieu ='" +maphieu+"' limit 1";
@@ -75,9 +61,11 @@ left join benh on benh.ma_benh = co_benh.ma_benh where phieu_tiem.ma_phieu ='" +
         ui->ten->setText(query.value(0).toString());
         ui->cstim->setText(query.value(1).toString());
         ui->csha->setText(query.value(2).toString());
-        ui->bibenh->setText(query.value(3).toString());
         ui->chuy->setText(query.value(4).toString());
+        ma_bn =
         //ui->ngaybd->setDate(query.value(5).toDate());
+        strquery = "select distinct benh.ten_benh from co_benh left join benh on benh.ma_benh = co_benh.ma_benh where co_benh.ma_bn ='" +mabn+"'";
+        danhsachbenh.setQuery(strquery);
     }
 }
 void tiemngua::infothuoc(QString maphieu, QString mabn)
@@ -115,17 +103,16 @@ void tiemngua::on_pushButton_2_clicked()
         ma_thuoc = query.value(0).toString();
         query_tmp.exec("update tiem set ngay_tiem = current_date, stt_lieu = '"+this->tinhSoTTLieu(ma_thuoc,ma_bn)+"',ngay_hen_kt = '"+ this->tinh_ngayTaiHen(ma_thuoc)+ "' where ma_phieu = '"+maphieu+"'");
     }
-    qDebug() << query.lastError().text();
-    qDebug() << query_tmp.lastError().text();
     query.exec("update tt_benh_nhan set da_tiemlandau = TRUE where ma_bn = '"+ma_bn+"'");
     if(!query.exec("update hoa_don set da_tiem= TRUE where ma_hd = '"+ma_hoadon+"'"))
         qDebug() << query.lastError().text();
-    this->cleanFroms();
-    //danhsachchomodel.setQuery("select * from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where ngay_tiem is null");
-    //drop cac bang duoc cap nhat trong bang bo_qua
-    this->updateDScho();
-    this->setcurentidx();
-    this->updateMainContent(ui->danhsanhcho->model()->index(ui->danhsanhcho->currentIndex().row(),0).data().toInt());
+    else{
+        this->cleanFroms();
+        //danhsachchomodel.setQuery("select * from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where ngay_tiem is null");
+        //drop cac bang duoc cap nhat trong bang bo_qua
+        this->updateDScho();
+        this->setcurentidx();
+    }
 }
 
 void tiemngua::on_pushButton_clicked()
@@ -146,20 +133,6 @@ void tiemngua::on_pushButton_clicked()
         qDebug() << query.lastError().text();
     }
     this->cleanFroms();
-}
-void tiemngua::cleanFroms()
-{
-    ui->ten->setText("");
-    ui->csha->setText("");
-    ui->cstim->setText("");
-    ui->tenthuoc->setText("");
-    ui->dungtich->setText("");
-    ui->hieuluc->setText("");
-    ui->dotuoi->setText("");
-    ui->lieudung->setText("");
-    ui->chuy->setText("");
-    querymodel.setQuery(NULL);
-    //ui->tableView->setModel(NULL);
 }
 
 void tiemngua::on_actionChon_nguoi_khong_theo_tt_triggered()
@@ -192,7 +165,6 @@ void tiemngua::receivers_stt(QString stt)
 
 void tiemngua::getID()
 {
-    //qDebug() << ui->treeView->currentIndex().row();
 }
 
 void tiemngua::setcurentidx()
@@ -208,8 +180,12 @@ void tiemngua::setcurentidx()
 
 void tiemngua::on_danhsanhcho_clicked(const QModelIndex &index)
 {
-    this->updateMainContent(this->danhsachchomodel.index(index.row(),0).data().toInt());
-    stt->setIDX(this->danhsachchomodel.index(index.row(),0).data().toInt());
+
+    if(index.isValid())
+    {
+            stt->setIDX(index.row());
+            this->updateMainContent(this->danhsachchomodel.index(index.row(),0).data().toInt());
+}
 }
 
 void tiemngua::on_tableView_clicked(const QModelIndex &index)
@@ -266,3 +242,12 @@ QList<QStandardItem *> tiemngua::prepareRow(const QString &first,
     rowItems << new QStandardItem(third);
     return rowItems;
 }
+
+void tiemngua::cleanFroms()
+{
+    ui->chuy->clear();
+    ui->csha->clear();
+    ui->cstim->clear();
+    //ui->
+}
+
