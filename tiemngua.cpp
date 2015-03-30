@@ -15,6 +15,7 @@ tiemngua::tiemngua(QWidget *parent) :
     //this->initializeModel(&muitiem);
     //ui->tableView->setModel(&muitiem);
     ui->tableView->setModel(&dsthuoc);
+    ui->treeView_ngayhen->setModel(&item_ngayhen);
 }
 
 tiemngua::~tiemngua()
@@ -47,7 +48,7 @@ void tiemngua::updateMainContent(int stt)
         ma_hoadon = query.value(3).toString();
         ma_bn = query.value(2).toString();
         this->infobenh(maphieu);
-        this->infothuoc(maphieu);
+        this->infothuoc(maphieu,ma_bn);
     }else{
         QMessageBox invali;
         invali.setText("Chua co benh nhan nao trong phong doi");
@@ -79,19 +80,26 @@ left join benh on benh.ma_benh = co_benh.ma_benh where phieu_tiem.ma_phieu ='" +
         //ui->ngaybd->setDate(query.value(5).toDate());
     }
 }
-void tiemngua::infothuoc(QString maphieu)
+void tiemngua::infothuoc(QString maphieu, QString mabn)
 {
     dsthuoc.setQuery("select thuoc.ten_thuoc,lieu_dung,thuoc.ma_thuoc from phieu_tiem \
                      right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu \
                      left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
                      left join do_tuoi on do_tuoi.ma_dotuoi =thuoc.ma_dotuoi where phieu_tiem.ma_phieu ='"+maphieu+"'");
+    //hien thi danh dach ngay hen cua tung thuoc
+    for(int i=0; i< dsthuoc.rowCount();i++)
+    {
+        ma_thuoc = dsthuoc.index(i,2).data().toString();
+        item_ngayhen.appendRow(this->prepareRow(dsthuoc.index(i,0).data().toString(),this->tinh_ngayTaiHen(ma_thuoc),this->tinhSoTTLieu(ma_thuoc,mabn)));
+    }
 }
 /*hien thi cac mui tiem da tiem va ngay tiem*/
 void tiemngua::showMuiTiem(QString ma_bnI, QString mat){
     querymodel.setQuery(" select tiem.ma_thuoc from tiem left join tt_benh_nhan on tt_benh_nhan.ma_bn = tiem.ma_bn \
                         left join phieu_tiem on phieu_tiem.ma_phieu = tiem.ma_phieu where \
                         phieu_tiem.ngay_tiem is not null and phieu_tiem.ma_bn = '"+ma_bnI+"' and tiem.ma_thuoc = '"+mat+"'");
-    ui->treeView->setModel(&querymodel);
+    //ui->treeView->setModel(&querymodel);
+
 }
 
 
@@ -184,7 +192,7 @@ void tiemngua::receivers_stt(QString stt)
 
 void tiemngua::getID()
 {
-    qDebug() << ui->treeView->currentIndex().row();
+    //qDebug() << ui->treeView->currentIndex().row();
 }
 
 void tiemngua::setcurentidx()
@@ -246,4 +254,15 @@ QString tiemngua::tinhSoTTLieu(QString mathuoc,QString mabn)
         return "0";
     }
 
+}
+
+QList<QStandardItem *> tiemngua::prepareRow(const QString &first,
+                                                const QString &second,
+                                                const QString &third)
+{
+    QList<QStandardItem *> rowItems;
+    rowItems << new QStandardItem(first);
+    rowItems << new QStandardItem(second);
+    rowItems << new QStandardItem(third);
+    return rowItems;
 }

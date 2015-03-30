@@ -108,13 +108,20 @@ void khamsobo::on_listView_dsCho_clicked(const QModelIndex &index)
 
 void khamsobo::on_pushButton_3_clicked()
 {
-    QString test;
-    test = "KH_100";
-    QDate d1,d2;
-    d1.setDate(1992,2,1);
-
-    qDebug() << d1.addDays(45).toString("yyyy-MM-dd") ;
-
+    //them thuoc theo ma
+    query.exec("select ma_thuoc,ten_thuoc from thuoc where ma_thuoc  like '%"+ui->lineEdit_mathuoc->text()+"'");
+    if(query.next())
+    {
+        //tim thay ma thuoc them vao danh sach
+        mot = query.value(1).toString(); //lay ten thuoc tu model
+        hai = query.value(0).toString();//lay ma thuoc tu moel
+        ba = "";
+        itemModel_thuocDChon.appendRow(this->prepareRow(mot,hai,ba));
+    }else
+    {
+        //khong tim thay ma thuoc hien thi thong bao
+        ui->label_kq->setText("Khong tim thay thuoc");
+    }
 }
 void khamsobo::disableEdit(bool state)
 {
@@ -252,4 +259,10 @@ void khamsobo::loadchitietBN_C(QModelIndex indexx)
     }
 
 
+}
+
+void khamsobo::on_pushButton_2_clicked()
+{
+    //xoa mot thuoc trong danh sach
+    itemModel_thuocDChon.removeRow(ui->danhsach_chonthuoc->currentIndex().row());
 }

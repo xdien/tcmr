@@ -186,7 +186,14 @@
               </widget>
              </item>
              <item row="5" column="0">
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Ma thuoc</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="lineEdit_mathuoc">
                <property name="minimumSize">
                 <size>
                  <width>91</width>
@@ -195,10 +202,17 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
+             <item row="6" column="1">
               <widget class="QPushButton" name="pushButton_3">
                <property name="text">
-                <string>add</string>
+                <string>Them</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_kq">
+               <property name="text">
+                <string/>
                </property>
               </widget>
              </item>
@@ -258,6 +272,13 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string>Xoa thuoc</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -271,13 +292,6 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_2">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QPushButton" name="pushButton">
              <property name="text">
               <string>Đã đủ sức khỏe để tiêm</string>
@@ -287,8 +301,6 @@
           </layout>
          </item>
         </layout>
-        <zorder>groupBox_2</zorder>
-        <zorder>gridLayoutWidget</zorder>
         <zorder></zorder>
        </widget>
       </item>

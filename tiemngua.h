@@ -9,6 +9,7 @@
 #include "danhsachboqua.h"
 #include <QKeyEvent>
 #include "dialog_jumstt.h"
+#include <QStandardItemModel>
 
 namespace Ui {
 class tiemngua;
@@ -25,7 +26,7 @@ public:
 public slots:
     void updateMainContent(int stt);
     void infobenh(QString maphieu);
-    void infothuoc(QString maphieu);
+    void infothuoc(QString maphieu, QString mabn);
     void showMuiTiem(QString ma_bnI, QString mat);
     void cleanFroms();
     void receivers_stt(QString stt);
@@ -64,6 +65,10 @@ private:
     void capnhatPhieuTiem();
     QStringList  tinh_ngayhentheoDS(QString ma_phieu);
     QString tinhSoTTLieu(QString mathuoc,QString mabn);
+    QStandardItemModel item_ngayhen;
+    QList<QStandardItem *> prepareRow(const QString &first,
+                                                    const QString &second,
+                                                    const QString &third);
 };
 
 #endif // TIEMNGUA_H

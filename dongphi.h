@@ -28,11 +28,12 @@ private slots:
 
 private:
     Ui::dongphi *ui;
-    QSqlQueryModel qrmodel;
+    QSqlQueryModel qrmodel,danhsachthuoc;
     QSqlQuery query;
     QString ma_bn,ma_hd;
     QString ma_phieu,ma_nv;
     manageIndex id;
+
     int stt;
     managerSTT *stt_hd;
 };
