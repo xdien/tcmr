@@ -24,13 +24,13 @@
         <datasource id="DataSource1" allowEmpty="true" primaryKeyColumn="1" type="list" openRole="begin" source="static" columnDelimiter="tab" listID="testdata0"></datasource>
     </datasources>
     <variables/>
-    <pageheader id="PH" height="44.185">
-        <label id="BUNBC" zValue="0" posX="1.587" posY="0.000" width="31.750" height="5.556" fontName="Arial" fontSize="14" fontWeight="bold" forecolor="#000000">Bộ Y Tế</label>
-        <label id="9KF7T" zValue="1" posX="76.200" posY="0.000" width="114.300" height="5.556" fontName="Arial" fontSize="14" fontWeight="bold" forecolor="#000000">BÁO CÁO KẾT QUẢ TIÊM CHỦNG CHO TRẺ EM</label>
-        <label id="78FD9" zValue="2" posX="1.587" posY="9.525" width="31.750" height="12.700" fontName="Arial" fontSize="10" forecolor="#000000">Tỉnh thành phố: 
+    <pageheader id="PH" height="53.975">
+        <label id="BUNBC" zValue="0" posX="1.587" posY="0.000" width="31.750" height="5.556" fontName="Arial" fontSize="14" fontWeight="bold" alignment="1">Bộ Y Tế</label>
+        <label id="9KF7T" zValue="1" posX="76.200" posY="0.000" width="114.300" height="5.556" fontName="Arial" fontSize="14" fontWeight="bold" alignment="1">BÁO CÁO KẾT QUẢ TIÊM CHỦNG CHO TRẺ EM</label>
+        <label id="78FD9" zValue="2" posX="1.587" posY="9.525" width="31.750" height="12.700" fontName="Arial" fontSize="10" alignment="1">Tỉnh thành phố: 
 Huyện quận thị:
 Xã, phường:</label>
-        <text id="HCXBO" zValue="4" posX="74.612" posY="6.350" width="119.062" height="17.462" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <text id="HCXBO" zValue="3" posX="74.612" posY="6.350" width="119.062" height="17.462" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -38,42 +38,77 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Xâ gủi lên huyện trước ngày 5 tháng s&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Huyện gửi lên tỉnh trước ngày 10 tháng s&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Tỉnh gửi TCMR QG và TCMR khu vực trước ngày 15 tháng sau&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
-        <text id="CR94T" zValue="5" posX="36.512" posY="23.812" width="49.212" height="17.462" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <text id="CR94T" zValue="4" posX="-1.587" posY="25.400" width="268.287" height="25.400" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;table border=&quot;1&quot;&gt;
-  &lt;tr&gt;
-    &lt;th&gt;Month&lt;/th&gt;
-    &lt;th&gt;Savings&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;January&lt;/td&gt;
-    &lt;td&gt;$100&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;February&lt;/td&gt;
-    &lt;td&gt;$80&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
+        	&lt;tbody&gt;&lt;tr&gt;
+            	&lt;td rowspan=&quot;3&quot;&gt;Bệnh&lt;/td&gt;
+                &lt;td colspan=&quot;4&quot;&gt;Dưới 1 tuổi(0 - 11 tháng)&lt;/td&gt;
+                &lt;td colspan=&quot;4&quot;&gt;1 - 4 tuổi&lt;/td&gt;
+                &lt;td colspan=&quot;4&quot;&gt;5 - 9 tuổi&lt;/td&gt;
+                &lt;td colspan=&quot;4&quot;&gt;10 - 14 tuổi&lt;/td&gt;
+                &lt;td colspan=&quot;4&quot;&gt;15 tuổi trở lên&lt;/td&gt;
+                &lt;td&gt;Cộng&lt;/td&gt;
+           	&lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TC&lt;/td&gt;
+                &lt;td&gt;Không rõ&lt;/td&gt;
+                &lt;td&gt;TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TC&lt;/td&gt;
+                &lt;td&gt;Không rõ&lt;/td&gt;
+                &lt;td&gt;TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TC&lt;/td&gt;
+                &lt;td&gt;Không rõ&lt;/td&gt;
+                &lt;td&gt;TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TC&lt;/td&gt;
+                &lt;td&gt;Không rõ&lt;/td&gt;
+                &lt;td&gt;TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TCĐĐ&lt;/td&gt;
+                &lt;td&gt;Không TC&lt;/td&gt;
+                &lt;td&gt;Không rõ&lt;/td&gt;
+                &lt;td&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+                &lt;td&gt;M/C&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;&lt;/table&gt;
 &lt;/body&gt;&lt;/html&gt;</text>
     </pageheader>
     <pagefooter id="PF" height="10.000"/>
     <details>
         <detail id="Detail1" height="25.140" autoHeight="true" datasource="DataSource1">
             <items>
-                <field id="BZLTY" zValue="0" posX="39.688" posY="1.587" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="10" forecolor="#000000" type="txt" ftype="ds">testdata0</field>
-                <text id="4P5BB" zValue="3" posX="1.587" posY="1.587" width="31.750" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;asdasdda&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
-                <text id="GJHU8" zValue="5" posX="106.362" posY="1.587" width="50.800" height="15.875" resource="param" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">aaa</text>
-                <field id="PZCS1" zValue="6" posX="161.925" posY="11.112" width="31.750" height="4.762" resource="datasource" fontName="Arial" fontSize="10" forecolor="#000000" type="txt" ftype="ds">Field</field>
-                <field id="0MYA4" zValue="8" posX="66.675" posY="9.525" width="31.750" height="4.762" resource="datasource" fontName="Arial" fontSize="10" forecolor="#000000" type="txt" ftype="ds">Field</field>
-                <line id="2ZUDL" zValue="9" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="34.925" fromY="0.000" toX="34.925" toY="17.462"/>
-                <graph id="RMGW2" zValue="10" posX="211.137" posY="3.175" width="3.175" height="3.175" classID="none"></graph>
+                <field id="BZLTY" zValue="0" posX="39.688" posY="1.587" width="20.637" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">testdata0</field>
+                <line id="2ZUDL" zValue="3" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="34.925" fromY="0.000" toX="34.925" toY="6.350"/>
+                <line id="B9BUN" zValue="4" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="36.512" fromY="6.350" toX="58.737" toY="6.350"/>
             </items>
         </detail>
     </details>
