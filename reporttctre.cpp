@@ -1,6 +1,8 @@
 #include "reporttctre.h"
 #include "ui_reporttctre.h"
 
+#include <QMessageBox>
+
 ReportTCTRE::ReportTCTRE(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ReportTCTRE)
@@ -101,4 +103,31 @@ void ReportTCTRE::on_pushButton_clicked()
 {
     if(ui->listView_dsdiaphuongDChon->currentIndex().isValid())
         item_tinhthanh.removeRow(ui->listView_dsdiaphuongDChon->currentIndex().row());
+}
+
+void ReportTCTRE::on_pushButton_2_clicked()
+{
+    NCReport *report = new NCReport();
+    report->setReportSource( NCReportSource::File ); // set report source type
+    //report->addItemModel(querymodel_room,"myModel");
+    report->setReportFile("/home/xdien/ProjectsQT/qlsv_ktx/lietkeDSSV.ncr"); //set the report filename fullpath or relative to dir
+    report->runReportToPreview(); // run to preview output
+    // error handling
+    if( report->hasError())
+    {
+        QMessageBox msgBox;
+        msgBox.setText(QObject::tr("Report error: ") + report->lastErrorMsg());
+        msgBox.exec();
+    }
+    else
+    {
+        // show preview
+        NCReportPreviewWindow *pv = new NCReportPreviewWindow();    // create preview window
+        pv->setOutput( (NCReportPreviewOutput*)report->output() );  // add output to the window
+        pv->setReport(report);
+        pv->setWindowModality(Qt::ApplicationModal );    // set modality
+        pv->setAttribute( Qt::WA_DeleteOnClose );    // set attrib
+        pv->exec();  // run like modal dialog
+    }
+    delete report;
 }

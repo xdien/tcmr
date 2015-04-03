@@ -6,11 +6,12 @@
 
 QT       += core gui sql xml
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = module
 TEMPLATE = app
-
+INCLUDEPATH += /home/xdien/QtSDK/NCReport/include
+LIBS += -L/home/xdien/QtSDK/NCReport/lib -lNCReport
 
 SOURCES += main.cpp\
         mainwindow.cpp \

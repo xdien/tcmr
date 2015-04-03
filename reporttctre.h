@@ -5,6 +5,8 @@
 #include <QtSql>
 #include <QDebug>
 #include <QStandardItem>
+#include "ncreport.h"
+#include "ncreportpreviewwindow.h"
 namespace Ui {
 class ReportTCTRE;
 }
@@ -30,6 +32,8 @@ private slots:
     void on_listView__diaphuong_clicked(const QModelIndex &index);
 
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     QSqlQuery query;
