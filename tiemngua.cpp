@@ -62,7 +62,6 @@ left join benh on benh.ma_benh = co_benh.ma_benh where phieu_tiem.ma_phieu ='" +
         ui->cstim->setText(query.value(1).toString());
         ui->csha->setText(query.value(2).toString());
         ui->chuy->setText(query.value(4).toString());
-        ma_bn =
         //ui->ngaybd->setDate(query.value(5).toDate());
         strquery = "select distinct benh.ten_benh from co_benh left join benh on benh.ma_benh = co_benh.ma_benh where co_benh.ma_bn ='" +mabn+"'";
         danhsachbenh.setQuery(strquery);
@@ -78,7 +77,8 @@ void tiemngua::infothuoc(QString maphieu, QString mabn)
     for(int i=0; i< dsthuoc.rowCount();i++)
     {
         ma_thuoc = dsthuoc.index(i,2).data().toString();
-        item_ngayhen.appendRow(this->prepareRow(dsthuoc.index(i,0).data().toString(),this->tinh_ngayTaiHen(ma_thuoc),this->tinhSoTTLieu(ma_thuoc,mabn)));
+        stt_lieu = this->tinhSoTTLieu(ma_thuoc,mabn);
+        item_ngayhen.appendRow(this->prepareRow(dsthuoc.index(i,0).data().toString(),this->tinh_ngayTaiHen(ma_thuoc,stt_lieu),stt_lieu));
     }
 }
 /*hien thi cac mui tiem da tiem va ngay tiem*/
@@ -101,7 +101,8 @@ void tiemngua::on_pushButton_2_clicked()
     while(query.next())
     {
         ma_thuoc = query.value(0).toString();
-        query_tmp.exec("update tiem set ngay_tiem = current_date, stt_lieu = '"+this->tinhSoTTLieu(ma_thuoc,ma_bn)+"',ngay_hen_kt = '"+ this->tinh_ngayTaiHen(ma_thuoc)+ "' where ma_phieu = '"+maphieu+"'");
+        stt_lieu = this->tinhSoTTLieu(ma_thuoc,ma_bn);
+        query_tmp.exec("update tiem set ngay_tiem = current_date, stt_lieu = '"+stt_lieu+"',ngay_hen_kt = '"+ this->tinh_ngayTaiHen(ma_thuoc,stt_lieu)+ "' where ma_phieu = '"+maphieu+"'");
     }
     query.exec("update tt_benh_nhan set da_tiemlandau = TRUE where ma_bn = '"+ma_bn+"'");
     if(!query.exec("update hoa_don set da_tiem= TRUE where ma_hd = '"+ma_hoadon+"'"))
@@ -199,9 +200,10 @@ void tiemngua::updateDScho()
                               left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
                               where hoa_don.ngay_lap = current_date  and hoa_don.da_tiem is null");
 }
-QString tiemngua::tinh_ngayTaiHen(QString mathuoc)
+QString tiemngua::tinh_ngayTaiHen(QString mathuoc,QString sttlieu)
 {
-    query_ham.exec("select chu_ky,sl_nhac_lai from thuoc where ma_thuoc = '"+mathuoc+"'" );
+    query_ham.exec("select so_ngay,sl_nhac_lai from thuoc right join lich_hen on lich_hen.ma_thuoc = thuoc.ma_thuoc where lan_thu = '"+sttlieu+"' and thuoc.ma_thuoc = '"+mathuoc+"'" );
+    qDebug() << query_ham.lastQuery();
     if(query_ham.next())
     {
         sl_nhac_lai = query_ham.value(1).toInt();
@@ -211,7 +213,7 @@ QString tiemngua::tinh_ngayTaiHen(QString mathuoc)
         }
     }
     else
-        return "NULL";
+        return "-1";
 }
 void tiemngua::capnhatPhieuTiem()
 {

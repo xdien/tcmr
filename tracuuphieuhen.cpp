@@ -24,27 +24,29 @@ void tracuuPhieuHen::on_pushButton_2_clicked()
     //hien thi thong tin benh dk
     //hien thi danh sach benh dang ky
     query.exec("select ten_benh, benh.ma_benh from tt_benh_nhan \
-               right join muon_tiem on muon_tiem.ma_bn = tt_benh_nhan.ma_bn \
-            left join benh on benh.ma_benh = muon_tiem.ma_benh where muon_tiem.ma_bn = '"+ ui->ma_bn->text() +"'" );
-            while(query.next())
-            {
-                tmp = itemtDSbenh.findItems(query.value(1).toString(),Qt::MatchExactly, 1);
-            if(tmp.count() <= 0)
-    {
-                    this->itemtDSbenh.appendRow(this->prepareRow(query.value(0).toString(),query.value(1).toString(),""));
-}
-        }
+     right join muon_tiem on muon_tiem.ma_bn = tt_benh_nhan.ma_bn \
+     left join benh on benh.ma_benh = muon_tiem.ma_benh where muon_tiem.ma_bn = '"+ ui->ma_bn->text() +"'" );
 
-                    query.exec("select thuoc.ten_thuoc,count(thuoc.ma_thuoc),thuoc.ma_thuoc from tiem left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
-                               where tiem.ngay_tiem is not null and thuoc.ma_thuoc = '"+ui->lineEdit_mathuoc->text() +"' and ma_bn = '"+ui->ma_bn->text()+"' group by thuoc.ma_thuoc");
-                    if(query.next())
-            {
-            tmp = thuocModel.findItems(query.value(2).toString(),Qt::MatchExactly,2);
-            if(tmp.count() <= 0)
-                    thuocModel.appendRow(this->prepareRow(query.value(0).toString(),query.value(1).toString(),query.value(2).toString()));
-        }else{
-                    ui->kq->setText("Khong tim thay");
+    while(query.next())
+    {
+        tmp = itemtDSbenh.findItems(query.value(1).toString(),Qt::MatchExactly, 1);
+        if(tmp.count() <= 0)
+        {
+            this->itemtDSbenh.appendRow(this->prepareRow(query.value(0).toString(),query.value(1).toString(),""));
         }
+    }
+
+    query.exec("select thuoc.ten_thuoc,count(thuoc.ma_thuoc),thuoc.ma_thuoc from tiem left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
+     where tiem.ngay_tiem is not null and thuoc.ma_thuoc = '"+ui->lineEdit_mathuoc->text() +"' and ma_bn = '"+ui->ma_bn->text()+"' group by thuoc.ma_thuoc");
+    qDebug() << query.lastQuery();
+    if(query.next())
+    {
+        tmp = thuocModel.findItems(query.value(2).toString(),Qt::MatchExactly,2);
+        if(tmp.count() <= 0)
+            thuocModel.appendRow(this->prepareRow(query.value(0).toString(),query.value(1).toString(),query.value(2).toString()));
+    }else{
+        ui->kq->setText("Khong tim thay");
+    }
 }
 
 QList<QStandardItem *> tracuuPhieuHen::prepareRow(const QString &first,

@@ -10,6 +10,7 @@
 #include "managenv.h"
 #include "managetiemngua.h"
 #include "managechucvu.h"
+#include "reporttctre.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -108,4 +109,10 @@ void MainWindow::on_actionNhap_thuoc_triggered()
 {
     NhapThuoc *nhapthuoc = new NhapThuoc();
     nhapthuoc->show();
+}
+
+void MainWindow::on_actionTC_cho_tr_em_triggered()
+{
+    ReportTCTRE *rerportr = new ReportTCTRE();
+    rerportr->show();
 }

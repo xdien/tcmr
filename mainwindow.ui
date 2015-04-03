@@ -39,6 +39,7 @@
     <property name="title">
      <string>Bao cao</string>
     </property>
+    <addaction name="actionTC_cho_tr_em"/>
    </widget>
    <widget class="QMenu" name="menuHe_thong">
     <property name="title">
@@ -128,7 +129,12 @@
   </action>
   <action name="actionNhap_thuoc">
    <property name="text">
-    <string>Nhap thuoc</string>
+    <string>&amp;Nhap thuoc</string>
+   </property>
+  </action>
+  <action name="actionTC_cho_tr_em">
+   <property name="text">
+    <string>TC cho trẻ em</string>
    </property>
   </action>
  </widget>
