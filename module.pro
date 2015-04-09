@@ -4,14 +4,23 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql xml
+QT       += core gui sql xml webkitwidgets  printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = module
 TEMPLATE = app
+#include(../QtRPT/QtRPT.pri)
 INCLUDEPATH += /home/xdien/QtSDK/NCReport/include
 LIBS += -L/home/xdien/QtSDK/NCReport/lib -lNCReport
+#CONFIG += qt warn_on debug staticlib
+
+copydata.commands = $(COPY_DIR) $$PWD/report $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
+
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -25,13 +34,14 @@ SOURCES += main.cpp\
     dongphi.cpp \
     tiemngua.cpp \
     danhsachboqua.cpp \
-    dialog_jumstt.cpp \
     tracuuphieuhen.cpp \
     managenv.cpp \
     managetiemngua.cpp \
     managechucvu.cpp \
     nhapthuoc.cpp \
-    reporttctre.cpp
+    reporttctre.cpp \
+    managerlogin.cpp \
+    htmltemp.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -44,13 +54,14 @@ HEADERS  += mainwindow.h \
     dongphi.h \
     tiemngua.h \
     danhsachboqua.h \
-    dialog_jumstt.h \
     tracuuphieuhen.h \
     managenv.h \
     managetiemngua.h \
     managechucvu.h \
     nhapthuoc.h \
-    reporttctre.h
+    reporttctre.h \
+    managerlogin.h \
+    htmltemp.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \

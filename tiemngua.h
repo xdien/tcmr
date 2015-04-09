@@ -8,7 +8,6 @@
 #include "managerstt.h"
 #include "danhsachboqua.h"
 #include <QKeyEvent>
-#include "dialog_jumstt.h"
 #include <QStandardItemModel>
 
 namespace Ui {

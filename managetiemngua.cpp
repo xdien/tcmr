@@ -36,10 +36,6 @@ void ManageTiemNgua::on_pushButton_clicked()
     this->up_bang_phongNgua();
 }
 
-void ManageTiemNgua::on_tableView_phong_pressed(const QModelIndex &index)
-{
-
-}
 void ManageTiemNgua::up_bang_phongNgua()
 {
     phong_ngua.setTable("phong_ngua");

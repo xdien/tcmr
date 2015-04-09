@@ -1,7 +1,13 @@
 #include "reporttctre.h"
 #include "ui_reporttctre.h"
+#include <QPrintDialog>
 
 #include <QMessageBox>
+#include <QTextEdit>
+//#include <QtPrintSupport>
+#include <QtWebKit/QtWebKit>
+
+
 
 ReportTCTRE::ReportTCTRE(QWidget *parent) :
     QWidget(parent),
@@ -15,7 +21,6 @@ ReportTCTRE::ReportTCTRE(QWidget *parent) :
     ui->listView__diaphuong->setModel(diachi);
     //ui->listView_dsdiaphuongDChon->setModel(diachiDC);
     ui->listView_dsdiaphuongDChon->setModel(&item_tinhthanh);
-
     //load cac bien default cho dia cap bat de chon
     ui->comboBox->addItem("Xa/phuong","ward");
     ui->comboBox->addItem("Quan/huyen","district");
@@ -23,6 +28,7 @@ ReportTCTRE::ReportTCTRE(QWidget *parent) :
     //ui->comboBox_2->setEnabled(false);
     ui->comboBox_2->setModel(diachiComBox);
      connect(this,SIGNAL(setvalue(QString,QString,QString)),this,SLOT(setbang(QString,QString,QString)));
+    htmltemp = new HtmlTemp();
 }
 
 ReportTCTRE::~ReportTCTRE()
@@ -107,12 +113,41 @@ void ReportTCTRE::on_pushButton_clicked()
 
 void ReportTCTRE::on_pushButton_2_clicked()
 {
+    QString mau;
+    QTextDocument *document = new QTextDocument();
+    QTextCursor cursor(document);
+    //truyen tr td vao bien conntent
+    for(int i =0;i<item_tinhthanh.rowCount();i++)
+    {
+
+        ma_dc = item_tinhthanh.index(i,1).data().toString();
+        mau = mau + "<tr><td>"+QString::number(i+1)+"</td>\
+                                <td>"+ item_tinhthanh.index(i,0).data().toString() +"</td><!-- hen thi stt-->\
+                                <!-- danh cho khoi 1-->\
+                                <td>"+this->tongsoTreTheoThang(18,ma_dc)+"</td>\
+                                <td>"+QString::number(this->tongsotre("0",ma_dc,"TH_00000001"))+"</td>\
+                                <td>"+this->tongsoTreTiemTheoThuoc("TH_00000000",ma_dc,200)+"</td>\
+                                <!-- danh cho khoi 2 dua vao do tuoi tinh so doi tuong vd: 1-2,4-10 la 2-->\
+                                <td>"+tongsoDoiTuongTheoThuoc("TH_00000001",ma_dc,"2","<=",200)+"</td>\
+                                <td>"+tongSoNguoiTiem(1, "TH_00000001",ma_dc,200)+"</td>\
+                                <td>"+tongSoNguoiTiem(2, "TH_00000001",ma_dc,200)+"</td>\
+                                 <td>"+tongsoDoiTuongTheoThuoc("TH_00000001",ma_dc,"3","=",200)+"</td>\
+                                <td>"+tongSoNguoiTiem(3, "TH_00000001",ma_dc,200)+"</td>\
+                                <!-- khoi 3-->\
+                                <td>"+tongsoDoiTuongTheoThuoc("TH_00000001",ma_dc,"","is not null",200)+"</td>\
+                                <td>"+this->tongsoTreTiemTheothuoc("TH_00000001",ma_dc,200)+"</td>\
+                                </tr>";
+    }
+    cursor.insertHtml(htmltemp->header+mau);
     NCReport *report = new NCReport();
     report->setReportSource( NCReportSource::File ); // set report source type
-    //report->addItemModel(querymodel_room,"myModel");
-    report->setReportFile("/home/xdien/ProjectsQT/qlsv_ktx/lietkeDSSV.ncr"); //set the report filename fullpath or relative to dir
+    report->setReportFile("report/ket_qua_tiem_chung_tre_em.ncr"); //set the report filename fullpath or relative to dir
+    //report->addParameter("pagehtml",doc.toHtml());
+    //qDebug() << doc.toHtml("UTF-8");
+
+    //qDebug() << document->toHtml("UTF-8");
+    report->addParameter("aaa",document->toHtml());
     report->runReportToPreview(); // run to preview output
-    // error handling
     if( report->hasError())
     {
         QMessageBox msgBox;
@@ -129,5 +164,78 @@ void ReportTCTRE::on_pushButton_2_clicked()
         pv->setAttribute( Qt::WA_DeleteOnClose );    // set attrib
         pv->exec();  // run like modal dialog
     }
-    delete report;
+//    delete report;
+    //QWebView *web = new QWebView();
+    //web->load(QUrl("https://www.google.com.vn"));
+//    QPrinter printer;
+//    //printer.setPrinterName("Print to File (PDF&#41;"&#41;;
+//    printer.setOutputFormat(QPrinter::PdfFormat);
+//    printer.setPrintRange(QPrinter::AllPages);
+//    printer.setOrientation(QPrinter::Portrait);
+//    printer.setPaperSize(QPrinter::A4);
+//    //printer.setResolution(QPrinter::HighResolution);
+//    printer.setFullPage(true);
+
+    //web->print(printer);
+
+    //printer.setOutputFileName("myss.ps");
+
+    //web->show();
+    //this->print();
+}
+
+int ReportTCTRE::tongsotre(QString sothang,QString madc,QString mathuoc)
+{
+    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan left join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where extract(month from age(sn)) > "+sothang+" and ma_dc = '"+madc+"' and (select distinct ma_bn from tiem where ngay_tiem is not null and tiem.ma_thuoc = '"+mathuoc+"') = tt_benh_nhan.ma_bn");
+    qDebug() << query.lastQuery();
+    if(query.next())
+    return query.value(0).toInt();
+    else
+        return -1;
+}
+QString ReportTCTRE::tongsoTreTheoThang(int sothang, QString madc)
+{
+    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan where extract(year from age(sn))*12+extract(month from age(sn)) = "+QString::number(sothang)+" and ma_dc = '"+madc+"'");
+    if(query.next())
+    {
+        return query.value(0).toString();
+    }else{
+        return query.lastError().text();
+    }
+}
+QString ReportTCTRE::tongsoTreTiemTheoThuoc(QString mathuoc, QString madc, int sothangtuoinhohon)
+{
+    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan left join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and (select distinct ma_bn from tiem where ngay_tiem is not null and tiem.ma_thuoc = '"+mathuoc+"') = tt_benh_nhan.ma_bn");
+    if(query.next())
+        return query.value(0).toString();
+    else
+        return query.lastError().text();
+}
+QString ReportTCTRE::tongsoDoiTuongTheoThuoc(QString mathuoc, QString madc,QString somui, QString dk,int sothangtuoinhohon)//so doi tuong tiem mui 1 va 2,
+{
+    query.exec("select count(distinct ma_dotuoi) from tt_benh_nhan,(select count(ma_thuoc) as somui,tiem.ma_bn from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where ngay_tiem is not null and tiem.ma_thuoc = '"+mathuoc+"' group by tiem.ma_bn) as demui where demui.somui "+dk+""+somui+" and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
+    qDebug() << query.lastQuery();
+    if(query.next())
+        return query.value(0).toString();
+    else
+        return query.lastError().text();
+}
+
+
+QString ReportTCTRE::tongSoNguoiTiem(int somui, QString mathuoc, QString madc,  int sothangtuoinhohon)
+{
+    query.exec("select count(ma_thuoc) from somuitiem where ma_dc = '"+madc+"' and somui = '"+QString::number(somui)+"' and ma_thuoc ='"+mathuoc+"'");
+
+    if(query.next())
+        return query.value(0).toString();
+    else
+        return query.lastError().text();
+}
+QString ReportTCTRE::tongsoTreTiemTheothuoc(QString mathuoc, QString madc, int sothangtuoinhohon)
+{
+    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan left join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
+            if(query.next())
+                return query.value(0).toString();
+            else
+                return query.lastError().text();
 }

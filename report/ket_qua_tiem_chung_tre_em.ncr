@@ -21,10 +21,10 @@
         <htmlBodyStyle>{DEFAULT}</htmlBodyStyle>
     </options>
     <datasources>
-        <datasource id="DataSource1" allowEmpty="true" primaryKeyColumn="1" type="list" openRole="begin" source="static" columnDelimiter="tab" listID="testdata0"></datasource>
+        <datasource id="DataSource1" allowEmpty="true" type="txt" openRole="begin" source="static" columnDelimiter="tab" encoding="UTF-8">aa</datasource>
     </datasources>
     <variables/>
-    <pageheader id="PH" height="52.123">
+    <pageheader id="PH" height="24.342">
         <label id="BUNBC" zValue="0" posX="1.587" posY="0.000" width="31.750" height="5.556" fontName="Arial" fontSize="14" fontWeight="bold" alignment="1">Bộ Y Tế</label>
         <label id="9KF7T" zValue="1" posX="76.200" posY="0.000" width="114.300" height="5.556" fontName="Arial" fontSize="14" fontWeight="bold" alignment="1">BÁO CÁO KẾT QUẢ TIÊM CHỦNG CHO TRẺ EM</label>
         <label id="78FD9" zValue="2" posX="1.587" posY="9.525" width="31.750" height="12.700" fontName="Arial" fontSize="10" alignment="1">Tỉnh thành phố: 
@@ -38,59 +38,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Xâ gủi lên huyện trước ngày 5 tháng s&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Huyện gửi lên tỉnh trước ngày 10 tháng s&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Tỉnh gửi TCMR QG và TCMR khu vực trước ngày 15 tháng sau&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
-        <text id="PQM57" zValue="4" posX="0.000" posY="25.400" width="263.525" height="25.400" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table border=&quot;1&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot;&gt;
-&lt;tr&gt;
-&lt;td rowspan=&quot;3&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;TT&lt;/span&gt;         &lt;/p&gt;&lt;/td&gt;
-&lt;td rowspan=&quot;3&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Địa Phương&lt;/span&gt;       &lt;/p&gt;&lt;/td&gt;
-&lt;td colspan=&quot;3&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Tiêm Vắc xin sởi và DPT&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td colspan=&quot;5&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Vắc xin Viêm Não Nhật Bản&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td colspan=&quot;2&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Vắc xin Thương&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Hàn&lt;/span&gt; 			            &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td rowspan=&quot;2&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Trẻ 18 tháng            &lt;/p&gt;&lt;/td&gt;
-&lt;td rowspan=&quot;2&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sởi            &lt;/p&gt;&lt;/td&gt;
-&lt;td rowspan=&quot;2&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;DPT            &lt;/p&gt;&lt;/td&gt;
-&lt;td colspan=&quot;3&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Tiêm Mũi 1 và 2  &lt;/p&gt;&lt;/td&gt;
-&lt;td colspan=&quot;2&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Tiêm Mũi 3            &lt;/p&gt;&lt;/td&gt;
-&lt;td rowspan=&quot;2&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Số Đối Tượng            &lt;/p&gt;&lt;/td&gt;
-&lt;td rowspan=&quot;2&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Số Tiêm            			            &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Số Đối&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Tượng&lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mũi 1&lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mũi 2         &lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Số Dối Tượng     &lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mũi 3&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</text>
     </pageheader>
     <pagefooter id="PF" height="10.000"/>
     <details>
-        <detail id="Detail1" height="25.140" autoHeight="true" datasource="DataSource1">
+        <detail id="Detail3" height="13.230" datasource="DataSource1">
             <items>
-                <field id="BZLTY" zValue="0" posX="36.512" posY="1.587" width="47.625" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">testdata0</field>
-                <line id="2ZUDL" zValue="1" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="34.925" fromY="0.000" toX="34.925" toY="6.350"/>
-                <line id="B9BUN" zValue="2" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="36.512" fromY="6.350" toX="58.737" toY="6.350"/>
-                <line id="7UHBR" zValue="4" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="58.737" fromY="6.350" toX="58.737" toY="1.587"/>
+                <text id="0VWXT" zValue="0" posX="0.000" posY="0.000" width="266.700" height="4.762" resource="param" autoHeight="true" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000" defPosAndSize="true">aaa</text>
             </items>
         </detail>
     </details>

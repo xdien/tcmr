@@ -12,6 +12,7 @@
 #include "managechucvu.h"
 #include "reporttctre.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
