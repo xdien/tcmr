@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NCReport version="2.14.0" name="Untitled" type="report">
+    <options>
+        <encoding>UTF-8</encoding>
+        <language>00</language>
+        <langrole>0</langrole>
+        <orientation>landscape</orientation>
+        <pagesize width="297.000" height="210.000">A4</pagesize>
+        <topmargin>15</topmargin>
+        <bottommargin>15</bottommargin>
+        <leftmargin>20</leftmargin>
+        <rightmargin>20</rightmargin>
+        <backcolor>#ffffff</backcolor>
+        <columns>0</columns>
+        <columnspace>0</columnspace>
+        <zoneSpacing>0</zoneSpacing>
+        <zoneBreak>false</zoneBreak>
+        <fontname>Arial</fontname>
+        <fontsize>10</fontsize>
+        <fontstyle></fontstyle>
+        <htmlBodyStyle>{DEFAULT}</htmlBodyStyle>
+    </options>
+    <datasources>
+        <datasource id="DataSource1" allowEmpty="true" type="txt" openRole="begin" source="static" columnDelimiter="tab" encoding="UTF-8">aa</datasource>
+    </datasources>
+    <variables/>
+    <pageheader id="PH" height="27.781">
+        <label id="BCE39" zValue="0" posX="3.175" posY="11.112" width="31.750" height="12.700" fontName="Arial" fontSize="10" alignment="1">Tỉnh thành phố: 
+Huyện quận thị:
+Xã, phường:</label>
+        <text id="KF7T7" zValue="1" posX="76.200" posY="7.938" width="119.062" height="17.462" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Tháng: ....từ ......../......../20..........đến ......../........../20......&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Xâ gủi lên huyện trước ngày 5 tháng s&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Huyện gửi lên tỉnh trước ngày 10 tháng s&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial';&quot;&gt;Tỉnh gửi TCMR QG và TCMR khu vực trước ngày 15 tháng sau&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+        <label id="UHBRP" zValue="2" posX="77.787" posY="1.587" width="114.300" height="5.556" fontName="Arial" fontSize="14" fontWeight="bold" alignment="1">BÁO CÁO KẾT QUẢ TIÊM CHỦNG CHO TRẺ EM</label>
+        <label id="QM578" zValue="3" posX="3.175" posY="1.587" width="31.750" height="5.556" fontName="Arial" fontSize="14" fontWeight="bold" alignment="1">Bộ Y Tế</label>
+    </pageheader>
+    <pagefooter id="PF" height="10.000"/>
+    <details>
+        <detail id="Detail1" height="6.879" datasource="DataSource1">
+            <items>
+                <text id="2HFMK" zValue="0" posX="0.000" posY="0.000" width="255.587" height="6.350" resource="param" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">aaa</text>
+            </items>
+        </detail>
+    </details>
+</NCReport>

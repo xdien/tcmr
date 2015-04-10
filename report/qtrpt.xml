@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Reports email="aliks-os@ukr.net" programmer="Aleksey Osipov" lib="QtRPT">
+  <Report marginsLeft="40" pageWidth="1188" marginsBottom="40" marginsTop="40" pageHeight="840" marginsRight="40" pageNo="1" orientation="1">
+    <ReportBand width="1108" left="40" height="48" type="ReportTitle" name="RepTitleBand" top="40">
+      <TContainerField printing="1" fontBold="1" fontItalic="0" borderLeft="rgba(0,0,0,255)" fontFamily="Oxygen-Sans" fontUnderline="0" fontStrikeout="0" textWrap="1" highlighting="" autoHeight="0" name="field1" fontColor="rgba(0,0,0,255)" format="" borderBottom="rgba(0,0,0,255)" backgroundColor="rgba(255,255,255,255)" value="aaa" borderColor="rgba(0,0,0,255)" width="140" aligmentH="hLeft" top="9" borderTop="rgba(0,0,0,255)" borderWidth="1px" borderStyle="solid" fontSize="10" height="30" type="label" borderRight="rgba(0,0,0,255)" left="148" aligmentV="vCenter"/>
+    </ReportBand>
+    <ReportBand width="1108" left="40" height="116" type="MasterData" name="MasterDataBand" top="180"/>
+    <ReportBand width="1108" left="40" height="48" type="ReportSummary" name="ReportSummaryBand" top="388"/>
+    <ReportBand showInGroup="1" width="1108" left="40" height="48" type="DataGroupFooter" name="DataGroupFooterBand" top="318"/>
+    <ReportBand width="1108" left="40" height="48" type="PageHeader" name="PageHeaderBand" top="110">
+      <TContainerField printing="1" fontBold="1" fontItalic="0" borderLeft="rgba(0,0,0,255)" fontFamily="Oxygen-Sans" fontUnderline="0" fontStrikeout="0" textWrap="1" highlighting="" autoHeight="0" name="field2" fontColor="rgba(0,0,0,255)" format="" borderBottom="rgba(0,0,0,255)" backgroundColor="rgba(255,255,255,255)" value="New Label" borderColor="rgba(0,0,0,255)" width="140" aligmentH="hLeft" top="8" borderTop="rgba(0,0,0,255)" borderWidth="1px" borderStyle="solid" fontSize="10" height="30" type="label" borderRight="rgba(0,0,0,255)" left="41" aligmentV="vCenter"/>
+    </ReportBand>
+    <DataSource dbPassword="hn4558" dbCoding="UTF8" dbHost="gentoo" dbType="QPSQL" dbUser="postgres" dbName="db_tcmr" type="SQL" dbConnectionName="pot" name="DB1" charsetCoding="UTF8" dbPort="5432">SELECT tt_benh_nhan.*, muon_tiem.*, do_tuoi.* 
+FROM tt_benh_nhan,
+muon_tiem,
+do_tuoi<diagram>
+        <item x="23" y="30" type="database-table" id="{5ec3be1c-b513-402f-8014-507031a99bfb}" name="tt_benh_nhan"/>
+        <item x="-537" y="-151" type="database-table" id="{8ccdbc88-6987-43e4-9c93-2518e2ad3b2e}" name="muon_tiem"/>
+        <item x="-662" y="-78" type="database-table" id="{61945c72-4be6-4336-b3a3-23a083052199}" name="do_tuoi"/>
+      </diagram>
+    </DataSource>
+  </Report>
+</Reports>
