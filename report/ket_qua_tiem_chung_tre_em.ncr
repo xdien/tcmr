@@ -41,7 +41,7 @@ p, li { white-space: pre-wrap; }
     </pageheader>
     <pagefooter id="PF" height="10.000"/>
     <details>
-        <detail id="Detail3" height="13.230" datasource="DataSource1">
+        <detail id="Detail3" height="5.821" datasource="DataSource1">
             <items>
                 <text id="0VWXT" zValue="0" posX="0.000" posY="0.000" width="266.700" height="4.762" resource="param" autoHeight="true" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000" defPosAndSize="true">aaa</text>
             </items>

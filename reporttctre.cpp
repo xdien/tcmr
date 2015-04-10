@@ -142,10 +142,6 @@ void ReportTCTRE::on_pushButton_2_clicked()
     NCReport *report = new NCReport();
     report->setReportSource( NCReportSource::File ); // set report source type
     report->setReportFile("report/ket_qua_tiem_chung_tre_em.ncr"); //set the report filename fullpath or relative to dir
-    //report->addParameter("pagehtml",doc.toHtml());
-    //qDebug() << doc.toHtml("UTF-8");
-
-    //qDebug() << document->toHtml("UTF-8");
     report->addParameter("aaa",document->toHtml());
     report->runReportToPreview(); // run to preview output
     if( report->hasError())
@@ -164,24 +160,6 @@ void ReportTCTRE::on_pushButton_2_clicked()
         pv->setAttribute( Qt::WA_DeleteOnClose );    // set attrib
         pv->exec();  // run like modal dialog
     }
-//    delete report;
-    //QWebView *web = new QWebView();
-    //web->load(QUrl("https://www.google.com.vn"));
-//    QPrinter printer;
-//    //printer.setPrinterName("Print to File (PDF&#41;"&#41;;
-//    printer.setOutputFormat(QPrinter::PdfFormat);
-//    printer.setPrintRange(QPrinter::AllPages);
-//    printer.setOrientation(QPrinter::Portrait);
-//    printer.setPaperSize(QPrinter::A4);
-//    //printer.setResolution(QPrinter::HighResolution);
-//    printer.setFullPage(true);
-
-    //web->print(printer);
-
-    //printer.setOutputFileName("myss.ps");
-
-    //web->show();
-    //this->print();
 }
 
 int ReportTCTRE::tongsotre(QString sothang,QString madc,QString mathuoc)

@@ -128,8 +128,24 @@ void ManageNV::on_pushButton_4_clicked()
 
 void ManageNV::on_pushButton_2_clicked()
 {
+
+    ma_cv = id.getNextIndexCode("chuc_vu","CV");
+    query.exec("INSERT INTO chuc_vu(\
+               ma_cv, ten_cv)\
+       VALUES ('"+ma_cv+"', '"+ui->lineEdit_tencv->text()+"')");
+    query.exec("INSERT INTO phan_quyen(\
+               ma_cv, dang_ky_tt, kham_so_bo, dong_phi, tiem, bao_cao, he_thong)\
+       VALUES ('"+ma_cv+"',"+boolToString(ui->checkBox_1->isChecked())+", "+boolToString(ui->checkBox_2->isChecked())+", "+boolToString(ui->checkBox_3->isChecked())+", "+boolToString(ui->checkBox_4->isChecked())+","+boolToString(ui->checkBox_5->isChecked())+", "+boolToString(ui->checkBox_6->isChecked())+")");
+            qDebug() << query.lastError().text();
     this->LoadChucvu();
+    this->LoadtableQuyen();
     //them thong tien chuc vu va quyen cua chuc vu do
 
-
+}
+QString ManageNV::boolToString(bool t)
+{
+    if(t)
+        return "TRUE";
+    else
+        return "FALSE";
 }

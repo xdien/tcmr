@@ -27,6 +27,63 @@ HtmlTemp::HtmlTemp()
             <td>Mũi 3</td>\
             </tr>";
     footer= "</table>";
+    header1 = "<table border=1>\
+            <tbody><tr>\
+                <td rowspan=3>Bệnh</td>\
+                <td colspan=4>Dưới 1 tuổi(0 - 11 tháng)</td>\
+                <td colspan=4>1 - 4 tuổi</td>\
+                <td colspan=4>5 - 9 tuổi</td>\
+                <td colspan=4>10 - 14 tuổi</td>\
+                <td colspan=4>15 tuổi trở lên</td>\
+                <td>Cộng</td>\
+            </tr>\
+            <tr>\
+                <td>TCĐĐ</td>\
+                <td>Không TCĐĐ</td>\
+                <td>Không TC</td>\
+                <td>Không rõ</td>\
+                <td>TCĐĐ</td>\
+                <td>Không TCĐĐ</td>\
+                <td>Không TC</td>\
+                <td>Không rõ</td>\
+                <td>TCĐĐ</td>\
+                <td>Không TCĐĐ</td>\
+                <td>Không TC</td>\
+                <td>Không rõ</td>\
+                <td>TCĐĐ</td>\
+                <td>Không TCĐĐ</td>\
+                <td>Không TC</td>\
+                <td>Không rõ</td>\
+                <td>TCĐĐ</td>\
+                <td>Không TCĐĐ</td>\
+                <td>Không TC</td>\
+                <td>Không rõ</td>\
+                <td></td>\
+            </tr>\
+            <tr>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+                <td>M/C</td>\
+            </tr>\
+        </tbody></table>";
 }
 
 HtmlTemp::~HtmlTemp()

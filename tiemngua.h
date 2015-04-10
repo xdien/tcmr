@@ -56,7 +56,7 @@ private:
     QString tiem_thuocID;
     managerSTT *stt;
     QString maphieu,ma_thuoc;
-    QString MaHD;
+    QString MaHD,ngaytaihen;
     QString ma_bn,stt_lieu;
     QDate ngay_hen;
     int col,row,chu_ky,sl_nhac_lai;

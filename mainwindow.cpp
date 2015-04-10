@@ -11,6 +11,7 @@
 #include "managetiemngua.h"
 #include "managechucvu.h"
 #include "reporttctre.h"
+#include "reportbenhtruyennhiem.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -116,4 +117,11 @@ void MainWindow::on_actionTC_cho_tr_em_triggered()
 {
     ReportTCTRE *rerportr = new ReportTCTRE();
     rerportr->show();
+}
+
+void MainWindow::on_actionBenh_truyen_nhiem_triggered()
+{
+    ReportBenhTruyenNhiem *benhtruyennhiem = new ReportBenhTruyenNhiem();
+    benhtruyennhiem->show();
+
 }

@@ -40,6 +40,7 @@
      <string>Bao cao</string>
     </property>
     <addaction name="actionTC_cho_tr_em"/>
+    <addaction name="actionBenh_truyen_nhiem"/>
    </widget>
    <widget class="QMenu" name="menuHe_thong">
     <property name="title">
@@ -134,7 +135,12 @@
   </action>
   <action name="actionTC_cho_tr_em">
    <property name="text">
-    <string>TC cho trẻ em</string>
+    <string>&amp;TC cho trẻ em</string>
+   </property>
+  </action>
+  <action name="actionBenh_truyen_nhiem">
+   <property name="text">
+    <string>Bệnh truyền nhiễm</string>
    </property>
   </action>
  </widget>

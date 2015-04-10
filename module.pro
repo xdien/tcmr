@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     nhapthuoc.cpp \
     reporttctre.cpp \
     managerlogin.cpp \
-    htmltemp.cpp
+    htmltemp.cpp \
+    reportbenhtruyennhiem.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -61,7 +62,8 @@ HEADERS  += mainwindow.h \
     nhapthuoc.h \
     reporttctre.h \
     managerlogin.h \
-    htmltemp.h
+    htmltemp.h \
+    reportbenhtruyennhiem.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -76,4 +78,5 @@ FORMS    += mainwindow.ui \
     managetiemngua.ui \
     managechucvu.ui \
     nhapthuoc.ui \
-    reporttctre.ui
+    reporttctre.ui \
+    reportbenhtruyennhiem.ui

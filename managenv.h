@@ -38,7 +38,7 @@ private:
     QModelIndex model_idx;
     int row;
     QSqlQuery query;
-    QString ma_nv,chuc_vu,ten,ten_dn,mk,sdt,cmnd,que_quan;
+    QString ma_cv,ma_nv,chuc_vu,ten,ten_dn,mk,sdt,cmnd,que_quan;
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);
@@ -46,6 +46,7 @@ private:
    QSqlQueryModel chucVuModel;
    void LoadtableQuyen();
    QSqlRelationalDelegate *dele;
+   QString boolToString(bool t);
 };
 
 #endif // MANAGENV_H
