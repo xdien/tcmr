@@ -28,7 +28,7 @@ HtmlTemp::HtmlTemp()
             </tr>";
     footer= "</table>";
     header1 = "<table border=1>\
-            <tbody><tr>\
+            <tr>\
                 <td rowspan=3>Bệnh</td>\
                 <td colspan=4>Dưới 1 tuổi(0 - 11 tháng)</td>\
                 <td colspan=4>1 - 4 tuổi</td>\
@@ -82,8 +82,7 @@ HtmlTemp::HtmlTemp()
                 <td>M/C</td>\
                 <td>M/C</td>\
                 <td>M/C</td>\
-            </tr>\
-        </tbody></table>";
+            </tr>";
 }
 
 HtmlTemp::~HtmlTemp()

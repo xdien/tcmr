@@ -12,8 +12,6 @@ tiemngua::tiemngua(QWidget *parent) :
     ngay = QDate::currentDate();
     this->updateDScho();
     ui->danhsanhcho->setModel(&danhsachchomodel);
-    //this->initializeModel(&muitiem);
-    //ui->tableView->setModel(&muitiem);
     ui->tableView->setModel(&dsthuoc);
     ui->treeView_ngayhen->setModel(&item_ngayhen);
     ui->danhsachbenh->setModel(&danhsachbenh);
@@ -113,7 +111,6 @@ void tiemngua::on_pushButton_2_clicked()
         qDebug() << query.lastError().text();
     else{
         this->cleanFroms();
-        //danhsachchomodel.setQuery("select * from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where ngay_tiem is null");
         //drop cac bang duoc cap nhat trong bang bo_qua
         this->updateDScho();
         this->setcurentidx();
@@ -201,13 +198,13 @@ QString tiemngua::tinh_ngayTaiHen(QString mathuoc,QString sttlieu)
 {
     /*sua lai o day sl_nhac_lai tinh truc tiep ben bang lich hen*/
     query_ham.exec("select so_ngay,sl_nhac_lai from thuoc right join lich_hen on lich_hen.ma_thuoc = thuoc.ma_thuoc where lan_thu = '"+sttlieu+"' and thuoc.ma_thuoc = '"+mathuoc+"'" );
-    qDebug() << query_ham.lastQuery();
+    //qDebug() << query_ham.lastQuery();
     if(query_ham.next())
     {
         sl_nhac_lai = query_ham.value(1).toInt();
         if(sl_nhac_lai > 0){
             chu_ky = query_ham.value(0).toInt();
-            return ngay_hen.currentDate().addDays(chu_ky).toString();
+            return ngay_hen.currentDate().addDays(chu_ky).toString("dd-MM-yyyy");
         }
     }
     else
@@ -215,18 +212,14 @@ QString tiemngua::tinh_ngayTaiHen(QString mathuoc,QString sttlieu)
 }
 void tiemngua::capnhatPhieuTiem()
 {
-
-
-
 }
 QString tiemngua::tinhSoTTLieu(QString mathuoc,QString mabn)
 {
-    query_ham.exec("select count(ma_thuoc) from tiem where ma_bn ='"+mabn+"' and ma_thuoc ='"+mathuoc+"'");
+    query_ham.exec("select count(ngay_tiem) from tiem where ma_bn ='"+mabn+"' and ma_thuoc ='"+mathuoc+"' group by ma_bn");
     if(query_ham.next())
     {
         return query_ham.value(0).toString();
-    }
-    else{
+    }else{
         return "0";
     }
 
@@ -249,4 +242,3 @@ void tiemngua::cleanFroms()
     ui->csha->clear();
     ui->cstim->clear();
 }
-

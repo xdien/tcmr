@@ -202,7 +202,7 @@ QString ReportTCTRE::tongsoDoiTuongTheoThuoc(QString mathuoc, QString madc,QStri
 
 QString ReportTCTRE::tongSoNguoiTiem(int somui, QString mathuoc, QString madc,  int sothangtuoinhohon)
 {
-    query.exec("select count(ma_thuoc) from somuitiem where ma_dc = '"+madc+"' and somui = '"+QString::number(somui)+"' and ma_thuoc ='"+mathuoc+"'");
+    query.exec("select count(ma_thuoc) from somuitiem where ma_dc = '"+madc+"' and somui = "+QString::number(somui)+" and ma_thuoc ='"+mathuoc+"'");
 
     if(query.next())
         return query.value(0).toString();

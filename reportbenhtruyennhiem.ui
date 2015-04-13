@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>582</width>
-    <height>236</height>
+    <width>674</width>
+    <height>297</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>180</y>
+     <x>550</x>
+     <y>260</y>
      <width>81</width>
      <height>22</height>
     </rect>
@@ -26,6 +26,92 @@
     <string>view</string>
    </property>
   </widget>
+  <widget class="QComboBox" name="comboBox_tp">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>150</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>150</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_qh">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>20</y>
+     <width>150</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>150</width>
+     <height>0</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_xp">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>20</y>
+     <width>150</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>150</width>
+     <height>0</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>606</width>
+     <height>194</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTreeView" name="treeView_benh"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>&lt;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTreeView" name="treeView_benhDChon"/>
+    </item>
+   </layout>
+  </widget>
+  <zorder>treeView_benh</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>treeView_benhDChon</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>comboBox_tp</zorder>
+  <zorder>comboBox_qh</zorder>
+  <zorder>comboBox_xp</zorder>
  </widget>
  <resources/>
  <connections/>

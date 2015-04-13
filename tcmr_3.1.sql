@@ -991,7 +991,10 @@ alter table tt_benh_nhan
 
 	drop view somuitiem;
 	create view somuitiem as
-	select ma_thuoc,count(ma_thuoc) as somui,tiem.ma_bn,ma_dc from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where ngay_tiem is not null group by tiem.ma_bn,ma_dc,ma_thuoc
-
+	select ma_thuoc,count(ma_thuoc) as somui,tiem.ma_bn,ma_dc from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where ngay_tiem is not null group by tiem.ma_bn,ma_dc,ma_thuoc;
+drop view tongsolantiem;
+create view tongsolantiem
+as
+select count(ma_lich_hen) as sl_nhac_lai,ma_thuoc from lich_hen group by ma_thuoc;
 '';
 
