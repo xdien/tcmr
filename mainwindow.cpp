@@ -22,6 +22,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     //db = QSqlDatabase::database("qt_sql_default_connection");
     //connect(db.driver()->,SIGNAL(disconnectNotify()),this,SLOT(trangthaiSQL()));
+    ui->actionPhieu_DK->setEnabled(false);
+    ui->actionKham_SB->setEnabled(false);
+    ui->actionDong_Phi->setEnabled(false);
+    ui->actionTiem->setEnabled(false);
+    ui->menuBao_cao->setEnabled(false);
+    ui->actionTrC_phieu_hen->setEnabled(false);
+    ui->menuHe_thong->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -40,6 +47,7 @@ void MainWindow::on_actionDan_nhap_triggered()
 {
     login * moi;
     moi = new login();
+    connect(moi,SIGNAL(nvdangnhap(QString)),this,SLOT(capnhatPhanQuyen(QString)));
     moi->show();
 }
 
@@ -133,4 +141,21 @@ void MainWindow::on_actionAbout_Qt_triggered()
     QString aas ="Thong tin ve Qt";
     aa.aboutQt(parentWidget(), aas);
     aa.show();
+}
+void MainWindow::capnhatPhanQuyen(QString macv)//cap nhat phan quyen dua theo macv
+{
+    query.exec("SELECT dang_ky_tt, kham_so_bo, dong_phi, tiem, bao_cao, he_thong "
+               "FROM phan_quyen where ma_cv = '"+macv+"'");
+    if(query.next())
+    {
+        ui->actionPhieu_DK->setEnabled(query.value(0).toBool());
+        ui->actionTrC_phieu_hen->setEnabled(query.value(0).toBool());
+        ui->actionKham_SB->setEnabled(query.value(1).toBool());
+        ui->actionDong_Phi->setEnabled(query.value(2).toBool());
+        ui->actionTiem->setEnabled(query.value(3).toBool());
+        ui->menuBao_cao->setEnabled(query.value(4).toBool());
+        ui->menuHe_thong->setEnabled(query.value(5).toBool());
+    }else{
+        qDebug() << "Loi: " <<query.lastError().text();
+    }
 }

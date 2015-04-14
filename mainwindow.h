@@ -51,6 +51,7 @@ private slots:
     void on_actionBenh_truyen_nhiem_triggered();
 
     void on_actionAbout_Qt_triggered();
+    void capnhatPhanQuyen(QString macv);
 
 private:
     Ui::MainWindow *ui;

@@ -16,6 +16,8 @@ class login : public QDialog
 public:
     explicit login(QWidget *parent = 0);
     ~login();
+signals:
+    void nvdangnhap(QString macv);
 
 private slots:
     void on_buttonBox_accepted();
