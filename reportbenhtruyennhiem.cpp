@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <QTextCursor>
 #include <QTextDocument>
+#include <QWebView>
 
 ReportBenhTruyenNhiem::ReportBenhTruyenNhiem(QWidget *parent) :
     QWidget(parent),
