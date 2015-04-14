@@ -42,13 +42,13 @@ private:
     void setcombobox(QString madc);
     void loadDefaultarr();
     void loadTP();
-    QString ma_dc,ten_bn,ma_thuoc, gioitinh, ma_nv,ma_bn,ma_pt;
+    QString ma_dc,ten_bn,ma_thuoc, gioitinh, ma_nv,ma_bn,ma_pt,ma_dt;
     int stt_lieu,thuoc_num;
     QSqlQuery query;
     //su dung model cho cmb_tp vi khog lam viec thong thuog
     QSqlQueryModel *cmb_tp;
     QSqlQueryModel *list_benh;
-    QSqlQueryModel *table_thuoc;
+    QSqlQueryModel *table_thuoc, dotuoimode;
     QString table_name;
     //lay ma dia chi tu combox
     QString getAdrrCode();

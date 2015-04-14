@@ -2,7 +2,10 @@
 #include "ui_mainwindow.h"
 #include "dialog_setting.h"
 #include "tiemngua.h"
+<<<<<<< HEAD
 //#include "test.h"
+=======
+>>>>>>> 84b0f0dd8dedac1dfb96c45a9739d3853553ea08
 #include <QMessageBox>
 #include <dangkyphieutiem.h>
 #include "khamsobo.h"
@@ -11,6 +14,9 @@
 #include "managenv.h"
 #include "managetiemngua.h"
 #include "managechucvu.h"
+#include "reporttctre.h"
+#include "reportbenhtruyennhiem.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -109,4 +115,17 @@ void MainWindow::on_actionNhap_thuoc_triggered()
 {
     NhapThuoc *nhapthuoc = new NhapThuoc();
     nhapthuoc->show();
+}
+
+void MainWindow::on_actionTC_cho_tr_em_triggered()
+{
+    ReportTCTRE *rerportr = new ReportTCTRE();
+    rerportr->show();
+}
+
+void MainWindow::on_actionBenh_truyen_nhiem_triggered()
+{
+    ReportBenhTruyenNhiem *benhtruyennhiem = new ReportBenhTruyenNhiem();
+    benhtruyennhiem->show();
+
 }

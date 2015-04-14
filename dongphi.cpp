@@ -23,10 +23,6 @@ dongphi::~dongphi()
     delete ui;
 }
 
-void dongphi::on_treeView_doubleClicked(const QModelIndex &index)
-{
-
-}
 
 void dongphi::on_treeView_clicked(const QModelIndex &index)
 {

@@ -5,6 +5,7 @@
 #include <QKeyEvent>
 #include <QStandardItemModel>
 #include "manageindex.h"
+#include <QCheckBox>
 
 namespace Ui {
 class ManageNV;
@@ -21,18 +22,31 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void LoadChucvu();
+
+    void on_comboBox_chucVu_currentIndexChanged(int index);
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     manageIndex id;
-    QSqlRelationalTableModel *testmodel;
+    QSqlRelationalTableModel *testmodel, *chuc_vumodel;
     Ui::ManageNV *ui;
     void keyPressEvent(QKeyEvent *e);
     QModelIndex model_idx;
     int row;
     QSqlQuery query;
-    QString ma_nv,chuc_vu,ten,ten_dn,mk,sdt,cmnd,que_quan;
+    QString ma_cv,ma_nv,chuc_vu,ten,ten_dn,mk,sdt,cmnd,que_quan;
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);
+   void LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBox *c3, QCheckBox *c4, QCheckBox *c5);
+   QSqlQueryModel chucVuModel;
+   void LoadtableQuyen();
+   QSqlRelationalDelegate *dele;
+   QString boolToString(bool t);
 };
 
 #endif // MANAGENV_H

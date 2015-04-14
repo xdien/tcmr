@@ -4,12 +4,22 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql xml
+QT       += core gui sql xml webkitwidgets  printsupport
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = module
 TEMPLATE = app
+#include(../QtRPT/QtRPT.pri)
+INCLUDEPATH += /home/xdien/QtSDK/NCReport/include
+LIBS += -L/home/xdien/QtSDK/NCReport/lib -lNCReport
+#CONFIG += qt warn_on debug staticlib
+
+copydata.commands = $(COPY_DIR) $$PWD/report $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
 
 
 SOURCES += main.cpp\
@@ -28,7 +38,11 @@ SOURCES += main.cpp\
     managenv.cpp \
     managetiemngua.cpp \
     managechucvu.cpp \
-    nhapthuoc.cpp
+    nhapthuoc.cpp \
+    reporttctre.cpp \
+    managerlogin.cpp \
+    htmltemp.cpp \
+    reportbenhtruyennhiem.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -45,7 +59,11 @@ HEADERS  += mainwindow.h \
     managenv.h \
     managetiemngua.h \
     managechucvu.h \
-    nhapthuoc.h
+    nhapthuoc.h \
+    reporttctre.h \
+    managerlogin.h \
+    htmltemp.h \
+    reportbenhtruyennhiem.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -59,4 +77,6 @@ FORMS    += mainwindow.ui \
     managenv.ui \
     managetiemngua.ui \
     managechucvu.ui \
-    nhapthuoc.ui
+    nhapthuoc.ui \
+    reporttctre.ui \
+    reportbenhtruyennhiem.ui

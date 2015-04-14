@@ -8,7 +8,6 @@
 #include "managerstt.h"
 #include "danhsachboqua.h"
 #include <QKeyEvent>
-#include "dialog_jumstt.h"
 #include <QStandardItemModel>
 
 namespace Ui {
@@ -57,12 +56,12 @@ private:
     QString tiem_thuocID;
     managerSTT *stt;
     QString maphieu,ma_thuoc;
-    QString MaHD;
-    QString ma_bn;
+    QString MaHD,ngaytaihen;
+    QString ma_bn,stt_lieu;
     QDate ngay_hen;
     int col,row,chu_ky,sl_nhac_lai;
     QModelIndex idx;
-    QString tinh_ngayTaiHen(QString mathuoc);
+    QString tinh_ngayTaiHen(QString mathuoc, QString stt_lieu);
     void capnhatPhieuTiem();
     QStringList  tinh_ngayhentheoDS(QString ma_phieu);
     QString tinhSoTTLieu(QString mathuoc,QString mabn);
@@ -72,6 +71,7 @@ private:
                                                     const QString &third);
     QSqlQueryModel danhsachbenh;
     QString strquery;
+
 };
 
 #endif // TIEMNGUA_H
