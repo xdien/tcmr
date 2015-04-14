@@ -1,5 +1,5 @@
 #include "dialog_jumstt.h"
-#include "ui_dialog_jumstt.h"
+//#include "ui_dialog_jumstt.h"
 
 dialog_jumStt::dialog_jumStt(QWidget *parent) :
     QDialog(parent),

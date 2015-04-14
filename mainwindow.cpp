@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "dialog_setting.h"
 #include "tiemngua.h"
-#include "test.h"
+//#include "test.h"
 #include <QMessageBox>
 #include <dangkyphieutiem.h>
 #include "khamsobo.h"

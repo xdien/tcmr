@@ -145,13 +145,13 @@ void tiemngua::on_actionChon_nguoi_khong_theo_tt_triggered()
 */
 void tiemngua::keyReleaseEvent(QKeyEvent *e)
 {
-    if(QApplication::keyboardModifiers() && Qt::ControlModifier && e->key() == Qt::Key_Z )//ctrl+z
-    {
-        dialog_jumStt *jum;
-        jum = new dialog_jumStt();
-        connect(jum,SIGNAL(setStt(QString)),this,SLOT(receivers_stt(QString)));
-        jum->exec();
-    }
+//    if(QApplication::keyboardModifiers() && Qt::ControlModifier && e->key() == Qt::Key_Z )//ctrl+z
+//    {
+//        dialog_jumStt *jum;
+//        jum = new dialog_jumStt();
+//        connect(jum,SIGNAL(setStt(QString)),this,SLOT(receivers_stt(QString)));
+//        jum->exec();
+//    }
 
 }
 /*

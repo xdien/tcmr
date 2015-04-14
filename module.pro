@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     dongphi.cpp \
     tiemngua.cpp \
     danhsachboqua.cpp \
-    dialog_jumstt.cpp \
     tracuuphieuhen.cpp \
     managenv.cpp \
     managetiemngua.cpp \
@@ -42,7 +41,6 @@ HEADERS  += mainwindow.h \
     dongphi.h \
     tiemngua.h \
     danhsachboqua.h \
-    dialog_jumstt.h \
     tracuuphieuhen.h \
     managenv.h \
     managetiemngua.h \
