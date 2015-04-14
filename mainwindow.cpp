@@ -2,10 +2,6 @@
 #include "ui_mainwindow.h"
 #include "dialog_setting.h"
 #include "tiemngua.h"
-<<<<<<< HEAD
-//#include "test.h"
-=======
->>>>>>> 84b0f0dd8dedac1dfb96c45a9739d3853553ea08
 #include <QMessageBox>
 #include <dangkyphieutiem.h>
 #include "khamsobo.h"
