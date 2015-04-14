@@ -51,9 +51,16 @@
     <addaction name="actionQL_Chuc_Vu"/>
     <addaction name="actionNhap_thuoc"/>
    </widget>
+   <widget class="QMenu" name="menuTh_ng_tin">
+    <property name="title">
+     <string>Th&amp;ông tin</string>
+    </property>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
    <addaction name="menuCai_dat"/>
    <addaction name="menuBao_cao"/>
    <addaction name="menuHe_thong"/>
+   <addaction name="menuTh_ng_tin"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
@@ -140,7 +147,12 @@
   </action>
   <action name="actionBenh_truyen_nhiem">
    <property name="text">
-    <string>Bệnh truyền nhiễm</string>
+    <string>&amp;Bệnh truyền nhiễm</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
    </property>
   </action>
  </widget>

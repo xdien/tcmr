@@ -7,6 +7,7 @@
 #include "dongphi.h"
 #include <QtSql>
 #include "nhapthuoc.h"
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -48,6 +49,8 @@ private slots:
     void on_actionTC_cho_tr_em_triggered();
 
     void on_actionBenh_truyen_nhiem_triggered();
+
+    void on_actionAbout_Qt_triggered();
 
 private:
     Ui::MainWindow *ui;

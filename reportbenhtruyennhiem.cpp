@@ -49,7 +49,7 @@ void ReportBenhTruyenNhiem::on_pushButton_clicked()
     cursor.insertHtml(htmltemp->header1+mau);
     NCReport *report = new NCReport();
     report->setReportSource( NCReportSource::File ); // set report source type
-    report->setReportFile("report/ket_qua_tiem_chung_tre_em.ncr"); //set the report filename fullpath or relative to dir
+    report->setReportFile("report/benh_truyen_nhiem.ncr"); //set the report filename fullpath or relative to dir
     report->addParameter("aaa",document->toHtml());
     report->runReportToPreview(); // run to preview output
     if( report->hasError())

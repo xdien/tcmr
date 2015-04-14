@@ -2,10 +2,6 @@
 #include "ui_mainwindow.h"
 #include "dialog_setting.h"
 #include "tiemngua.h"
-<<<<<<< HEAD
-//#include "test.h"
-=======
->>>>>>> 84b0f0dd8dedac1dfb96c45a9739d3853553ea08
 #include <QMessageBox>
 #include <dangkyphieutiem.h>
 #include "khamsobo.h"
@@ -128,4 +124,13 @@ void MainWindow::on_actionBenh_truyen_nhiem_triggered()
     ReportBenhTruyenNhiem *benhtruyennhiem = new ReportBenhTruyenNhiem();
     benhtruyennhiem->show();
 
+}
+
+void MainWindow::on_actionAbout_Qt_triggered()
+{
+    //QMessageBox::about(parent,"ads","asdas");
+    QMessageBox aa;
+    QString aas ="Thong tin ve Qt";
+    aa.aboutQt(parentWidget(), aas);
+    aa.show();
 }

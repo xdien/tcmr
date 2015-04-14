@@ -60,9 +60,11 @@ private:
     int tongsotre(QString sothang,QString madc,QString mathuoc);
     QString tongsoTreTheoThang(int sothang, QString madc);
     QString tongsoTreTiemTheoThuoc(QString mathuoc, QString madc, int sothangtuoinhohon);
-    QString tongsoDoiTuongTheoThuoc(QString mathuoc, QString madc, QString somui, QString dk, int sothangtuoinhohon);
+    QString tongsoDoiTuongTheoThuoc2(QString mathuoc, QString madc, int sothangtuoinhohon);
+    QString tongsoDoiTuongTheoThuoc3(QString mathuoc, QString madc, int sothangtuoinhohon);
     QString tongSoNguoiTiem(int somui, QString mathuoc, QString madc, int sothangtuoinhohon);
     QString tongsoTreTiemTheothuoc(QString mathuoc, QString madc, int sothangtuoinhohon);
+    QString tongsodoiTuongVNNB(QString mathuoc, QString madc, int sothangtuoinhohon);
 };
 
 #endif // REPORTTCTRE_H

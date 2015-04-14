@@ -147,17 +147,6 @@ void tiemngua::on_actionChon_nguoi_khong_theo_tt_triggered()
 */
 void tiemngua::keyReleaseEvent(QKeyEvent *e)
 {
-<<<<<<< HEAD
-//    if(QApplication::keyboardModifiers() && Qt::ControlModifier && e->key() == Qt::Key_Z )//ctrl+z
-//    {
-//        dialog_jumStt *jum;
-//        jum = new dialog_jumStt();
-//        connect(jum,SIGNAL(setStt(QString)),this,SLOT(receivers_stt(QString)));
-//        jum->exec();
-//    }
-=======
->>>>>>> 84b0f0dd8dedac1dfb96c45a9739d3853553ea08
-
 }
 /*
  * nhan tin hieu tu danhSachBoQua
