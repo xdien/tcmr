@@ -1,6 +1,7 @@
 #include "managetiemngua.h"
 #include "ui_managetiemngua.h"
 
+#include <QCompleter>
 #include <QKeyEvent>
 
 ManageTiemNgua::ManageTiemNgua(QWidget *parent) :
@@ -23,6 +24,14 @@ ManageTiemNgua::ManageTiemNgua(QWidget *parent) :
     phong_ngua.select();
     ui->tableView_phong->setItemDelegate(new QSqlRelationalDelegate);
     ui->tableView_benh->hideColumn(0);
+    QStringList wordList;
+    wordList << "alpha" << "omega" << "omicron" << "zeta";
+
+    //QLineEdit *lineEdit = new QLineEdit(this);
+
+    QCompleter *completer = new QCompleter(wordList, this);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEdit->setCompleter(completer);
 }
 
 ManageTiemNgua::~ManageTiemNgua()
@@ -103,4 +112,9 @@ void ManageTiemNgua::on_pushButton_2_clicked()
 {
     if(!phong_ngua.submitAll())
         qDebug() << "KHong the cap nhat bang phong ngua: " << phong_ngua.lastError().text();
+}
+
+void ManageTiemNgua::on_lineEdit_returnPressed()
+{
+    qDebug() << ui->lineEdit->text();
 }

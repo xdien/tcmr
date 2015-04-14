@@ -14,17 +14,23 @@ TEMPLATE = app
 linux{
 INCLUDEPATH += /home/xdien/QtSDK/NCReport/include
 LIBS += -L/home/xdien/QtSDK/NCReport/lib -lNCReport
+
+#CONFIG += qt warn_on debug staticlib
+linux {
 copydata.commands = $(COPY_DIR) $$PWD/report $$OUT_PWD
 first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
 }
+<<<<<<< HEAD
 
+=======
 windows{
 INCLUDEPATH += D:\tcmr\ncreport\include
 LIBS += -LD:\tcmr\ncreport\lib\ -lNCReport2
 }
+>>>>>>> db53f81c5c640e776d7fc390e41cf27d5d97dee1
 
 SOURCES += main.cpp\
         mainwindow.cpp \

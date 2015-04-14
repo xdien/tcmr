@@ -25,6 +25,8 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_lineEdit_returnPressed();
+
 private:
     manageIndex id;
     QString ma_benh;
