@@ -2,8 +2,11 @@
 #define REPORTBENHTRUYENNHIEM_H
 
 #include <QWidget>
+#ifdef __linux
 #include "ncreport.h"
 #include "ncreportpreviewwindow.h"
+#endif
+
 #include "htmltemp.h"
 #include <QtSql>
 #include <QDebug>

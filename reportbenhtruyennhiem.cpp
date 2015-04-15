@@ -47,11 +47,19 @@ void ReportBenhTruyenNhiem::on_pushButton_clicked()
     }
     //qDebug() << this->kiemtraDungHen(22,"TH_00000001","00001");
     cursor.insertHtml(htmltemp->header1+mau);
+#ifdef __MINGW32__
+    //thu su dung webview tren windows
+    QWebView *view = new QWebView();
+    view->setHtml(document->toHtml());
+    view->show();
+#endif
+#ifdef __linux
     NCReport *report = new NCReport();
     report->setReportSource( NCReportSource::File ); // set report source type
-    report->setReportFile("report/benh_truyen_nhiem.ncr"); //set the report filename fullpath or relative to dir
+    report->setReportFile("report/ket_qua_tiem_chung_tre_em.ncr"); //set the report filename fullpath or relative to dir
     report->addParameter("aaa",document->toHtml());
     report->runReportToPreview(); // run to preview output
+
     if( report->hasError())
     {
         QMessageBox msgBox;
@@ -68,6 +76,7 @@ void ReportBenhTruyenNhiem::on_pushButton_clicked()
         pv->setAttribute( Qt::WA_DeleteOnClose );    // set attrib
         pv->exec();  // run like modal dialog
     }
+#endif
 }
 
 QString ReportBenhTruyenNhiem::tcdd(QString mathuoc, QString madc, int sothangtuoinhonhon)

@@ -4,6 +4,7 @@
 
 #include <QMessageBox>
 #include <QTextEdit>
+#include <QWebView>
 //#include <QtPrintSupport>
 #include <QtWebKit/QtWebKit>
 
@@ -139,6 +140,13 @@ void ReportTCTRE::on_pushButton_2_clicked()
                                 </tr>";
     }
     cursor.insertHtml(htmltemp->header+mau);
+#ifdef __MINGW32__
+    //thu su dung webview tren windows
+    QWebView *view = new QWebView();
+    view->setHtml(document->toHtml());
+    view->show();
+#endif
+#ifdef __linux
     NCReport *report = new NCReport();
     report->setReportSource( NCReportSource::File ); // set report source type
     report->setReportFile("report/ket_qua_tiem_chung_tre_em.ncr"); //set the report filename fullpath or relative to dir
@@ -160,6 +168,8 @@ void ReportTCTRE::on_pushButton_2_clicked()
         pv->setAttribute( Qt::WA_DeleteOnClose );    // set attrib
         pv->exec();  // run like modal dialog
     }
+#endif
+
 }
 
 int ReportTCTRE::tongsotre(QString sothang,QString madc,QString mathuoc)
@@ -236,4 +246,51 @@ QString ReportTCTRE::tongsoTreTiemTheothuoc(QString mathuoc, QString madc, int s
                 return query.value(0).toString();
             else
                 return query.lastError().text();
+}
+
+void ReportTCTRE::on_pushButton_3_clicked()
+{
+#ifdef __MINGW32__
+    QString mau;
+    QTextDocument *document = new QTextDocument();
+    QTextCursor cursor(document);
+    //truyen tr td vao bien conntent
+    for(int i =0;i<item_tinhthanh.rowCount();i++)
+    {
+
+        ma_dc = item_tinhthanh.index(i,1).data().toString();
+        mau = mau + "<tr><td>"+QString::number(i+1)+"</td>\
+                                <td>"+ item_tinhthanh.index(i,0).data().toString() +"</td><!-- hen thi stt-->\
+                                <!-- danh cho khoi 1-->\
+                                <td>"+this->tongsoTreTheoThang(18,ma_dc)+"</td>\
+                                <td>"+QString::number(this->tongsotre("0",ma_dc,"TH_00000001"))+"</td>\
+                                <td>"+this->tongsoTreTiemTheoThuoc("TH_00000000",ma_dc,200)+"</td>\
+                                <!-- danh cho khoi 2 dua vao do tuoi tinh so doi tuong vd: 1-2,4-10 la 2-->\
+                                <td>"+tongsoDoiTuongTheoThuoc2("TH_00000001",ma_dc,200)+"</td>\
+                                <td>"+tongSoNguoiTiem(1, "TH_00000001",ma_dc,200)+"</td>\
+                                <td>"+tongSoNguoiTiem(2, "TH_00000001",ma_dc,200)+"</td>\
+                                 <td>"+tongsoDoiTuongTheoThuoc3("TH_00000001",ma_dc,200)+"</td>\
+                                <td>"+tongSoNguoiTiem(3, "TH_00000001",ma_dc,200)+"</td>\
+                                <!-- khoi 3-->\
+                                <td>"+tongsodoiTuongVNNB("TH_00000001",ma_dc,200)+"</td>\
+                                <td>"+this->tongsoTreTiemTheothuoc("TH_00000001",ma_dc,200)+"</td>\
+                                </tr>";
+    }
+    cursor.insertHtml(htmltemp->header+mau);
+    QPrinter printer;
+    printer.setPaperSize(QPrinter::A4);
+    printer.setOrientation(QPrinter::Landscape);//giay nam ngang
+    printer.setOutputFileName("file.pdf");
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    view.print(&printer);
+    printer.newPage();
+    QMessageBox *thongbao = new QMessageBox();
+    thongbao->setText("Tinh nang nay chua hoan thien\n File pdf da luu tai thu muc goc cua chuong trinh.");
+    thongbao->show();
+#endif
+#ifdef __linux
+    QMessageBox *thongbao = new QMessageBox();
+    thongbao->setText("Tinh nang nay chi su dung tren Windows\n Hay dung tinh nang xem truoc va in");
+    thongbao->show();
+#endif
 }

@@ -9,8 +9,10 @@
 #include <QDialog>
 //#include "qtrpt.h"
 #include <QDebug>
+#ifdef __linux
 #include "ncreport.h"
 #include "ncreportpreviewwindow.h"
+#endif
 #include "QTextDocument"
 #include "htmltemp.h"
 namespace Ui {
@@ -40,6 +42,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
+
 private:
     //QtRPT *report;
     HtmlTemp *htmltemp;

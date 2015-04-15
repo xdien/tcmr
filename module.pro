@@ -21,10 +21,6 @@ export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
 }
 
-windows{
-INCLUDEPATH += D:\tcmr\ncreport\include
-LIBS += -LD:\tcmr\ncreport\lib\ -lNCReport2
-}
 
 SOURCES += main.cpp\
         mainwindow.cpp \
