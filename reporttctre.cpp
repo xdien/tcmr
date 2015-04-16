@@ -282,11 +282,14 @@ void ReportTCTRE::on_pushButton_3_clicked()
     printer.setOrientation(QPrinter::Landscape);//giay nam ngang
     printer.setOutputFileName("file.pdf");
     printer.setOutputFormat(QPrinter::PdfFormat);
-    view.print(&printer);
+    QWebView *view = new QWebView();
+    view->setHtml(document->toHtml());
+    view->print(&printer);
     printer.newPage();
     QMessageBox *thongbao = new QMessageBox();
     thongbao->setText("Tinh nang nay chua hoan thien\n File pdf da luu tai thu muc goc cua chuong trinh.");
     thongbao->show();
+    view->~QObject();
 #endif
 #ifdef __linux
     QMessageBox *thongbao = new QMessageBox();
