@@ -32,7 +32,6 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
-    const int t11 = 11;
     HtmlTemp *htmltemp;
     QString tcdd(QString mathuoc, QString madc, int sothangtuoinhonhon);
     Ui::ReportBenhTruyenNhiem *ui;

@@ -45,10 +45,6 @@ void khamsobo::setcurentidx()
     //ui->listView_dsCho->clicked(idx);
 }
 
-void khamsobo::infoTTbenhNhan(QString ma_phieu)
-{
-
-}
 
 void khamsobo::on_pushButton_clicked()
 {
