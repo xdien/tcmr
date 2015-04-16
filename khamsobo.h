@@ -55,7 +55,6 @@ private:
     QString ma_bn,ma_benh,ma_nv,ma_phieu,ma_thuoc,ma_phieuhen,ktimdc,ngay_taihen;
     int do_tuoi, thuoc_num;
     QStandardItemModel itemModel_thuocDChon,itemModel_benhDChon;
-    void infoTTbenhNhan(QString ma_phieu);
     void disableEdit(bool state);
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
