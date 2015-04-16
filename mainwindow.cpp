@@ -28,12 +28,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionTiem->setEnabled(false);
     ui->menuBao_cao->setEnabled(false);
     ui->actionTrC_phieu_hen->setEnabled(false);
-    ui->menuHe_thong->setEnabled(false);
+    //ui->menuHe_thong->setEnabled(false);//Comment de bao tri
+    moi = new login();
+    connect(moi,SIGNAL(nvdangnhap(QString)),this,SLOT(capnhatPhanQuyen(QString)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete moi;
 }
 
 void MainWindow::on_actionSQL_triggered()
@@ -45,10 +48,12 @@ void MainWindow::on_actionSQL_triggered()
 
 void MainWindow::on_actionDan_nhap_triggered()
 {
-    login * moi;
-    moi = new login();
-    connect(moi,SIGNAL(nvdangnhap(QString)),this,SLOT(capnhatPhanQuyen(QString)));
-    moi->show();
+
+    if(!moi->isActiveWindow())
+    {
+        moi->show();
+        moi->activateWindow();
+    }
 }
 
 void MainWindow::on_actionPhieu_DK_triggered()
@@ -136,7 +141,6 @@ void MainWindow::on_actionBenh_truyen_nhiem_triggered()
 
 void MainWindow::on_actionAbout_Qt_triggered()
 {
-    //QMessageBox::about(parent,"ads","asdas");
     QMessageBox aa;
     QString aas ="Thong tin ve Qt";
     aa.aboutQt(parentWidget(), aas);
@@ -159,3 +163,4 @@ void MainWindow::capnhatPhanQuyen(QString macv)//cap nhat phan quyen dua theo ma
         qDebug() << "Loi: " <<query.lastError().text();
     }
 }
+

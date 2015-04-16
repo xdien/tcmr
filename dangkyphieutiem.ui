@@ -106,11 +106,11 @@
              </date>
             </property>
             <property name="displayFormat">
-             <string>M/d/yyyy</string>
+             <string>d/M/yyyy</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="label_2">
             <property name="font">
              <font>
@@ -124,7 +124,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="lineEdit_3">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -143,16 +143,6 @@
               <width>500</width>
               <height>16777215</height>
              </size>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QComboBox" name="comboBox_dotuoi"/>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Oo tuoi</string>
             </property>
            </widget>
           </item>

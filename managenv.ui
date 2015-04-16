@@ -68,7 +68,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="lineEdit_ten"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_4">
@@ -101,7 +101,7 @@
         <item row="5" column="0">
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>cmnd</string>
+           <string>CMND</string>
           </property>
          </widget>
         </item>
@@ -116,19 +116,33 @@
          <widget class="QComboBox" name="comboBox_chucVu"/>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_3"/>
+         <widget class="QLineEdit" name="lineEdit_tk"/>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_4"/>
+         <widget class="QLineEdit" name="lineEdit_mk"/>
         </item>
         <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEdit_5"/>
+         <widget class="QLineEdit" name="lineEdit_sdt">
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="maxLength">
+           <number>13</number>
+          </property>
+         </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_6"/>
+         <widget class="QLineEdit" name="lineEdit_qq"/>
         </item>
         <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEdit_7"/>
+         <widget class="QLineEdit" name="lineEdit_cmnd">
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="maxLength">
+           <number>9</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -146,68 +160,73 @@
         <widget class="QCheckBox" name="checkBox_3h">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>90</y>
+           <x>10</x>
+           <y>120</y>
            <width>86</width>
-           <height>16</height>
+           <height>31</height>
           </rect>
          </property>
          <property name="text">
-          <string>CheckBox</string>
+          <string>Thu phi</string>
          </property>
         </widget>
         <widget class="QCheckBox" name="checkBox_1h">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>30</y>
+           <x>10</x>
+           <y>40</y>
            <width>86</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
-          <string>CheckBox</string>
+          <string>Dang ky </string>
          </property>
         </widget>
         <widget class="QCheckBox" name="checkBox_2h">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>60</y>
-           <width>86</width>
+           <x>10</x>
+           <y>80</y>
+           <width>111</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
-          <string>CheckBox</string>
+          <string>Kham so bo</string>
          </property>
         </widget>
         <widget class="QCheckBox" name="checkBox_4h">
          <property name="geometry">
           <rect>
-           <x>170</x>
-           <y>30</y>
+           <x>210</x>
+           <y>80</y>
            <width>86</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
-          <string>CheckBox</string>
+          <string>Tiem</string>
          </property>
         </widget>
         <widget class="QCheckBox" name="checkBox_5h">
          <property name="geometry">
           <rect>
-           <x>170</x>
-           <y>60</y>
+           <x>210</x>
+           <y>120</y>
            <width>86</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
-          <string>CheckBox</string>
+          <string>Bao cao</string>
          </property>
         </widget>
+        <zorder>checkBox_1h</zorder>
+        <zorder>checkBox_2h</zorder>
+        <zorder>checkBox_4h</zorder>
+        <zorder>checkBox_5h</zorder>
+        <zorder>checkBox_3h</zorder>
        </widget>
       </item>
       <item>
@@ -219,7 +238,7 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>40</width>
+            <width>226</width>
             <height>20</height>
            </size>
           </property>
@@ -234,7 +253,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>Them</string>
           </property>
          </widget>
         </item>
@@ -345,7 +364,7 @@
            <x>0</x>
            <y>120</y>
            <width>314</width>
-           <height>24</height>
+           <height>33</height>
           </rect>
          </property>
          <layout class="QFormLayout" name="formLayout_4">
@@ -434,6 +453,34 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_ten</tabstop>
+  <tabstop>lineEdit_tk</tabstop>
+  <tabstop>lineEdit_mk</tabstop>
+  <tabstop>lineEdit_sdt</tabstop>
+  <tabstop>lineEdit_qq</tabstop>
+  <tabstop>lineEdit_cmnd</tabstop>
+  <tabstop>comboBox_chucVu</tabstop>
+  <tabstop>checkBox_1h</tabstop>
+  <tabstop>checkBox_2h</tabstop>
+  <tabstop>checkBox_3h</tabstop>
+  <tabstop>checkBox_4h</tabstop>
+  <tabstop>checkBox_5h</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>lineEdit_tencv</tabstop>
+  <tabstop>checkBox_1</tabstop>
+  <tabstop>checkBox_2</tabstop>
+  <tabstop>checkBox_6</tabstop>
+  <tabstop>checkBox_3</tabstop>
+  <tabstop>checkBox_5</tabstop>
+  <tabstop>checkBox_4</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>tableView_phanquyen</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>pushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -448,7 +495,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>344</x>
-     <y>411</y>
+     <y>532</y>
     </hint>
    </hints>
   </connection>
@@ -459,12 +506,12 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>842</x>
-     <y>200</y>
+     <x>1010</x>
+     <y>480</y>
     </hint>
     <hint type="destinationlabel">
-     <x>962</x>
-     <y>347</y>
+     <x>1009</x>
+     <y>509</y>
     </hint>
    </hints>
   </connection>

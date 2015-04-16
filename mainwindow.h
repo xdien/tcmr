@@ -57,6 +57,7 @@ private:
     Ui::MainWindow *ui;
     QSqlQuery query;
     QSqlDatabase db;
+    login *moi;
 };
 
 #endif // MAINWINDOW_H

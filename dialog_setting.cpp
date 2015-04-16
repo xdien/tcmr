@@ -20,6 +20,7 @@ Dialog_setting::Dialog_setting(QWidget *parent) :
     ui->linedialog_pass->setText(loadSet.value("pass").toString());
     ui->linedialog_db->setText(loadSet.value("db").toString());
     this->setFixedSize(this->maximumSize());
+    diaDB = QSqlDatabase::database("qt_sql_default_connection");//lay ket noi toi server hien tai
 }
 
 Dialog_setting::~Dialog_setting()
@@ -33,12 +34,17 @@ void Dialog_setting::on_pushButton_clicked()
         n.setText("Chu y: Phai dien day du thong tin");
         n.exec();
     }else{
-        QSqlDatabase::removeDatabase("qt_sql_default_connection");//remove old connect
-        diaDB = QSqlDatabase::addDatabase("QMYSQL");
+        //QSqlDatabase::removeDatabase("qt_sql_default_connection");//remove old connect
+        if(diaDB.isOpen())
+        {
+            qDebug() << "Ket sql noi dang duoc mo. Thu ngat ket noi de kiem tra thong so nhap vao";
+            diaDB.close();
+        }
         diaDB.setHostName(ui->linedialog_ip->text());
         diaDB.setDatabaseName(ui->linedialog_db->text());
         diaDB.setPassword(ui->linedialog_pass->text());
         diaDB.setUserName(ui->linedialog_user->text());
+        diaDB.setPort(5432);
         if(diaDB.open()){
             n.setText("Ket noi thanh cong!!");
         } else {
@@ -46,7 +52,7 @@ void Dialog_setting::on_pushButton_clicked()
         }
         n.exec();
     }
-    diaDB.close();
+    //diaDB.close();
 }
 
 void Dialog_setting::on_buttonBox_accepted()

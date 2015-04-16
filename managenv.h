@@ -4,8 +4,10 @@
 #include <QWidget>
 #include <QKeyEvent>
 #include <QStandardItemModel>
+#include <QMenu>
 #include "manageindex.h"
 #include <QCheckBox>
+#include <QAction>
 
 namespace Ui {
 class ManageNV;
@@ -30,6 +32,10 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+    void onCustomContextMenu(const QPoint &point);
+    void xoaMotNhanvien();
+
 private:
     manageIndex id;
     QSqlRelationalTableModel *testmodel, *chuc_vumodel;
@@ -46,6 +52,7 @@ private:
    QSqlQueryModel chucVuModel;
    void LoadtableQuyen();
    QSqlRelationalDelegate *dele;
+   QMenu *contextMenu;
    QString boolToString(bool t);
 };
 

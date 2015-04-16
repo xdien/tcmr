@@ -20,8 +20,7 @@ Dangkyphieutiem::Dangkyphieutiem(QWidget *parent) :
     //ui->tableView_loaithuoc->setModel(table_thuoc);
     ui->listView_duocchon->setModel(&itemModel);
     //load do tuoi
-    dotuoimode.setQuery("select do_tuoi,ma_dotuoi from do_tuoi where danh_cho_tt is true");
-    ui->comboBox_dotuoi->setModel(&dotuoimode);
+
     stt = new managerSTT("dangkytt");
 }
 
@@ -202,11 +201,11 @@ void Dangkyphieutiem::on_luu_tt_clicked()
             ma_dc = this->getAdrrCode();
             gioitinh = this->getSex();
             ten_bn = ui->ten->text();
-            ma_dt = this->dotuoimode.index(ui->comboBox_dotuoi->currentIndex(),1).data().toString();
+            //ma_dt = this->dotuoimode.index(ui->comboBox_dotuoi->currentIndex(),1).data().toString();
             ma_bn = id.getNextIndexCode("tt_benh_nhan","BN");
             QString str;
-            str = "INSERT INTO tt_benh_nhan(ma_bn, ma_dotuoi, ten, gioi_tinh, ma_dc, dc_chi_tiet, sn, stt, ngay_lap, \
-                    lap_phieu, da_tiemlandau, tai_hen) values('"+ma_bn+"', '"+ma_dt+"','"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"','"+QString::number(stt->getcurrentindex())+"',current_date,NULL,NULL,NULL)";
+            str = "INSERT INTO tt_benh_nhan(ma_bn,  ten, gioi_tinh, ma_dc, dc_chi_tiet, sn, stt, ngay_lap, \
+                    lap_phieu, da_tiemlandau, tai_hen) values('"+ma_bn+"', '"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"','"+QString::number(stt->getcurrentindex())+"',current_date,NULL,NULL,NULL)";
             if(query.exec(str))
             {
                 stt->next();
