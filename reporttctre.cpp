@@ -5,7 +5,6 @@
 #include <QMessageBox>
 #include <QTextEdit>
 #include <QWebView>
-//#include <QtPrintSupport>
 #include <QtWebKit/QtWebKit>
 
 

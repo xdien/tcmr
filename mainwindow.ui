@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>TIêm chủng mở rộng</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -31,20 +31,20 @@
    </property>
    <widget class="QMenu" name="menuCai_dat">
     <property name="title">
-     <string>&amp;Cai dat</string>
+     <string>&amp;Cài đặt</string>
     </property>
     <addaction name="actionSQL"/>
    </widget>
    <widget class="QMenu" name="menuBao_cao">
     <property name="title">
-     <string>Bao cao</string>
+     <string>B&amp;áo cáo</string>
     </property>
     <addaction name="actionTC_cho_tr_em"/>
     <addaction name="actionBenh_truyen_nhiem"/>
    </widget>
    <widget class="QMenu" name="menuHe_thong">
     <property name="title">
-     <string>He tho&amp;ng</string>
+     <string>Hệ thố&amp;ng</string>
     </property>
     <addaction name="actionQl_nv"/>
     <addaction name="actionQl_benh"/>
@@ -92,37 +92,37 @@
   </action>
   <action name="actionDan_nhap">
    <property name="text">
-    <string>Dan nhap</string>
+    <string>Đăng nhập</string>
    </property>
   </action>
   <action name="actionPhieu_DK">
    <property name="text">
-    <string>Phieu DK</string>
+    <string>Lập phiếu ĐK</string>
    </property>
   </action>
   <action name="actionKham_SB">
    <property name="text">
-    <string>Kham SB</string>
+    <string>Khám SB</string>
    </property>
   </action>
   <action name="actionDong_Phi">
    <property name="text">
-    <string>Dong Phi</string>
+    <string>Thu phí</string>
    </property>
   </action>
   <action name="actionTiem">
    <property name="text">
-    <string>Tiem</string>
+    <string>Tiêm</string>
    </property>
   </action>
   <action name="actionTrC_phieu_hen">
    <property name="text">
-    <string>TrC phieu hen</string>
+    <string>Tra phiếu hẹn</string>
    </property>
   </action>
   <action name="actionQl_nv">
    <property name="text">
-    <string>&amp;ql nv</string>
+    <string>Quản lý NV</string>
    </property>
   </action>
   <action name="actionQl_benh">
@@ -152,7 +152,7 @@
   </action>
   <action name="actionAbout_Qt">
    <property name="text">
-    <string>About Qt</string>
+    <string>&amp;About Qt</string>
    </property>
   </action>
  </widget>
