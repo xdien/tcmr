@@ -36,6 +36,8 @@ private slots:
     void onCustomContextMenu(const QPoint &point);
     void xoaMotNhanvien();
 
+    void on_tableView_clicked(const QModelIndex &index);
+
 private:
     manageIndex id;
     QSqlRelationalTableModel *testmodel, *chuc_vumodel;
@@ -54,6 +56,7 @@ private:
    QSqlRelationalDelegate *dele;
    QMenu *contextMenu;
    QString boolToString(bool t);
+   QModelIndex index;
 };
 
 #endif // MANAGENV_H

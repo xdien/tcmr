@@ -165,11 +165,14 @@ void tiemngua::setcurentidx()
 {
     row = stt->getcurrentindex();
     col = 0;
-    idx  = ui->danhsanhcho->model()->index(row,col);
-    ui->danhsanhcho->selectionModel()->select(idx, QItemSelectionModel::Select);
-    ui->danhsanhcho->setCurrentIndex(idx);
-    ui->danhsanhcho->setFocus();
-    //ui->danhsanhcho->clicked(idx);
+    if(ui->danhsanhcho->model()->index(row,col).isValid())
+    {
+        idx  = ui->danhsanhcho->model()->index(row,col);
+        ui->danhsanhcho->selectionModel()->select(idx, QItemSelectionModel::Select);
+        ui->danhsanhcho->setCurrentIndex(idx);
+        ui->danhsanhcho->setFocus();
+        ui->danhsanhcho->clicked(idx);//chi danh cho qt5.x
+    }
 }
 
 void tiemngua::on_danhsanhcho_clicked(const QModelIndex &index)

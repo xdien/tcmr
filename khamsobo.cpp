@@ -42,7 +42,7 @@ void khamsobo::setcurentidx()
     ui->listView_dsCho->selectionModel()->select(idx, QItemSelectionModel::Select);
     ui->listView_dsCho->setCurrentIndex(idx);
     ui->listView_dsCho->setFocus();
-    //ui->listView_dsCho->clicked(idx);
+    ui->listView_dsCho->clicked(idx);
 }
 
 

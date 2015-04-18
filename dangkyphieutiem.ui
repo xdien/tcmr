@@ -175,7 +175,7 @@
           <item row="0" column="2">
            <widget class="QRadioButton" name="radioButton_2">
             <property name="text">
-             <string>N&amp;U</string>
+             <string>&amp;NU</string>
             </property>
            </widget>
           </item>

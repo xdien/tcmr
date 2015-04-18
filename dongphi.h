@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtSql>
 #include <QDebug>
+#include <QCloseEvent>
 #include "manageindex.h"
 #include "managerstt.h"
 
@@ -27,7 +28,13 @@ private slots:
     void on_pushButton_6_clicked();
     void capnhatDScho();
 
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_lineEdit_returnPressed();
+//    void
+
 private:
+  void closeEvent(QCloseEvent *event);
     Ui::dongphi *ui;
     QSqlQueryModel qrmodel,danhsachthuoc;
     QSqlQuery query;
@@ -37,6 +44,7 @@ private:
     QSqlDatabase db;
     int stt;
     managerSTT *stt_hd;
+    QModelIndex idx;
 };
 
 #endif // DONGPHI_H

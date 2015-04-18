@@ -9,6 +9,7 @@
 #include <QStandardItemModel>
 #include "manageindex.h"
 #include "managerstt.h"
+#include <QKeyEvent>
 
 namespace Ui {
 class Dangkyphieutiem;
@@ -36,6 +37,7 @@ private slots:
     void on_listView_benh_doubleClicked(const QModelIndex &index);
 
     void on_pushButton_3_clicked();
+
 private:
     Ui::Dangkyphieutiem *ui;
     QString thuocdiachi(QString nhapvao);
@@ -59,6 +61,7 @@ private:
     QString mot,hai,ba;
     manageIndex id;
     managerSTT *stt;
+    void keyReleaseEvent(QKeyEvent *e);
 };
 
 #endif // DANGKYPHIEUTIEM_H

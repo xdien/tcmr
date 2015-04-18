@@ -180,9 +180,10 @@ void ManageNV::on_pushButton_3_clicked()
         qDebug() << "Khong the them nv: " << query.lastQuery();
     else
         testmodel->select();
+
 }
 void ManageNV::onCustomContextMenu(const QPoint &point){
-    QModelIndex index = ui->tableView->indexAt(point);
+    index = ui->tableView->indexAt(point);
     if (index.isValid()) {
         QAction action1("Remove Data Point", this);
         connect(&action1, SIGNAL(triggered()), this, SLOT(xoaMotNhanvien()));
@@ -194,4 +195,9 @@ void ManageNV::xoaMotNhanvien()
 {
     testmodel->removeRow(ui->tableView->currentIndex().row());
     testmodel->submitAll();
+}
+
+void ManageNV::on_tableView_clicked(const QModelIndex &index)
+{
+
 }

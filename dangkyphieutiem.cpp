@@ -272,4 +272,8 @@ void Dangkyphieutiem::on_pushButton_3_clicked()
 {
     qDebug() << id.getNextIndexCode("tt_benh_nhan","BN");
 }
-
+void Dangkyphieutiem::keyReleaseEvent(QKeyEvent *e)
+{
+    if(e->key() == Qt::Key_Return)
+       qDebug()<< "enter";
+}

@@ -65,6 +65,7 @@ private slots:
 
     void on_actionAbout_Qt_triggered();
     void capnhatPhanQuyen(QString macv);
+    void test(QObject *o);
 
 private:
     Ui::MainWindow *ui;
