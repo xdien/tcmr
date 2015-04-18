@@ -1,18 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "dialog_setting.h"
-#include "tiemngua.h"
 #include <QMessageBox>
-#include <dangkyphieutiem.h>
-#include "khamsobo.h"
-#include "tiemngua.h"
-#include "tracuuphieuhen.h"
-#include "managenv.h"
-#include "managetiemngua.h"
-#include "managechucvu.h"
-#include "reporttctre.h"
-#include "reportbenhtruyennhiem.h"
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,15 +11,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     //db = QSqlDatabase::database("qt_sql_default_connection");
     //connect(db.driver()->,SIGNAL(disconnectNotify()),this,SLOT(trangthaiSQL()));
-    ui->actionPhieu_DK->setEnabled(false);
-    ui->actionKham_SB->setEnabled(false);
-    ui->actionDong_Phi->setEnabled(false);
-    ui->actionTiem->setEnabled(false);
-    ui->menuBao_cao->setEnabled(false);
-    ui->actionTrC_phieu_hen->setEnabled(false);
+//    ui->actionPhieu_DK->setEnabled(false);
+//    ui->actionKham_SB->setEnabled(false);
+//    ui->actionDong_Phi->setEnabled(false);
+//    ui->actionTiem->setEnabled(false);
+//    ui->menuBao_cao->setEnabled(false);
+//    ui->actionTrC_phieu_hen->setEnabled(false);
     //ui->menuHe_thong->setEnabled(false);//Comment de bao tri
+    /*Khoi dong cac form*/
     moi = new login();
+    khamsb = new khamsobo();
+    dpmoi = new dongphi();
+    tiemn = new tiemngua();
+    modangkyphieutiem = new Dangkyphieutiem();
     connect(moi,SIGNAL(nvdangnhap(QString)),this,SLOT(capnhatPhanQuyen(QString)));
+    //subwindowList = new QList<subwindowList>();
 }
 
 MainWindow::~MainWindow()
@@ -45,10 +40,8 @@ void MainWindow::on_actionSQL_triggered()
     setting.exec();
 }
 
-
 void MainWindow::on_actionDan_nhap_triggered()
 {
-
     if(!moi->isActiveWindow())
     {
         moi->show();
@@ -58,34 +51,40 @@ void MainWindow::on_actionDan_nhap_triggered()
 
 void MainWindow::on_actionPhieu_DK_triggered()
 {
-    Dangkyphieutiem * modangkyphieutiem;
-    modangkyphieutiem = new Dangkyphieutiem();
-    ui->mdiArea->addSubWindow(modangkyphieutiem);
-    modangkyphieutiem->showMaximized();
+    if(!modangkyphieutiem->isActiveWindow())
+    {
+        ui->mdiArea->addSubWindow(modangkyphieutiem);
+    }
+     modangkyphieutiem->showMaximized();
 }
 
 void MainWindow::on_actionKham_SB_triggered()
 {
-    khamsobo *moi;
-    moi = new khamsobo();
-    ui->mdiArea->addSubWindow(moi);
-    connect(moi,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
-    moi->showMaximized();
+    if(!khamsb->isActiveWindow())
+    {
+        ui->mdiArea->addSubWindow(khamsb);
+        connect(khamsb,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
+    }
+    khamsb->showMaximized();
 }
 
 void MainWindow::on_actionDong_Phi_triggered()
 {
-    dongphi *dpmoi;
-    dpmoi = new dongphi();
-    ui->mdiArea->addSubWindow(dpmoi);
+    if(!dpmoi->isActiveWindow())
+    {
+        ui->mdiArea->addSubWindow(dpmoi);
+        connect(dpmoi,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
+    }
     dpmoi->showMaximized();
 }
 
 void MainWindow::on_actionTiem_triggered()
 {
-    tiemngua *ss = new tiemngua();
-    ui->mdiArea->addSubWindow(ss);
-    ss->showMaximized();
+    if(!tiemn->isActiveWindow())
+    {
+        ui->mdiArea->addSubWindow(tiemn);
+    }
+    tiemn->showMaximized();
 }
 
 void MainWindow::on_actionTrC_phieu_hen_triggered()

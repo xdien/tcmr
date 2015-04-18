@@ -72,9 +72,9 @@ void khamsobo::on_pushButton_clicked()
         }
         //cap nhat ngay kham la hom nay
         qDebug() << query.lastQuery();
-        query.exec("UPDATE co_benh\
-                   SET ngay_kham=current_date\
-                 WHERE ma_bn = '"+ma_bn+"'");
+        query.exec("UPDATE co_benh "
+                   "SET ngay_kham=current_date "
+                 "WHERE ma_bn = '"+ma_bn+"'");
         //lap phieu tiem
         ma_phieu = id.getNextIndexCode("phieu_tiem","PT");
         //query.exec("")
@@ -89,8 +89,12 @@ void khamsobo::on_pushButton_clicked()
             }
             if(!query.exec("update tt_benh_nhan set lap_phieu = 'TRUE' where ma_bn = '"+ma_bn+"'"))
                 qDebug() << query.lastError().text();
+            else{
+                //tao su kien cap nhat cho thu phi
+
+            }
+            query.exec("NOTIFY dongphi");
             //cap nhat lai benh dang ky
-            //query.exec("update muon_tiem set ")
             this->loaddanhsach_chokham();
             //tra ve benh nhan ke tiep
             this->setcurentidx();

@@ -24,12 +24,12 @@ ManageNV::ManageNV(QWidget *parent) :
     ui->tableView->hideColumn(0);
     ui->tableView->hideColumn(3);
     //dat ten cho cac cot trong bang
-    testmodel->setHeaderData(1,Qt::Horizontal,QString::fromUtf8("Teen aa"));
-    testmodel->setHeaderData(2,Qt::Horizontal,QString::fromUtf8("Ho Ten"));
-    testmodel->setHeaderData(4,Qt::Horizontal,QString::fromUtf8("Ten DN"));
-    testmodel->setHeaderData(5,Qt::Horizontal,QString::fromUtf8("SDT"));
+    testmodel->setHeaderData(1,Qt::Horizontal,QString::fromUtf8("Chức vụ"));
+    testmodel->setHeaderData(2,Qt::Horizontal,QString::fromUtf8("Họ tên"));
+    testmodel->setHeaderData(4,Qt::Horizontal,QString::fromUtf8("Tên DN"));
+    testmodel->setHeaderData(5,Qt::Horizontal,QString::fromUtf8("SĐT"));
     testmodel->setHeaderData(6,Qt::Horizontal,QString::fromUtf8("CMND"));
-    testmodel->setHeaderData(7,Qt::Horizontal,QString::fromUtf8("Que Quan"));
+    testmodel->setHeaderData(7,Qt::Horizontal,QString::fromUtf8("Quê Quán"));
     //tao su kien right click cho bang
     ui->tableView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->tableView, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(onCustomContextMenu(const QPoint &)));

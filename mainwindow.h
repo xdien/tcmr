@@ -3,11 +3,24 @@
 
 #include <QMainWindow>
 #include <QSqlQuery>
+#include <QMdiSubWindow>
 #include "login.h"
 #include "dongphi.h"
 #include <QtSql>
 #include "nhapthuoc.h"
 #include <QMessageBox>
+#include "khamsobo.h"
+#include "tiemngua.h"
+#include "tracuuphieuhen.h"
+#include "managenv.h"
+#include "managetiemngua.h"
+#include "managechucvu.h"
+#include "reporttctre.h"
+#include "reportbenhtruyennhiem.h"
+#include <dangkyphieutiem.h>
+#include "tiemngua.h"
+#include <QObjectList>
+
 
 namespace Ui {
 class MainWindow;
@@ -58,6 +71,12 @@ private:
     QSqlQuery query;
     QSqlDatabase db;
     login *moi;
+    khamsobo *khamsb;
+    dongphi *dpmoi;
+    tiemngua *tiemn;
+    Dangkyphieutiem *modangkyphieutiem;
+    QList<QMdiSubWindow*> subwindowList;
+    QObjectList objl;
 };
 
 #endif // MAINWINDOW_H

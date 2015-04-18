@@ -18,12 +18,14 @@ class dongphi : public QMainWindow
 public:
     explicit dongphi(QWidget *parent = 0);
     ~dongphi();
-
+signals:
+    void setThongBao(QString);
 private slots:
 
     void on_treeView_clicked(const QModelIndex &index);
 
     void on_pushButton_6_clicked();
+    void capnhatDScho();
 
 private:
     Ui::dongphi *ui;
@@ -32,7 +34,7 @@ private:
     QString ma_bn,ma_hd;
     QString ma_phieu,ma_nv;
     manageIndex id;
-
+    QSqlDatabase db;
     int stt;
     managerSTT *stt_hd;
 };
