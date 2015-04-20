@@ -134,7 +134,6 @@ void dongphi::on_lineEdit_returnPressed()
 }
 void dongphi::closeEvent (QCloseEvent *event)
 {
-    this->
     event->ignore();
 }
 
