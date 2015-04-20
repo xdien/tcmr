@@ -9,7 +9,7 @@ NhapThuoc::NhapThuoc(QWidget *parent) :
     table_thuoc = new QSqlRelationalTableModel();
     table_dotuoi.setEditStrategy(QSqlTableModel::OnRowChange);
     sqlde = new QSqlRelationalDelegate();
-    //khoi dong bang do tuoi
+    //khoi dong bang do tuoi hgjjgtj
     this->loadTableDoTuoi();
     this->loadTableThuoc();
     ui->tableView_thuoc->hideColumn(0);
