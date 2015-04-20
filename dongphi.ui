@@ -137,16 +137,17 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>10</y>
+      <x>450</x>
+      <y>0</y>
       <width>411</width>
-      <height>281</height>
+      <height>301</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <weight>50</weight>
-      <bold>false</bold>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="title">
@@ -175,8 +176,8 @@
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>220</y>
+       <x>10</x>
+       <y>250</y>
        <width>111</width>
        <height>21</height>
       </rect>
@@ -195,20 +196,43 @@
     <widget class="QTreeView" name="treeView_danhsachthuoc">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>160</x>
        <y>40</y>
-       <width>231</width>
-       <height>111</height>
+       <width>211</width>
+       <height>81</height>
       </rect>
      </property>
     </widget>
     <widget class="QLineEdit" name="sotien">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>220</y>
+       <x>200</x>
+       <y>250</y>
        <width>113</width>
        <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>180</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Phụ Phí</string>
+     </property>
+    </widget>
+    <widget class="QListView" name="listView">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>160</y>
+       <width>191</width>
+       <height>81</height>
       </rect>
      </property>
     </widget>
