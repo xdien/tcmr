@@ -40,12 +40,14 @@ private slots:
 
         void codkMoi();
 
+        void on_treeView_dichVu_clicked(const QModelIndex &index);
+
 private:
     void loaddanhsach_chokham();
     manageIndex id;
     Ui::khamsobo *ui;
     QSqlQuery query,query_notify;
-    QSqlQueryModel danhsachCho,danhsachBenhdk,danhsachBenh,danhsach_goiyThuoc;
+    QSqlQueryModel danhsachCho,danhsachBenhdk,danhsachBenh,danhsach_goiyThuoc,danhsachDV;
     void setcurentidx();
     managerSTT *stt;
     int col,row,sodong,chu_ky;
@@ -54,7 +56,7 @@ private:
     QDate ngay_sinh,ngay_hen;
     QString ma_bn,ma_benh,ma_nv,ma_phieu,ma_thuoc,ma_phieuhen,ktimdc,ngay_taihen;
     int do_tuoi, thuoc_num;
-    QStandardItemModel itemModel_thuocDChon,itemModel_benhDChon;
+    QStandardItemModel itemModel_thuocDChon,itemModel_benhDChon, itemModel_dichvu;
     void disableEdit(bool state);
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
@@ -65,6 +67,7 @@ private:
     void loadchitietBN_M(QModelIndex indexx);
     void loadchitietBN_C(QModelIndex indexx);
     QSqlDatabase db;
+
 };
 
 #endif // KHAMSOBO_H

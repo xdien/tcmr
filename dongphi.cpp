@@ -24,6 +24,8 @@ dongphi::dongphi(QWidget *parent) :
     //set danh sach thuoc
     ui->treeView_danhsachthuoc->setModel(&danhsachthuoc);
     ui->sotien->setEnabled(false);
+    //Dich vu
+    ui->treeView_dv->setModel(&dsdichvu);
 }
 
 dongphi::~dongphi()
@@ -36,19 +38,20 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
 {
     ma_bn = ui->treeView->model()->index(index.row(),0).data().toString();
     ma_phieu = ui->treeView->model()->index(index.row(),3).data().toString();
-    danhsachthuoc.setQuery("select thuoc.ten_thuoc,don_gia.gia from phieu_tiem \
-                           right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu \
-                           left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
-                           left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc \
-                           where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
-   query.exec("select sum(don_gia.gia) from phieu_tiem \
-              right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu \
-              left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
-              left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc \
-              where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
-            if(query.next())
-            ui->sotien->setText(query.value(0).toString());
-
+    danhsachthuoc.setQuery("select thuoc.ten_thuoc,don_gia.gia from phieu_tiem "
+                           "right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu "
+                           "left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc "
+                           "left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc "
+                           "where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
+    query.exec("select sum(don_gia.gia) from phieu_tiem "
+               "right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu "
+               "left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc "
+               "left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc "
+               "where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
+    //load du lieu cho dv
+    dsdichvu.setQuery("select ten_phu_pphi, don_gia");
+    if(query.next())
+        ui->sotien->setText(query.value(0).toString());
 }
 
 void dongphi::on_pushButton_6_clicked()
@@ -82,30 +85,33 @@ void dongphi::capnhatDScho()
 {
     query.exec("select count(tt_benh_nhan.ma_bn) from phieu_tiem "
                "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
-"left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
+               "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
                "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
-               "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date");
+               "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true "
+               "and co_benh.ngay_kham = current_date");
     if(query.next()){
         emit setThongBao("Số lượng người chờ đóng phí là: " + query.value(0).toString());
     }
     qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem "
                      "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
-"left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
+                     "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
                      "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
-                     "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date limit 20");
+                     "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true "
+                     "and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date "
+                     "and co_benh.ngay_kham = current_date limit 20");
 
 }
 
 void dongphi::on_lineEdit_textChanged(const QString &arg1)
 {
-    qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem "
-               "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
-               "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
-               "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
-               "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date "
-               "and co_benh.du_tc is true and co_benh.ngay_kham = current_date "
-               "and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date "
-               "and tt_benh_nhan.ma_bn like '%"+arg1+"' limit 10");
+    qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu, "
+                     "hoa_don.ma_hd from phieu_tiem "
+                     "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
+                     "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
+                     "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
+                     "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date "
+                     "and co_benh.du_tc is true and co_benh.ngay_kham = current_date "
+                     "and tt_benh_nhan.ma_bn like '%"+arg1+"' limit 10");
     qDebug()<< qrmodel.lastError().text();
 }
 

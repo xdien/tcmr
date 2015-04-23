@@ -19,6 +19,8 @@ ManageNV::ManageNV(QWidget *parent) :
     //testmodel->set;
     testmodel->setRelation(1,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
     testmodel->select();
+    //testmodel->set
+
     ui->tableView->setModel(testmodel);
     ui->tableView->setItemDelegate(new QSqlRelationalDelegate());
     ui->tableView->hideColumn(0);

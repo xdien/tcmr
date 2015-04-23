@@ -155,7 +155,7 @@
          </sizepolicy>
         </property>
         <property name="title">
-         <string>Các quyền được cấp cho nv này</string>
+         <string>Các quyền cấp cho nv này</string>
         </property>
         <widget class="QCheckBox" name="checkBox_3h">
          <property name="geometry">
@@ -298,7 +298,7 @@
           <rect>
            <x>20</x>
            <y>30</y>
-           <width>91</width>
+           <width>101</width>
            <height>20</height>
           </rect>
          </property>
@@ -311,12 +311,12 @@
           <rect>
            <x>20</x>
            <y>60</y>
-           <width>86</width>
+           <width>111</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
-          <string>Đóng phí</string>
+          <string>Khám sơ bộ</string>
          </property>
         </widget>
         <widget class="QCheckBox" name="checkBox_3">
@@ -324,12 +324,12 @@
           <rect>
            <x>180</x>
            <y>30</y>
-           <width>101</width>
+           <width>81</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
-          <string>Khám sơ bô </string>
+          <string>Thu phí</string>
          </property>
         </widget>
         <widget class="QCheckBox" name="checkBox_4">
@@ -375,7 +375,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>124</width>
               <height>20</height>
              </size>
             </property>
