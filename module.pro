@@ -42,7 +42,9 @@ SOURCES += main.cpp\
     reporttctre.cpp \
     managerlogin.cpp \
     htmltemp.cpp \
-    reportbenhtruyennhiem.cpp
+    reportbenhtruyennhiem.cpp \
+    qlbenhthuoc.cpp \
+    managebenhvathuoc.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -63,7 +65,8 @@ HEADERS  += mainwindow.h \
     reporttctre.h \
     managerlogin.h \
     htmltemp.h \
-    reportbenhtruyennhiem.h
+    reportbenhtruyennhiem.h \
+    managebenhvathuoc.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -79,4 +82,5 @@ FORMS    += mainwindow.ui \
     managechucvu.ui \
     nhapthuoc.ui \
     reporttctre.ui \
-    reportbenhtruyennhiem.ui
+    reportbenhtruyennhiem.ui \
+    managebenhvathuoc.ui

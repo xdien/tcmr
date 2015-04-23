@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     khamsb = new khamsobo();
     dpmoi = new dongphi();
     tiemn = new tiemngua();
+    qlbenhthuoc = new managebenhvathuoc();
     modangkyphieutiem = new Dangkyphieutiem();
     connect(moi,SIGNAL(nvdangnhap(QString)),this,SLOT(capnhatPhanQuyen(QString)));
     //connect(dpmoi,SIGNAL(destroyed(QObject*)),this,SLOT(test(QObject*)));
@@ -170,4 +171,13 @@ void MainWindow::test(QObject *o)
 {
 //    qDebug() << o->objectName();
 //    dpmoi = o
+}
+
+void MainWindow::on_actionQL_B_nh_va_Thu_c_triggered()
+{
+    if(!qlbenhthuoc->isActiveWindow())
+    {
+        ui->mdiArea->addSubWindow(qlbenhthuoc);
+    }
+    qlbenhthuoc->showMaximized();
 }

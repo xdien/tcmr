@@ -20,6 +20,7 @@
 #include <dangkyphieutiem.h>
 #include "tiemngua.h"
 #include <QObjectList>
+#include "managebenhvathuoc.h"
 
 
 namespace Ui {
@@ -67,6 +68,8 @@ private slots:
     void capnhatPhanQuyen(QString macv);
     void test(QObject *o);
 
+    void on_actionQL_B_nh_va_Thu_c_triggered();
+
 private:
     Ui::MainWindow *ui;
     QSqlQuery query;
@@ -78,6 +81,7 @@ private:
     Dangkyphieutiem *modangkyphieutiem;
     QList<QMdiSubWindow*> subwindowList;
     QObjectList objl;
+    managebenhvathuoc *qlbenhthuoc;
 };
 
 #endif // MAINWINDOW_H
