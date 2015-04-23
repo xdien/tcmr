@@ -14,6 +14,9 @@ khamsobo::khamsobo(QWidget *parent) :
     ui->treeView_benh->setModel(&danhsachBenh);
     ui->listView_benhduocchon->setModel(&itemModel_benhDChon);
     ui->danhsach_chonthuoc->setModel(&itemModel_thuocDChon);
+    ui->treeView_DSPhiChon->setModel(&itemModel_dichvu);
+    ui->treeView_dichVu->setModel(&danhsachDV);
+    danhsachDV.setQuery("select ten_phu_phi,ma_dm from danh_muc");
     this->disableEdit(false);
     //lay ket noi database hien tai
     db = QSqlDatabase::database("qt_sql_default_connection");
@@ -24,6 +27,7 @@ khamsobo::khamsobo(QWidget *parent) :
         db.driver()->subscribeToNotification("khamsobo");
         connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(codkMoi()));
    }
+
 }
 
 khamsobo::~khamsobo()
@@ -77,8 +81,8 @@ void khamsobo::on_pushButton_clicked()
                  "WHERE ma_bn = '"+ma_bn+"'");
         //lap phieu tiem
         ma_phieu = id.getNextIndexCode("phieu_tiem","PT");
-        //query.exec("")
-        if(query.exec("INSERT INTO phieu_tiem( ma_phieu, ma_bn, ma_nv, ngay_lap_pt) VALUES ('"+ ma_phieu +"', '"+ma_bn+"', '"+ma_nv+"', current_date)"))
+        if(query.exec("INSERT INTO phieu_tiem( ma_phieu, ma_bn, ma_nv, ngay_lap_pt) VALUES "
+                      "('"+ ma_phieu +"', '"+ma_bn+"', '"+ma_nv+"', current_date)"))
         {
             //Nhap vao danh sach thuoc duoc chon
             thuoc_num = itemModel_thuocDChon.rowCount();
@@ -88,10 +92,16 @@ void khamsobo::on_pushButton_clicked()
                            ma_thuoc, ma_phieu, ma_nv, ma_bn) values('"+ma_thuoc+"','"+ma_phieu+"','"+ma_nv+"','"+ma_bn+"')");
             }
             if(!query.exec("update tt_benh_nhan set lap_phieu = 'TRUE' where ma_bn = '"+ma_bn+"'"))
+            {
                 qDebug() << query.lastError().text();
-            else{
-                //tao su kien cap nhat cho thu phi
-
+                //Cap nhat cac phu phi
+                thuoc_num = itemModel_dichvu.rowCount();
+                for(int i =0;i<thuoc_num;i++)
+                {
+                    query.exec("INSERT INTO gom( "
+                               "ma_phieu, ma_dm) "
+                               "VALUES ('"+ma_phieu+"', '"+itemModel_dichvu.index(i,1).data().toString()+"')");
+                }
             }
             query.exec("NOTIFY dongphi");
             //cap nhat lai benh dang ky
@@ -306,4 +316,9 @@ void khamsobo::codkMoi()
         }
         emit setThongBao(QString::fromUtf8("Số lượng người chờ là :")+query_notify.value(0).toString());
     }
+}
+
+void khamsobo::on_treeView_dichVu_clicked(const QModelIndex &index)
+{
+    itemModel_dichvu.appendRow(this->prepareRow(danhsachDV.index(index.row(),0).data().toString(),danhsachDV.index(index.row(),1).data().toString(),""));
 }

@@ -36,7 +36,7 @@ private slots:
 private:
   void closeEvent(QCloseEvent *event);
     Ui::dongphi *ui;
-    QSqlQueryModel qrmodel,danhsachthuoc;
+    QSqlQueryModel qrmodel,danhsachthuoc,dsdichvu;
     QSqlQuery query;
     QString ma_bn,ma_hd;
     QString ma_phieu,ma_nv;
