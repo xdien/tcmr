@@ -15,6 +15,7 @@
 #endif
 #include "QTextDocument"
 #include "htmltemp.h"
+#include <QPrintPreviewDialog>
 namespace Ui {
 class ReportTCTRE;
 }

@@ -9,6 +9,7 @@
 
 
 
+
 ReportTCTRE::ReportTCTRE(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ReportTCTRE)
@@ -143,7 +144,14 @@ void ReportTCTRE::on_pushButton_2_clicked()
     //thu su dung webview tren windows
     QWebView *view = new QWebView();
     view->setHtml(document->toHtml());
-    view->show();
+    QPrinter  printer(QPrinter::HighResolution);
+    printer.setPaperSize(QPrinter::A4);
+    printer.setOrientation(QPrinter::Landscape);//giay nam ngang
+    QPrintPreviewDialog *preview = new QPrintPreviewDialog(&printer,this);
+    connect( preview, SIGNAL(paintRequested(QPrinter*)),view, SLOT(print(QPrinter*)));
+    preview->exec();
+    delete preview;
+    delete view;
 #endif
 #ifdef __linux
     NCReport *report = new NCReport();
@@ -174,7 +182,7 @@ void ReportTCTRE::on_pushButton_2_clicked()
 int ReportTCTRE::tongsotre(QString sothang,QString madc,QString mathuoc)
 {
     query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan left join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where extract(month from age(sn)) > "+sothang+" and ma_dc = '"+madc+"' and (select distinct ma_bn from tiem where ngay_tiem is not null and tiem.ma_thuoc = '"+mathuoc+"') = tt_benh_nhan.ma_bn");
-    qDebug() << query.lastQuery();
+    //qDebug() << query.lastQuery();
     if(query.next())
     return query.value(0).toInt();
     else
@@ -204,7 +212,6 @@ QString ReportTCTRE::tongsoDoiTuongTheoThuoc2(QString mathuoc, QString madc, int
     //           "from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where ngay_tiem is not null "
     //           "and tiem.ma_thuoc = '"+mathuoc+"' group by tiem.ma_bn) as demui where demui.somui "+dk+""+somui+" and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
     query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and stt_lieu <= 2 and tiem.ma_bn not in(select ma_bn from tiem where stt_lieu = 3)");
-    qDebug() << query.lastQuery();
     if(query.next())
         return query.value(0).toString();
     else
@@ -213,7 +220,7 @@ QString ReportTCTRE::tongsoDoiTuongTheoThuoc2(QString mathuoc, QString madc, int
 QString ReportTCTRE::tongsoDoiTuongTheoThuoc3(QString mathuoc, QString madc, int sothangtuoinhohon)//viem nao nhat ban mui 3
 {
     query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and stt_lieu = 3");
-    qDebug() << query.lastQuery();
+    //qDebug() << query.lastQuery();
     if(query.next())
         return query.value(0).toString();
     else
@@ -222,7 +229,7 @@ QString ReportTCTRE::tongsoDoiTuongTheoThuoc3(QString mathuoc, QString madc, int
 QString ReportTCTRE::tongsodoiTuongVNNB(QString mathuoc, QString madc, int sothangtuoinhohon)
 {
     query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
-    qDebug() << query.lastQuery();
+    //qDebug() << query.lastQuery();
     if(query.next())
         return query.value(0).toString();
     else
