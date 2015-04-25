@@ -69,7 +69,7 @@ void managebenhvathuoc::on_lineEdit_returnPressed()
         lavx = "TRUE";
     else
         lavx = "FALSE";
-    maBn = id.getNextIndexCode("benh","BN");
+    maBn = id.getNextIndexCode("benh","BH");
     query.exec("INSERT INTO benh("
                "ma_benh, ten_benh, la_vx)"
                "VALUES ('"+maBn+"', '"+ui->lineEdit->text()+"', '"+lavx+"')");
@@ -101,9 +101,11 @@ void managebenhvathuoc::on_pushButton_themthuoc_clicked()
 
 void managebenhvathuoc::on_tableView_dsthuoc_doubleClicked(const QModelIndex &index)
 {
-    query.exec("INSERT INTO phong_ngua("
+    //kiem tra kq truy van
+    if(query.exec("INSERT INTO phong_ngua("
                "ma_benh, ma_thuoc) "
-               "VALUES ('"+mabenh+"', '"+this->dsthuocmodel.index(index.row(),0).data().toString()+"')");
+               "VALUES ('"+mabenh+"', '"+this->dsthuocmodel.index(index.row(),0).data().toString()+"')"))
+        qDebug() << query.lastError().text();
     benhdcchonmodel.setQuery("select * from phong_ngua where ma_benh = '"+ mabenh +"'");
 
 }

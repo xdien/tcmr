@@ -42,7 +42,7 @@ private:
     QString ma_phieu,ma_nv;
     manageIndex id;
     QSqlDatabase db;
-    int stt;
+    int stt, tongsotien;
     managerSTT *stt_hd;
     QModelIndex idx;
 };

@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     dpmoi = new dongphi();
     tiemn = new tiemngua();
     qlbenhthuoc = new managebenhvathuoc();
+    qlGia = new ManageGia();
     modangkyphieutiem = new Dangkyphieutiem();
     connect(moi,SIGNAL(nvdangnhap(QString)),this,SLOT(capnhatPhanQuyen(QString)));
     //connect(dpmoi,SIGNAL(destroyed(QObject*)),this,SLOT(test(QObject*)));
@@ -167,11 +168,6 @@ void MainWindow::capnhatPhanQuyen(QString macv)//cap nhat phan quyen dua theo ma
     }
 }
 
-void MainWindow::test(QObject *o)
-{
-//    qDebug() << o->objectName();
-//    dpmoi = o
-}
 
 void MainWindow::on_actionQL_B_nh_va_Thu_c_triggered()
 {
@@ -180,4 +176,13 @@ void MainWindow::on_actionQL_B_nh_va_Thu_c_triggered()
         ui->mdiArea->addSubWindow(qlbenhthuoc);
     }
     qlbenhthuoc->showMaximized();
+}
+
+void MainWindow::on_actionQuan_ly_gia_triggered()
+{
+    if(!qlGia->isActiveWindow())
+    {
+        ui->mdiArea->addSubWindow(qlGia);
+    }
+    qlGia->showMaximized();
 }

@@ -44,7 +44,8 @@ SOURCES += main.cpp\
     htmltemp.cpp \
     reportbenhtruyennhiem.cpp \
     qlbenhthuoc.cpp \
-    managebenhvathuoc.cpp
+    managebenhvathuoc.cpp \
+    managegia.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -66,7 +67,8 @@ HEADERS  += mainwindow.h \
     managerlogin.h \
     htmltemp.h \
     reportbenhtruyennhiem.h \
-    managebenhvathuoc.h
+    managebenhvathuoc.h \
+    managegia.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -83,4 +85,5 @@ FORMS    += mainwindow.ui \
     nhapthuoc.ui \
     reporttctre.ui \
     reportbenhtruyennhiem.ui \
-    managebenhvathuoc.ui
+    managebenhvathuoc.ui \
+    managegia.ui

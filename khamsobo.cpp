@@ -57,6 +57,10 @@ void khamsobo::on_pushButton_clicked()
     query.exec("select * from nv_dangnhap");
     if(query.next() && ui->csha->text().toInt() > 0)
     {
+        if(ui->checkBox_khogtimdc->isChecked())
+            co_benh = "FALSE";
+        else
+            co_benh = "TRUE";
         ma_nv = query.value(0).toString();
         sodong = itemModel_benhDChon.rowCount();
         if(sodong > 0)
@@ -66,13 +70,13 @@ void khamsobo::on_pushButton_clicked()
                 ma_benh = itemModel_benhDChon.index(i,1).data().toString();
                 query.exec("INSERT INTO co_benh( \
                            ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham) \
-                        VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', TRUE,current_date)");
+                        VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', '"+co_benh+"',current_date)");
             }
         }else{
             ma_benh = "BH_00000000";
             query.exec("INSERT INTO co_benh( \
                        ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham)\
-                    VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', TRUE,current_date)");
+                    VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', "+co_benh+",current_date)");
         }
         //cap nhat ngay kham la hom nay
         qDebug() << query.lastQuery();
@@ -94,6 +98,7 @@ void khamsobo::on_pushButton_clicked()
             if(!query.exec("update tt_benh_nhan set lap_phieu = 'TRUE' where ma_bn = '"+ma_bn+"'"))
             {
                 qDebug() << query.lastError().text();
+            }else{
                 //Cap nhat cac phu phi
                 thuoc_num = itemModel_dichvu.rowCount();
                 for(int i =0;i<thuoc_num;i++)

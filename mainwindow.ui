@@ -26,7 +26,7 @@
      <x>0</x>
      <y>0</y>
      <width>788</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCai_dat">
@@ -51,6 +51,7 @@
     <addaction name="actionQL_Chuc_Vu"/>
     <addaction name="actionNhap_thuoc"/>
     <addaction name="actionQL_B_nh_va_Thu_c"/>
+    <addaction name="actionQuan_ly_gia"/>
    </widget>
    <widget class="QMenu" name="menuTh_ng_tin">
     <property name="title">
@@ -123,7 +124,7 @@
   </action>
   <action name="actionQl_nv">
    <property name="text">
-    <string>Quản lý NV</string>
+    <string>&amp;Quản lý NV</string>
    </property>
   </action>
   <action name="actionQl_benh">
@@ -158,7 +159,12 @@
   </action>
   <action name="actionQL_B_nh_va_Thu_c">
    <property name="text">
-    <string>QL Bệnh và Thuốc</string>
+    <string>QL Bệnh &amp;và Thuốc</string>
+   </property>
+  </action>
+  <action name="actionQuan_ly_gia">
+   <property name="text">
+    <string>Quan ly gia</string>
    </property>
   </action>
  </widget>

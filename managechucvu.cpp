@@ -91,8 +91,3 @@ void ManageChucVu::on_tableView_customContextMenuRequested(const QPoint &pos)
     menu.exec(pos);
     qDebug() << "Customenu";
 }
-
-void ManageChucVu::on_tableView_cv_pressed(const QModelIndex &index)
-{
-    qDebug() << "nhan";
-}
