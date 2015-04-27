@@ -188,9 +188,9 @@ int ReportTCTRE::tongsotre(QString sothang,QString madc,QString mathuoc)
     else
         return -1;
 }
-QString ReportTCTRE::tongsoTreTheoThang(int sothang, QString madc)
+QString ReportTCTRE::tongsoTreTheoThang(int sothang, QString madc, QString  Jtuthang, QString Jdenthang)
 {
-    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan where extract(year from age(sn))*12+extract(month from age(sn)) = "+QString::number(sothang)+" and ma_dc = '"+madc+"'");
+    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > '"+Jtuthang+"' and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < '"+Jdenthang+"'  and extract(year from age(sn))*12+extract(month from age(sn)) = "+QString::number(sothang)+" and ma_dc = '"+madc+"' ");
     if(query.next())
     {
         return query.value(0).toString();
