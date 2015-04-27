@@ -34,8 +34,9 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
 
     ui->lineEdit->setText("Nhập bệnh mới...");
     ui->lineEdit_tkthuoc->setText("Nhập thuốc cần tìm...");
+    ui->lineEdit->installEventFilter(this);
+    ui->lineEdit_tkthuoc->installEventFilter(this);
 }
-
 managebenhvathuoc::~managebenhvathuoc()
 {
     delete ui;
@@ -124,4 +125,45 @@ void managebenhvathuoc::xoathuocthuocbenh()
                "WHERE ma_benh = '"+mabenh+"' and ma_thuoc = '"+mathuoc+"'");
     benhdcchonmodel.setQuery("select * from phong_ngua where ma_benh = '"+ mabenh +"'");
 
+}
+
+bool managebenhvathuoc::eventFilter(QObject *obj, QEvent *event)
+{
+    if(event->type() == QEvent::FocusIn)
+    {
+        if(obj->objectName()=="lineEdit")
+        {
+            if(ui->lineEdit->text()=="Nhập bệnh mới...")
+                ui->lineEdit->setText("");
+        }
+        else
+        {
+            if(ui->lineEdit_tkthuoc->text()=="Nhập thuốc cần tìm...")
+                ui->lineEdit_tkthuoc->setText("");
+        }
+    }
+    else if(event->type() == QEvent::FocusOut)
+    {
+        if(obj->objectName()=="lineEdit")
+        {
+            if(ui->lineEdit->text()=="")
+               ui->lineEdit->setText("Nhập bệnh mới...");
+        }
+        else
+        {
+            if(ui->lineEdit_tkthuoc->text()=="")
+               ui->lineEdit_tkthuoc->setText("Nhập thuốc cần tìm...");
+        }
+    }
+    return false;
+}
+
+void managebenhvathuoc::on_pushButton_timkiem_clicked()
+{
+    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc where ten_thuoc ilike '%"+ui->lineEdit_tkthuoc->text()+"%'");
+}
+
+void managebenhvathuoc::on_lineEdit_tkthuoc_textChanged(const QString &arg1)
+{
+    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc where ten_thuoc ilike '%"+arg1+"%'");
 }

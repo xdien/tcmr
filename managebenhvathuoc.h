@@ -32,15 +32,22 @@ private slots:
     void onCustomContextMenu(const QPoint &point);
     void xoathuocthuocbenh();
 
+    void on_pushButton_timkiem_clicked();
+
+    void on_lineEdit_tkthuoc_textChanged(const QString &arg1);
+
 private:
     Ui::managebenhvathuoc *ui;
     QSqlQueryModel dsbenhmodel;
     QSqlQueryModel dsthuocmodel;
     QSqlQueryModel benhdcchonmodel;
     QSqlQueryModel dotuoimodel;
+
+
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);
+    bool eventFilter(QObject *obj, QEvent *event);
     QString maBn;
     QSqlQuery query;
     manageIndex id;
