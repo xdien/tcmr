@@ -15,6 +15,7 @@ tiemngua::tiemngua(QWidget *parent) :
     ui->tableView->setModel(&dsthuoc);
     ui->treeView_ngayhen->setModel(&item_ngayhen);
     ui->danhsachbenh->setModel(&danhsachbenh);
+    ui->pushButton_3->setVisible(false);
 }
 
 tiemngua::~tiemngua()
