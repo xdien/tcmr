@@ -118,6 +118,7 @@ void ReportTCTRE::on_pushButton_2_clicked()
     QTextDocument *document = new QTextDocument();
     QTextCursor cursor(document);
     //truyen tr td vao bien conntent
+    tu = ui->dateEdit->date();
     for(int i =0;i<item_tinhthanh.rowCount();i++)
     {
 
@@ -188,9 +189,9 @@ int ReportTCTRE::tongsotre(QString sothang,QString madc,QString mathuoc)
     else
         return -1;
 }
-QString ReportTCTRE::tongsoTreTheoThang(int sothang, QString madc, QString  Jtuthang, QString Jdenthang)
+QString ReportTCTRE::tongsoTreTheoThang(int sothang, QString madc)
 {
-    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > '"+Jtuthang+"' and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < '"+Jdenthang+"'  and extract(year from age(sn))*12+extract(month from age(sn)) = "+QString::number(sothang)+" and ma_dc = '"+madc+"' ");
+    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > "+QString::number(ui->dateEdit->date().toJulianDay())+" and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < "+QString::number(ui->dateEdit_2->date().toJulianDay()) +"  and extract(year from age(sn))*12+extract(month from age(sn)) = "+QString::number(sothang)+" and ma_dc = '"+madc+"' ");
     if(query.next())
     {
         return query.value(0).toString();
@@ -200,7 +201,8 @@ QString ReportTCTRE::tongsoTreTheoThang(int sothang, QString madc, QString  Jtut
 }
 QString ReportTCTRE::tongsoTreTiemTheoThuoc(QString mathuoc, QString madc, int sothangtuoinhohon)
 {
-    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan left join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and (select distinct ma_bn from tiem where ngay_tiem is not null and tiem.ma_thuoc = '"+mathuoc+"') = tt_benh_nhan.ma_bn");
+    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan left join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > "+QString::number(ui->dateEdit->date().toJulianDay())+" and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < "+QString::number(ui->dateEdit_2->date().toJulianDay()) +" and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and (select distinct ma_bn from tiem where ngay_tiem is not null and tiem.ma_thuoc = '"+mathuoc+"') = tt_benh_nhan.ma_bn");
+    qDebug() << query.lastQuery();
     if(query.next())
         return query.value(0).toString();
     else
@@ -208,10 +210,7 @@ QString ReportTCTRE::tongsoTreTiemTheoThuoc(QString mathuoc, QString madc, int s
 }
 QString ReportTCTRE::tongsoDoiTuongTheoThuoc2(QString mathuoc, QString madc, int sothangtuoinhohon)//so doi tuong tiem mui 1 va 2, Viem nao nhat ban
 {
-    //query.exec("select count(distinct ma_dotuoi) from tt_benh_nhan,(select count(ma_thuoc) as somui,tiem.ma_bn "
-    //           "from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where ngay_tiem is not null "
-    //           "and tiem.ma_thuoc = '"+mathuoc+"' group by tiem.ma_bn) as demui where demui.somui "+dk+""+somui+" and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
-    query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and stt_lieu <= 2 and tiem.ma_bn not in(select ma_bn from tiem where stt_lieu = 3)");
+    query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > "+QString::number(ui->dateEdit->date().toJulianDay())+" and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < "+QString::number(ui->dateEdit_2->date().toJulianDay()) +" and tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and stt_lieu <= 2 and tiem.ma_bn not in(select ma_bn from tiem where stt_lieu = 3)");
     if(query.next())
         return query.value(0).toString();
     else
@@ -219,7 +218,7 @@ QString ReportTCTRE::tongsoDoiTuongTheoThuoc2(QString mathuoc, QString madc, int
 }
 QString ReportTCTRE::tongsoDoiTuongTheoThuoc3(QString mathuoc, QString madc, int sothangtuoinhohon)//viem nao nhat ban mui 3
 {
-    query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and stt_lieu = 3");
+    query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > "+QString::number(ui->dateEdit->date().toJulianDay())+" and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < "+QString::number(ui->dateEdit_2->date().toJulianDay()) +" and tiem.ma_thuoc = '"+mathuoc+"' and tt_benh_nhan.ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+" and stt_lieu = 3");
     //qDebug() << query.lastQuery();
     if(query.next())
         return query.value(0).toString();
@@ -228,7 +227,7 @@ QString ReportTCTRE::tongsoDoiTuongTheoThuoc3(QString mathuoc, QString madc, int
 }
 QString ReportTCTRE::tongsodoiTuongVNNB(QString mathuoc, QString madc, int sothangtuoinhohon)
 {
-    query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
+    query.exec("select count(distinct tiem.ma_bn) from tt_benh_nhan right join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > "+QString::number(ui->dateEdit->date().toJulianDay())+" and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < "+QString::number(ui->dateEdit_2->date().toJulianDay()) +" and tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
     //qDebug() << query.lastQuery();
     if(query.next())
         return query.value(0).toString();
@@ -238,8 +237,7 @@ QString ReportTCTRE::tongsodoiTuongVNNB(QString mathuoc, QString madc, int sotha
 
 QString ReportTCTRE::tongSoNguoiTiem(int somui, QString mathuoc, QString madc,  int sothangtuoinhohon)
 {
-    query.exec("select count(ma_thuoc) from somuitiem where ma_dc = '"+madc+"' and somui = "+QString::number(somui)+" and ma_thuoc ='"+mathuoc+"'");
-
+    query.exec("select count(ma_thuoc) from somuitiem left join tt_benh_nhan on tt_benh_nhan.ma_bn = somuitiem.ma_bn where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > "+QString::number(ui->dateEdit->date().toJulianDay())+" and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < "+QString::number(ui->dateEdit_2->date().toJulianDay()) +" and tt_benh_nhan.ma_dc = '"+madc+"' and somui = "+QString::number(somui)+" and ma_thuoc ='"+mathuoc+"'");
     if(query.next())
         return query.value(0).toString();
     else
@@ -247,7 +245,7 @@ QString ReportTCTRE::tongSoNguoiTiem(int somui, QString mathuoc, QString madc,  
 }
 QString ReportTCTRE::tongsoTreTiemTheothuoc(QString mathuoc, QString madc, int sothangtuoinhohon)
 {
-    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan left join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
+    query.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan left join tiem on tiem.ma_bn = tt_benh_nhan.ma_bn where nullif(TO_CHAR(ngay_lap, 'J'),'')::int > "+QString::number(ui->dateEdit->date().toJulianDay())+" and nullif(TO_CHAR(ngay_lap, 'J'),'')::int < "+QString::number(ui->dateEdit_2->date().toJulianDay()) +" and tiem.ma_thuoc = '"+mathuoc+"' and ma_dc = '"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) < "+QString::number(sothangtuoinhohon)+"");
             if(query.next())
                 return query.value(0).toString();
             else
