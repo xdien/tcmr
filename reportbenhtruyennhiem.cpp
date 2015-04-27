@@ -2,6 +2,8 @@
 #include "ui_reportbenhtruyennhiem.h"
 
 #include <QMessageBox>
+#include <QPrintPreviewDialog>
+#include <QPrinter>
 #include <QTextCursor>
 #include <QTextDocument>
 #include <QWebView>
@@ -36,14 +38,24 @@ void ReportBenhTruyenNhiem::on_pushButton_clicked()
         mau = mau + "<tr>\
                     <td>"+itemModel_benhDChon.index(i,0).data().toString()+"</td>\
                     <td>"+tcdd(ma_thuoc,"00001",200)+"</td>\
-                    <td></td>\
                     <td>"+this->ktc(ma_thuoc,"00001",200000)+"</td>\
                     <td>"+this->kr(ma_thuoc,"00001",11)+"</td>\
                     <!-- khoi 2-->"
                 "<td>"+tcdd(ma_thuoc,"00001",200)+"</td>\
-                <td></td>\
                 <td>"+this->ktc(ma_thuoc,"00001",200000)+"</td>\
                 <td>"+this->kr(ma_thuoc,"00001",11)+"</td>\
+                <!-- khoi 3-->"
+            "<td>"+tcdd(ma_thuoc,"00001",200)+"</td>\
+            <td>"+this->ktc(ma_thuoc,"00001",200000)+"</td>\
+            <td>"+this->kr(ma_thuoc,"00001",11)+"</td>\
+                <!-- khoi 4-->"
+            "<td>"+tcdd(ma_thuoc,"00001",200)+"</td>\
+            <td>"+this->ktc(ma_thuoc,"00001",200000)+"</td>\
+            <td>"+this->kr(ma_thuoc,"00001",11)+"</td>\
+                <!-- khoi 5-->"
+            "<td>"+tcdd(ma_thuoc,"00001",200)+"</td>\
+            <td>"+this->ktc(ma_thuoc,"00001",200000)+"</td>\
+            <td>"+this->kr(ma_thuoc,"00001",11)+"</td>\
                     </tr>";
     }
     //qDebug() << this->kiemtraDungHen(22,"TH_00000001","00001");
@@ -52,7 +64,14 @@ void ReportBenhTruyenNhiem::on_pushButton_clicked()
     //thu su dung webview tren windows
     QWebView *view = new QWebView();
     view->setHtml(document->toHtml());
-    view->show();
+    QPrinter  printer(QPrinter::HighResolution);
+    printer.setPaperSize(QPrinter::A4);
+    printer.setOrientation(QPrinter::Landscape);//giay nam ngang
+    QPrintPreviewDialog *preview = new QPrintPreviewDialog(&printer,this);
+    connect( preview, SIGNAL(paintRequested(QPrinter*)),view, SLOT(print(QPrinter*)));
+    preview->exec();
+    delete preview;
+    delete view;
 #endif
 #ifdef __linux
     NCReport *report = new NCReport();
@@ -119,18 +138,13 @@ void ReportBenhTruyenNhiem::on_pushButton_2_clicked()
     if(ui->treeView_benhDChon->currentIndex().isValid())
          itemModel_benhDChon.removeRow(ui->treeView_benhDChon->currentIndex().row());
 }
-QString ReportBenhTruyenNhiem::ktcdd(QString mathuoc, QString madc, int sothangtuoinhonhon)
-{
-    //query_tmp.exec("")
-}
-
 QString ReportBenhTruyenNhiem::ktc(QString mabenh, QString madc, int sothangtuoinhohon)
 {
     query_tmp.exec("select count(distinct tt_benh_nhan.ma_bn) from tt_benh_nhan "
                    "full outer join tiem on tt_benh_nhan.ma_bn = tiem.ma_bn "
                    "right join (select distinct ma_bn from co_benh where ma_benh = '"+mabenh+"') as aac on aac.ma_bn = tt_benh_nhan.ma_bn "
                    "where tiem.ma_bn is null and ma_dc ='"+madc+"' and extract(year from age(sn))*12+extract(month from age(sn)) <= "+QString::number(sothangtuoinhohon)+"");
-    qDebug() << query_tmp.lastQuery();
+    //qDebug() << query_tmp.lastQuery();
     if(query_tmp.next())
     {
         return query_tmp.value(0).toString();

@@ -19,7 +19,7 @@ dongphi::dongphi(QWidget *parent) :
                      left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn \
                      left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn \
                      left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu \
-                     where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date");
+                     where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true and co_benh.ngay_kham = current_date ");
     ui->treeView->setModel(&qrmodel);
     //set danh sach thuoc
     ui->treeView_danhsachthuoc->setModel(&danhsachthuoc);
@@ -36,6 +36,7 @@ dongphi::~dongphi()
 
 void dongphi::on_treeView_clicked(const QModelIndex &index)
 {
+    tongsotien = 0;
     ma_bn = ui->treeView->model()->index(index.row(),0).data().toString();
     ma_phieu = ui->treeView->model()->index(index.row(),3).data().toString();
     danhsachthuoc.setQuery("select thuoc.ten_thuoc,don_gia.gia from phieu_tiem "
@@ -48,10 +49,23 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
                "left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc "
                "left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc "
                "where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
-    //load du lieu cho dv
-    dsdichvu.setQuery("select ten_phu_pphi, don_gia");
     if(query.next())
-        ui->sotien->setText(query.value(0).toString());
+        tongsotien = query.value(0).toInt();
+    //load du lieu cho dv
+    dsdichvu.setQuery("SELECT ten_phu_phi,gia "
+                      "FROM don_gia "
+                       "right join (select ma_dm,max(ma_dongia) as ma_dg, max(ngay) from don_gia group by ma_dm) as aa "
+                       "on aa.ma_dg = don_gia.ma_dongia right join gom on gom.ma_dm = aa.ma_dm "
+                      "left join danh_muc on danh_muc.ma_dm = gom.ma_dm where gom.ma_phieu = '"+ma_phieu+"'");
+    query.exec("SELECT sum(gia) "
+               "FROM don_gia "
+                "right join (select ma_dm,max(ma_dongia) as ma_dg, max(ngay) from don_gia group by ma_dm) as aa "
+               "on aa.ma_dg = don_gia.ma_dongia right join gom on gom.ma_dm = aa.ma_dm  where gom.ma_phieu = '"+ma_phieu+"'");
+    if(query.next())
+            tongsotien += query.value(0).toInt();
+    else
+        qDebug() << query.lastError().text();
+    ui->sotien->setText(QString::number(tongsotien));
 }
 
 void dongphi::on_pushButton_6_clicked()

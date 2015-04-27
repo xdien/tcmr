@@ -19,6 +19,8 @@ ManageNV::ManageNV(QWidget *parent) :
     //testmodel->set;
     testmodel->setRelation(1,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
     testmodel->select();
+    /*-----------------*/
+    ui->lineEdit_cmnd->installEventFilter(this);
     //testmodel->set
 
     ui->tableView->setModel(testmodel);
@@ -199,7 +201,15 @@ void ManageNV::xoaMotNhanvien()
     testmodel->submitAll();
 }
 
-void ManageNV::on_tableView_clicked(const QModelIndex &index)
+bool ManageNV::eventFilter(QObject *obj, QEvent *event)
 {
-
+    if(event->type() == QEvent::MouseButtonPress)
+    {
+        qDebug() << "CLICK";
+    }
+//    if(event->type() == QEvent::MouseMove)
+//    {
+//        qDebug() << "MOUSE OVER";
+//    }
+    return false;
 }

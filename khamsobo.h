@@ -54,7 +54,7 @@ private:
     QString mot,hai,ba;
     QModelIndex idx;
     QDate ngay_sinh,ngay_hen;
-    QString ma_bn,ma_benh,ma_nv,ma_phieu,ma_thuoc,ma_phieuhen,ktimdc,ngay_taihen;
+    QString ma_bn,ma_benh,ma_nv,ma_phieu,ma_thuoc,ma_phieuhen,ktimdc,ngay_taihen, co_benh;
     int do_tuoi, thuoc_num;
     QStandardItemModel itemModel_thuocDChon,itemModel_benhDChon, itemModel_dichvu;
     void disableEdit(bool state);

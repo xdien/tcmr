@@ -21,6 +21,7 @@
 #include "tiemngua.h"
 #include <QObjectList>
 #include "managebenhvathuoc.h"
+#include "managegia.h"
 
 
 namespace Ui {
@@ -66,9 +67,10 @@ private slots:
 
     void on_actionAbout_Qt_triggered();
     void capnhatPhanQuyen(QString macv);
-    void test(QObject *o);
 
     void on_actionQL_B_nh_va_Thu_c_triggered();
+
+    void on_actionQuan_ly_gia_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -82,6 +84,7 @@ private:
     QList<QMdiSubWindow*> subwindowList;
     QObjectList objl;
     managebenhvathuoc *qlbenhthuoc;
+    ManageGia *qlGia;
 };
 
 #endif // MAINWINDOW_H

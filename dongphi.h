@@ -31,8 +31,7 @@ private slots:
     void on_lineEdit_textChanged(const QString &arg1);
 
     void on_lineEdit_returnPressed();
-//    void
-
+//    void    
 private:
   void closeEvent(QCloseEvent *event);
     Ui::dongphi *ui;
@@ -42,7 +41,7 @@ private:
     QString ma_phieu,ma_nv;
     manageIndex id;
     QSqlDatabase db;
-    int stt;
+    int stt, tongsotien;
     managerSTT *stt_hd;
     QModelIndex idx;
 };
