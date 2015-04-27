@@ -11,7 +11,7 @@ ManageGia::ManageGia(QWidget *parent) :
     ui->treeView_dm->setModel(&dsdanhmuc);
     ui->tableView_giaia->setModel(&test);
     dele = new QSqlRelationalDelegate();
-    dsgiahientai.setQuery("select ten_phu_phi,ma_dm from danh_muc");
+    //dsgiahientai.setQuery("select ten_phu_phi,ma_dm from danh_muc");
     dsdanhmuc.setQuery("select ten_phu_phi,ma_dm from danh_muc");
     test.setTable("danh_muc");
     test.setRelation(0,QSqlRelation("danh_muc","ma_dm","ten_phu_phi"));
@@ -48,6 +48,7 @@ void ManageGia::on_lineEdit_dm_returnPressed()
                    "ten_phu_phi) "
                    "VALUES ('"+ui->lineEdit_dm->text()+"')"))
         qDebug() << query.lastError().text();
+    dsdanhmuc.setQuery("select ten_phu_phi,ma_dm from danh_muc");
 }
 
 void ManageGia::on_treeView_dm_clicked(const QModelIndex &index)

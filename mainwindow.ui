@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>TIêm chủng mở rộng</string>
+   <string>Tiêm chủng mở rộng</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -47,9 +47,6 @@
      <string>Hệ thố&amp;ng</string>
     </property>
     <addaction name="actionQl_nv"/>
-    <addaction name="actionQl_benh"/>
-    <addaction name="actionQL_Chuc_Vu"/>
-    <addaction name="actionNhap_thuoc"/>
     <addaction name="actionQL_B_nh_va_Thu_c"/>
     <addaction name="actionQuan_ly_gia"/>
    </widget>
@@ -164,7 +161,7 @@
   </action>
   <action name="actionQuan_ly_gia">
    <property name="text">
-    <string>Quan ly gia</string>
+    <string>Quan &amp;ly gia</string>
    </property>
   </action>
  </widget>
