@@ -33,7 +33,7 @@ private slots:
 
 private:
     HtmlTemp *htmltemp;
-    QString tcdd(QString mathuoc, QString madc, int sothangtuoinhonhon);
+    QString tcdd(QString mathuoc, QString madc, QString tu, QString den);
     Ui::ReportBenhTruyenNhiem *ui;
     QSqlQuery query,query_tmp;
     QSqlQueryModel table_benh;
@@ -42,7 +42,7 @@ private:
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);
-    QString ktcdd(QString mathuoc, QString madc, int sothangtuoinhonhon);
+    //QString ktcdd(QString mathuoc, QString madc, int sothangtuoinhonhon);
     QList<QStandardItem *> tmp;
     QString ktc(QString mabenh, QString madc, int sothangtuoinhohon);
     QString kr(QString mathuoc, QString madc, int sothangtuoinhohon);

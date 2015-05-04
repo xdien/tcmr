@@ -12,7 +12,7 @@ dongphi::dongphi(QWidget *parent) :
         qDebug() << "chu y sqlDriver nay khong ho tro notifi";
     }else{
         if(db.driver()->subscribeToNotification("dongphi"))
-            connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(capnhatDScho()));
+            connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(capnhatDScho(QString)));
     }
     stt_hd = new managerSTT("dongphi");
     qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem \
@@ -78,41 +78,45 @@ void dongphi::on_pushButton_6_clicked()
         //lay ma_hd sau do tang len 1
         ma_hd = id.getNextIndexCode("hoa_don","HD");
         stt = stt_hd->getcurrentindex();
-        QString str ="insert into hoa_don( \
-                ma_hd, ma_phieu, ma_nv, ngay_lap, so_tien, xac_nhan, stt) \
-values('"+ma_hd+"','"+ma_phieu+"','"+ma_nv+"',current_date,'"+ui->sotien->text()+"','0','"+QString::number(stt)+"')";
-        if(query.exec(str))
-                stt_hd->next();
+        QString str ="insert into hoa_don( "
+                     "ma_hd, ma_phieu, ma_nv, ngay_lap, so_tien, xac_nhan, stt) "
+                     "values('"+ma_hd+"','"+ma_phieu+"','"+ma_nv+"',current_date,'"+ui->sotien->text()+"','0','"+QString::number(stt)+"')";
+        if(query.exec(str)){
+            stt_hd->next();
+            query.exec("NOTIFY tiem");
+        }
         else
-                qDebug() << query.lastError().text();
+        qDebug() << query.lastError().text();
 
         qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem "
                          "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
-    "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
+                         "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
                          "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
                          "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date");
     }else{
         qDebug() << "Khong the lay ma nhan vien";
     }
 }
-void dongphi::capnhatDScho()
+void dongphi::capnhatDScho(QString notiName)
 {
-    query.exec("select count(tt_benh_nhan.ma_bn) from phieu_tiem "
-               "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
-               "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
-               "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
-               "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true "
-               "and co_benh.ngay_kham = current_date");
-    if(query.next()){
-        emit setThongBao("Số lượng người chờ đóng phí là: " + query.value(0).toString());
+    if(notiName == "dongphi"){
+        query.exec("select count(tt_benh_nhan.ma_bn) from phieu_tiem "
+                   "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
+                   "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
+                   "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
+                   "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true "
+                   "and co_benh.ngay_kham = current_date");
+        if(query.next()){
+            emit setThongBao("Số lượng người chờ đóng phí là: " + query.value(0).toString());
+        }
+        qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem "
+                         "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
+                         "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
+                         "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
+                         "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true "
+                         "and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date "
+                         "and co_benh.ngay_kham = current_date limit 20");
     }
-    qrmodel.setQuery("select tt_benh_nhan.ma_bn,tt_benh_nhan.ten,tt_benh_nhan.gioi_tinh, phieu_tiem.ma_phieu , hoa_don.ma_hd from phieu_tiem "
-                     "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
-                     "left join co_benh on co_benh.ma_bn = tt_benh_nhan.ma_bn "
-                     "left join hoa_don on hoa_don.ma_phieu = phieu_tiem.ma_phieu "
-                     "where hoa_don.ma_phieu is null and phieu_tiem.ngay_lap_pt = current_date and co_benh.du_tc is true "
-                     "and co_benh.ngay_kham = current_date and co_benh.ngay_kham = current_date "
-                     "and co_benh.ngay_kham = current_date limit 20");
 
 }
 

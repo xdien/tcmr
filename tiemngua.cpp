@@ -7,6 +7,15 @@ tiemngua::tiemngua(QWidget *parent) :
     ui(new Ui::tiemngua)
 {
     ui->setupUi(this);
+
+    db = QSqlDatabase::database("qt_sql_default_connection");
+    if(!db.driver()->hasFeature(QSqlDriver::EventNotifications))
+    {
+        qDebug() << "chu y sqlDriver nay khong ho tro notifi";
+    }else{
+        if(db.driver()->subscribeToNotification("tiem"))
+            connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(capnhatDScho(QString)));
+    }
     //this->update();
     stt = new managerSTT("tiemngua");
     ngay = QDate::currentDate();
@@ -244,4 +253,17 @@ void tiemngua::cleanFroms()
     ui->chuy->clear();
     ui->csha->clear();
     ui->cstim->clear();
+}
+void tiemngua::capnhatDScho(QString notiName)
+{
+    this->updateDScho();
+    if(notiName == "tiem"){
+        query.exec("select count(tt_benh_nhan.ma_bn) from hoa_don "
+                   "left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu "
+                   "left join tt_benh_nhan on tt_benh_nhan.ma_bn = phieu_tiem.ma_bn "
+                   "where hoa_don.ngay_lap = current_date  and hoa_don.da_tiem is null");
+        if(query.next()){
+            emit setThongBao("Số lượng người chờ tiêm là: " + query.value(0).toString());
+        }
+    }
 }

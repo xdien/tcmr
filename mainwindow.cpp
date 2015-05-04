@@ -78,7 +78,7 @@ void MainWindow::on_actionDong_Phi_triggered()
     {
         //dpmoi = new dongphi();
         ui->mdiArea->addSubWindow(dpmoi);
-        //connect(&dpmoi,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
+        connect(dpmoi,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
     }
     dpmoi->showMaximized();
 }
@@ -88,6 +88,7 @@ void MainWindow::on_actionTiem_triggered()
     if(!tiemn->isActiveWindow())
     {
         ui->mdiArea->addSubWindow(tiemn);
+        connect(tiemn,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
     }
     tiemn->showMaximized();
 }

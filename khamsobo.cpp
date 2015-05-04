@@ -25,7 +25,7 @@ khamsobo::khamsobo(QWidget *parent) :
         qDebug() << "chu y sqlDriver nay khong ho tro notifi";
     }else{
         db.driver()->subscribeToNotification("khamsobo");
-        connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(codkMoi()));
+        connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(codkMoi(QString)));
    }
 
 }
@@ -79,7 +79,7 @@ void khamsobo::on_pushButton_clicked()
                     VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', "+co_benh+",current_date)");
         }
         //cap nhat ngay kham la hom nay
-        qDebug() << query.lastQuery();
+        //qDebug() << query.lastQuery();
         query.exec("UPDATE co_benh "
                    "SET ngay_kham=current_date "
                  "WHERE ma_bn = '"+ma_bn+"'");
@@ -296,30 +296,31 @@ void khamsobo::on_pushButton_2_clicked()
     itemModel_thuocDChon.removeRow(ui->danhsach_chonthuoc->currentIndex().row());
 }
 
-void khamsobo::codkMoi()
+void khamsobo::codkMoi(QString notiName)
 {
-    //qDebug() << "co song";
-    query_notify.exec("select count(ma_bn) from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null");
-    if(query_notify.next())
-    {
-        //neu co nhieu hon 1 benh nhan thi k lam gi
-        qDebug() << query_notify.value(0).toInt();
-        if(query_notify.value(0).toInt() == 1 )
+    if(notiName == "khamsobo"){
+        query_notify.exec("select count(ma_bn) from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null");
+        if(query_notify.next())
         {
-            //set idex dau tien va click
-            row = 0;
-            idx  = ui->listView_dsCho->model()->index(row,col);
-            ui->listView_dsCho->selectionModel()->select(idx, QItemSelectionModel::Select);
-            ui->listView_dsCho->setCurrentIndex(idx);
-            ui->listView_dsCho->setFocus();
-            //ui->listView_dsCho->clicked(idx);
+            //neu co nhieu hon 1 benh nhan thi k lam gi
+            qDebug() << query_notify.value(0).toInt();
+            if(query_notify.value(0).toInt() == 1 )
+            {
+                //set idex dau tien va click
+                row = 0;
+                idx  = ui->listView_dsCho->model()->index(row,col);
+                ui->listView_dsCho->selectionModel()->select(idx, QItemSelectionModel::Select);
+                ui->listView_dsCho->setCurrentIndex(idx);
+                ui->listView_dsCho->setFocus();
+                //ui->listView_dsCho->clicked(idx);
+            }
+            //gioi han 20
+            if(query_notify.value(0).toInt() <= 20 )
+            {
+                this->loaddanhsach_chokham();
+            }
+            emit setThongBao(QString::fromUtf8("Số lượng người chờ khám là :")+query_notify.value(0).toString());
         }
-        //gioi han 20
-        if(query_notify.value(0).toInt() <= 20 )
-        {
-            this->loaddanhsach_chokham();
-        }
-        emit setThongBao(QString::fromUtf8("Số lượng người chờ là :")+query_notify.value(0).toString());
     }
 }
 

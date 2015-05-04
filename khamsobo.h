@@ -8,6 +8,7 @@
 #include <QDate>
 #include "manageindex.h"
 
+
 namespace Ui {
 class khamsobo;
 }
@@ -38,7 +39,7 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-        void codkMoi();
+        void codkMoi(QString notiName);
 
         void on_treeView_dichVu_clicked(const QModelIndex &index);
 
