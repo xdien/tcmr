@@ -205,28 +205,28 @@ void Dangkyphieutiem::on_luu_tt_clicked()
             //ma_dt = this->dotuoimode.index(ui->comboBox_dotuoi->currentIndex(),1).data().toString();
             ma_bn = id.getNextIndexCode("tt_benh_nhan","BN");
             QString str;
-            str = "INSERT INTO tt_benh_nhan(ma_bn,  ten, gioi_tinh, ma_dc, dc_chi_tiet, sn, stt, ngay_lap, \
-                    lap_phieu, da_tiemlandau, tai_hen) values('"+ma_bn+"', '"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"','"+QString::number(stt->getcurrentindex())+"',current_date,NULL,NULL,NULL)";
-                    if(query.exec(str))
+            str = "INSERT INTO tt_benh_nhan(ma_bn,  ten, gioi_tinh, ma_dc, dc_chi_tiet, sn, stt, ngay_lap, "
+                  "lap_phieu, da_tiemlandau, tai_hen) values('"+ma_bn+"', '"+ten_bn+"','"+gioitinh+"','"+ma_dc+"','"+ui->lineEdit_diachi->text()+"','"+ui->dateEdit->date().toString("yyyy-MM-dd")+"','"+QString::number(stt->getcurrentindex())+"',current_date,NULL,NULL,NULL)";
+            if(query.exec(str))
             {
                 stt->next();
+                thuoc_num = itemModel.rowCount();
+                for(int i =0;i<thuoc_num;i++){
+                    ma_thuoc = itemModel.index(i,1).data().toString();
+                    if(!query.exec("insert into muon_tiem values('"+ma_thuoc+"','"+ma_bn+"')"))
+                        qDebug()<<query.lastError().text();
+                }
                 //tao su kien notify cho khamsobo
                 query.exec("NOTIFY khamsobo");
                 //xoa thong tin tren lineedit
                 ui->lineEdit_diachi->clear();
                 ui->ten->clear();
                 ui->lineEdit_3->clear();
+                itemModel.clear();
             }
             else{
                 qDebug() << "Loi them tt benh nhan: "<< query.lastError().text();
             }
-            thuoc_num = itemModel.rowCount();
-            for(int i =0;i<thuoc_num;i++){
-                ma_thuoc = itemModel.index(i,1).data().toString();
-                if(!query.exec("insert into muon_tiem values('"+ma_thuoc+"','"+ma_bn+"')"))
-                    qDebug()<<query.lastError().text();
-            }
-
         }else{
             qDebug() << "Can't get id NHAN_VIEN";
         }

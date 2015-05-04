@@ -26,7 +26,7 @@
      <x>0</x>
      <y>0</y>
      <width>788</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCai_dat">
@@ -54,6 +54,8 @@
     <property name="title">
      <string>Th&amp;ông tin</string>
     </property>
+    <addaction name="actionAbout"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout_Qt"/>
    </widget>
    <addaction name="menuCai_dat"/>
@@ -162,6 +164,11 @@
   <action name="actionQuan_ly_gia">
    <property name="text">
     <string>Quan &amp;ly gia</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

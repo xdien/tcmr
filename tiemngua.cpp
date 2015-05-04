@@ -25,6 +25,9 @@ tiemngua::tiemngua(QWidget *parent) :
     ui->treeView_ngayhen->setModel(&item_ngayhen);
     ui->danhsachbenh->setModel(&danhsachbenh);
     ui->pushButton_3->setVisible(false);
+    danhsachchomodel.setHeaderData(0,Qt::Horizontal,"STT");
+    danhsachchomodel.setHeaderData(1,Qt::Horizontal,"Tên");
+
 }
 
 tiemngua::~tiemngua()
@@ -253,6 +256,9 @@ void tiemngua::cleanFroms()
     ui->chuy->clear();
     ui->csha->clear();
     ui->cstim->clear();
+    dsthuoc.clear();
+    querymodel.clear();
+    item_ngayhen.clear();
 }
 void tiemngua::capnhatDScho(QString notiName)
 {

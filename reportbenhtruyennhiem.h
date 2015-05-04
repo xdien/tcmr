@@ -44,8 +44,8 @@ private:
                                                     const QString &third);
     //QString ktcdd(QString mathuoc, QString madc, int sothangtuoinhonhon);
     QList<QStandardItem *> tmp;
-    QString ktc(QString mabenh, QString madc, int sothangtuoinhohon);
-    QString kr(QString mathuoc, QString madc, int sothangtuoinhohon);
+    QString ktc(QString mabenh, QString madc, QString tu, QString den);
+    QString kr(QString mathuoc, QString madc, QString tu, QString den);
 };
 
 #endif // REPORTBENHTRUYENNHIEM_H

@@ -43,6 +43,8 @@ private slots:
 
         void on_treeView_dichVu_clicked(const QModelIndex &index);
 
+        void on_treeView_benh_clicked(const QModelIndex &index);
+
 private:
     void loaddanhsach_chokham();
     manageIndex id;
@@ -52,7 +54,7 @@ private:
     void setcurentidx();
     managerSTT *stt;
     int col,row,sodong,chu_ky;
-    QString mot,hai,ba;
+    QString mot,hai,ba,ma_dv;
     QModelIndex idx;
     QDate ngay_sinh,ngay_hen;
     QString ma_bn,ma_benh,ma_nv,ma_phieu,ma_thuoc,ma_phieuhen,ktimdc,ngay_taihen, co_benh;
@@ -68,6 +70,7 @@ private:
     void loadchitietBN_M(QModelIndex indexx);
     void loadchitietBN_C(QModelIndex indexx);
     QSqlDatabase db;
+QList<QStandardItem *> tmp;
 
 };
 

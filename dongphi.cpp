@@ -26,6 +26,13 @@ dongphi::dongphi(QWidget *parent) :
     ui->sotien->setEnabled(false);
     //Dich vu
     ui->treeView_dv->setModel(&dsdichvu);
+    /**set header*/
+    qrmodel.setHeaderData(0,Qt::Horizontal,"Mã người đk");
+    qrmodel.setHeaderData(1,Qt::Horizontal,"Tên");
+    qrmodel.setHeaderData(2,Qt::Horizontal,"Giới tính");
+    qrmodel.setHeaderData(3,Qt::Horizontal,"Mã Phiếu");
+
+
 }
 
 dongphi::~dongphi()
@@ -44,6 +51,8 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
                            "left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc "
                            "left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc "
                            "where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
+    danhsachthuoc.setHeaderData(0,Qt::Horizontal,"Tên thuốc");
+    danhsachthuoc.setHeaderData(1,Qt::Horizontal,"Giá");
     query.exec("select sum(don_gia.gia) from phieu_tiem "
                "right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu "
                "left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc "
@@ -57,6 +66,9 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
                        "right join (select ma_dm,max(ma_dongia) as ma_dg, max(ngay) from don_gia group by ma_dm) as aa "
                        "on aa.ma_dg = don_gia.ma_dongia right join gom on gom.ma_dm = aa.ma_dm "
                       "left join danh_muc on danh_muc.ma_dm = gom.ma_dm where gom.ma_phieu = '"+ma_phieu+"'");
+    dsdichvu.setHeaderData(0,Qt::Horizontal,"Tên phụ phí");
+    dsdichvu.setHeaderData(1,Qt::Horizontal,"Giá");
+
     query.exec("SELECT sum(gia) "
                "FROM don_gia "
                 "right join (select ma_dm,max(ma_dongia) as ma_dg, max(ngay) from don_gia group by ma_dm) as aa "
@@ -84,6 +96,8 @@ void dongphi::on_pushButton_6_clicked()
         if(query.exec(str)){
             stt_hd->next();
             query.exec("NOTIFY tiem");
+            this->dsdichvu.clear();
+            this->danhsachthuoc.clear();
         }
         else
         qDebug() << query.lastError().text();

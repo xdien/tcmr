@@ -21,9 +21,7 @@ export(first.depends)
 export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
 }
-win32:{
-QMAKE_LFLAGS += -shared
-}
+
 CONFIG (debug, debug|release) {
  mac: TARGET = $$join(TARGET,,,_debug)
  win32: TARGET = $$join(TARGET,,,d)
@@ -66,7 +64,8 @@ SOURCES += main.cpp\
     reportbenhtruyennhiem.cpp \
     qlbenhthuoc.cpp \
     managebenhvathuoc.cpp \
-    managegia.cpp
+    managegia.cpp \
+    about.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -89,7 +88,8 @@ HEADERS  += mainwindow.h \
     htmltemp.h \
     reportbenhtruyennhiem.h \
     managebenhvathuoc.h \
-    managegia.h
+    managegia.h \
+    about.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -107,4 +107,5 @@ FORMS    += mainwindow.ui \
     reporttctre.ui \
     reportbenhtruyennhiem.ui \
     managebenhvathuoc.ui \
-    managegia.ui
+    managegia.ui \
+    about.ui

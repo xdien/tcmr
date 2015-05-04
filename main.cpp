@@ -4,7 +4,7 @@
 #include <QtPlugin>
 #ifdef __MINGW32__
     #if defined __MINGW64_VERSION_MAJOR && defined __MINGW64_VERSION_MINOR
-        Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+       // Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
     #else
         // mingw
 
