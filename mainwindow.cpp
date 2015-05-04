@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "dialog_setting.h"
 #include <QMessageBox>
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
