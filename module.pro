@@ -10,6 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = module
 TEMPLATE = app
+QTPLUGIN += qwindows
 #include(../QtRPT/QtRPT.pri)
 linux{
 INCLUDEPATH += /home/xdien/QtSDK/NCReport/include
@@ -19,6 +20,9 @@ first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
+}
+win32:{
+QMAKE_LFLAGS += -shared
 }
 CONFIG (debug, debug|release) {
  mac: TARGET = $$join(TARGET,,,_debug)
@@ -31,7 +35,11 @@ static { # everything below takes effect with CONFIG = static
  message("~~~ static build ~~~") # this is for information, that the static build is done
  mac: TARGET = $$join(TARGET,,,_static) #this adds an _static in the end, so you can seperate static build
 #from non static build
- win32: TARGET = $$join(TARGET,,,s)
+ win32:
+{
+TARGET = $$join(TARGET,,,s)
+LIBS += -L/usr/x86_64-w64-mingw32/sys-root/mingw/lib/qt5/plugins/platforms/qwindows.dll -lqwindows
+}
 #non static build
 }
 
