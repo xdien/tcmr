@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qlGia = new ManageGia();
     modangkyphieutiem = new Dangkyphieutiem();
     connect(moi,SIGNAL(nvdangnhap(QString)),this,SLOT(capnhatPhanQuyen(QString)));
+    //connect(moi,)
     //connect(dpmoi,SIGNAL(destroyed(QObject*)),this,SLOT(test(QObject*)));
     //subwindowList = new QList<subwindowList>();
 }
@@ -164,7 +165,9 @@ void MainWindow::capnhatPhanQuyen(QString macv)//cap nhat phan quyen dua theo ma
         ui->actionTiem->setEnabled(query.value(3).toBool());
         ui->menuBao_cao->setEnabled(query.value(4).toBool());
         ui->menuHe_thong->setEnabled(query.value(5).toBool());
+        ui->statusBar->showMessage("Danh nhap thanh cong");
     }else{
+        ui->statusBar->showMessage("Dang nhap that bai, xin kiem tra thong tin dang nhap");
         qDebug() << "Loi: " <<query.lastError().text();
     }
 }

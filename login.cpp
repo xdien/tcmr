@@ -24,10 +24,14 @@ void login::on_buttonBox_accepted()
     if(query.next()){
         ma_nv = query.value(0).toString();
         emit nvdangnhap(query.value(2).toString());
-        if(query.exec("insert into nv_dangnhap values('"+ma_nv+"')"))
+
+        if(query.exec("insert into nv_dangnhap values('"+ma_nv+"')")){
             qDebug() << "Login succeed";
+            emit setThongBao("Dang nhap thanh cong");
+        }
         else{
-            qDebug() << query.lastError().text() ;
+            qDebug() << query.lastError().text();
+            emit setThongBao("Dang nhap that bai xin hay kiem tra lai");
         }
     }else{
         qDebug() << "Login failed";

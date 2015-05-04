@@ -78,8 +78,6 @@ void khamsobo::on_pushButton_clicked()
                        ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham)\
                     VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', "+co_benh+",current_date)");
         }
-        //cap nhat ngay kham la hom nay
-        //qDebug() << query.lastQuery();
         query.exec("UPDATE co_benh "
                    "SET ngay_kham=current_date "
                  "WHERE ma_bn = '"+ma_bn+"'");
@@ -107,6 +105,11 @@ void khamsobo::on_pushButton_clicked()
                                "ma_phieu, ma_dm) "
                                "VALUES ('"+ma_phieu+"', '"+itemModel_dichvu.index(i,1).data().toString()+"')");
                 }
+                //xoa cai lineedit
+                itemModel_benhDChon.clear();
+                itemModel_dichvu.clear();
+                itemModel_thuocDChon.clear();
+                danhsach_goiyThuoc.clear();
             }
             query.exec("NOTIFY dongphi");
             //cap nhat lai benh dang ky

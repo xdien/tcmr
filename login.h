@@ -18,6 +18,7 @@ public:
     ~login();
 signals:
     void nvdangnhap(QString macv);
+    void setThongBao(QString thongBao);
 
 private slots:
     void on_buttonBox_accepted();
