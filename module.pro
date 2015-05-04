@@ -38,7 +38,7 @@ static { # everything below takes effect with CONFIG = static
  win32:
 {
 TARGET = $$join(TARGET,,,s)
-LIBS += -L/usr/x86_64-w64-mingw32/sys-root/mingw/lib/qt5/plugins/platforms/qwindows.dll -lqwindows
+INCLUDEPATH += -$(QTDIR)\plugins\platforms\
 }
 #non static build
 }

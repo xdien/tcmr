@@ -2,7 +2,17 @@
 #include <QApplication>
 #include "config/config_sqlconnect.h"
 #include <QtPlugin>
-Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+#ifdef __MINGW32__
+    #if defined __MINGW64_VERSION_MAJOR && defined __MINGW64_VERSION_MINOR
+        Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+    #else
+        // mingw
+
+    #endif
+#else
+    // other toolchain
+#endif
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
