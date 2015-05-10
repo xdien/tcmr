@@ -94,7 +94,7 @@
         <item row="4" column="0">
          <widget class="QLabel" name="label_7">
           <property name="text">
-           <string>Que quán</string>
+           <string>Quê quán</string>
           </property>
          </widget>
         </item>
@@ -157,71 +157,54 @@
         <property name="title">
          <string>Các quyền cấp cho nv này</string>
         </property>
-        <widget class="QCheckBox" name="checkBox_3h">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>120</y>
-           <width>86</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Thu phí</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_1h">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>40</y>
-           <width>86</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Đăng ký</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_2h">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>80</y>
-           <width>111</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Khám sơ bộ</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_4h">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>80</y>
-           <width>86</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Tiêm</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_5h">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>120</y>
-           <width>86</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Hệ thống</string>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QCheckBox" name="checkBox_1h">
+             <property name="text">
+              <string>Đăng ký</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_6h">
+             <property name="text">
+              <string>Hệ thống</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_4h">
+             <property name="text">
+              <string>Tiêm</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_2h">
+             <property name="text">
+              <string>Khám sơ bộ</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_3h">
+             <property name="text">
+              <string>Thu phí</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_5h">
+             <property name="text">
+              <string>Hệ thống</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
         <zorder>checkBox_1h</zorder>
         <zorder>checkBox_2h</zorder>
         <zorder>checkBox_4h</zorder>
@@ -293,122 +276,84 @@
         <property name="title">
          <string>Quyền cho chức vụ này</string>
         </property>
-        <widget class="QCheckBox" name="checkBox_1">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>30</y>
-           <width>101</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Đăng ky TT</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_2">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>60</y>
-           <width>111</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Khám sơ bộ</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_3">
-         <property name="geometry">
-          <rect>
-           <x>180</x>
-           <y>30</y>
-           <width>81</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Thu phí</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_4">
-         <property name="geometry">
-          <rect>
-           <x>180</x>
-           <y>80</y>
-           <width>86</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Báo cáo</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_5">
-         <property name="geometry">
-          <rect>
-           <x>180</x>
-           <y>50</y>
-           <width>86</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Tiêm</string>
-         </property>
-        </widget>
-        <widget class="QWidget" name="layoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>120</y>
-           <width>314</width>
-           <height>33</height>
-          </rect>
-         </property>
-         <layout class="QFormLayout" name="formLayout_4">
-          <item row="0" column="0">
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>124</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="1">
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="text">
-             <string>Thêm</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QCheckBox" name="checkBox_6">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>90</y>
-           <width>86</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Hê thống</string>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <layout class="QFormLayout" name="formLayout_5">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="checkBox_1">
+             <property name="text">
+              <string>Đăng ký TT</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QCheckBox" name="checkBox_3">
+             <property name="text">
+              <string>Thu phí</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="checkBox_2">
+             <property name="text">
+              <string>Khám sơ bộ</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QCheckBox" name="checkBox_5">
+             <property name="text">
+              <string>Tiêm</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="checkBox_6">
+             <property name="text">
+              <string>Hê thống</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QCheckBox" name="checkBox_4">
+             <property name="text">
+              <string>Báo cáo</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QFormLayout" name="formLayout_4">
+           <item row="0" column="0">
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>124</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string>Thêm</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
        <widget class="QGroupBox" name="groupBox_5">
         <property name="title">
-         <string>Danh sách phan quyền</string>
+         <string>Danh sách phân quyền</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>

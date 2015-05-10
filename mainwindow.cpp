@@ -11,14 +11,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     db = QSqlDatabase::database("qt_sql_default_connection");
-    //connect(db.driver()->,SIGNAL(disconnectNotify()),this,SLOT(trangthaiSQL()));
-//    ui->actionPhieu_DK->setEnabled(false);
-//    ui->actionKham_SB->setEnabled(false);
-//    ui->actionDong_Phi->setEnabled(false);
-//    ui->actionTiem->setEnabled(false);
-//    ui->menuBao_cao->setEnabled(false);
-//    ui->actionTrC_phieu_hen->setEnabled(false);
-    //ui->menuHe_thong->setEnabled(false);//Comment de bao tri
+    connect(db.driver(),SIGNAL(disconnectNotify()),this,SLOT(trangthaiSQL()));
+    ui->actionPhieu_DK->setEnabled(false);
+    ui->actionKham_SB->setEnabled(false);
+    ui->actionDong_Phi->setEnabled(false);
+    ui->actionTiem->setEnabled(false);
+    ui->menuBao_cao->setEnabled(false);
+    ui->actionTrC_phieu_hen->setEnabled(false);
+    ui->menuHe_thong->setEnabled(false);//Comment de bao tri
     /*status bar*/
     statusLabel = new QLabel(this);
     tinhtrangsql = new QLabel(this);
@@ -204,7 +204,7 @@ void MainWindow::on_actionQL_B_nh_va_Thu_c_triggered()
 {
     if(!qlbenhthuoc->isActiveWindow())
     {
-        ui->mdiArea->addSubWindow(qlbenhthuoc);
+        //ui->mdiArea->addSubWindow(qlbenhthuoc);
     }
     qlbenhthuoc->showMaximized();
 }
