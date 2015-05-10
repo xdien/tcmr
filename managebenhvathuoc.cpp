@@ -6,13 +6,16 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
     ui(new Ui::managebenhvathuoc)
 {
     ui->setupUi(this);
+
+    tkFocus = false;
+
     dsbenhmodel.setQuery("SELECT ma_benh, ten_benh, la_vx "
                          "FROM benh");
     ui->tableView_dsbenh->hideColumn(0);
     ui->tableView_dsbenh->setModel(&dsbenhmodel);
     //dsbenhmodel.setHeaderData(0,Qt::Horizontal,"Mã Thuốc");
 
-    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc");
+    dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
     ui->tableView_dsthuoc->setModel(&dsthuocmodel);
     ui->tableView_dsthuoc->hideColumn(0);
 
@@ -40,6 +43,8 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
     ui->lineEdit_tkthuoc->setText("Nhập thuốc cần tìm...");
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_tkthuoc->installEventFilter(this);
+
+
 }
 managebenhvathuoc::~managebenhvathuoc()
 {
@@ -106,7 +111,9 @@ void managebenhvathuoc::on_pushButton_themthuoc_clicked()
                "ma_thuoc, ma_dotuoi, ten_thuoc, vung_tiem, dung_tich, lieu_dung) "
                "VALUES ('"+maBn+"', '"+dotuoi+"', '"+ui->lineEdit_tenthuoc->text()+"', '"+ui->comboBox_vungtiem->currentText()+"', '"+ui->lineEdit_dungtich->text()+"', '"+ui->lineEdit_lieudung->text()+"')"))
         qDebug()<<query.lastError().text();
-    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc");
+    query.exec("insert into don_gia(ma_thuoc, gia, ngay, gia_ap_dung) values('"+maBn+"', '"+ui->lineEdit_gia->text()+"', current_date,'"+ui->lineEdit_gia->text()+"')");
+    dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
+
 
 }
 
@@ -163,6 +170,7 @@ void managebenhvathuoc::xoathuocthuocbenh()
 
 bool managebenhvathuoc::eventFilter(QObject *obj, QEvent *event)
 {
+
     if(event->type() == QEvent::FocusIn)
     {
         if(obj->objectName()=="lineEdit")
@@ -173,7 +181,10 @@ bool managebenhvathuoc::eventFilter(QObject *obj, QEvent *event)
         else
         {
             if(ui->lineEdit_tkthuoc->text()=="Nhập thuốc cần tìm...")
+            {
+                tkFocus = true;
                 ui->lineEdit_tkthuoc->setText("");
+            }
         }
     }
     else if(event->type() == QEvent::FocusOut)
@@ -188,7 +199,8 @@ bool managebenhvathuoc::eventFilter(QObject *obj, QEvent *event)
             if(ui->lineEdit_tkthuoc->text()=="")
             {
                ui->lineEdit_tkthuoc->setText("Nhập thuốc cần tìm...");
-               dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc");
+               dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
+
             }
         }
     }
@@ -197,12 +209,13 @@ bool managebenhvathuoc::eventFilter(QObject *obj, QEvent *event)
 
 void managebenhvathuoc::on_pushButton_timkiem_clicked()
 {
-    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc where ten_thuoc ilike '%"+ui->lineEdit_tkthuoc->text()+"%'");
+    dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
 }
 
 void managebenhvathuoc::on_lineEdit_tkthuoc_textChanged(const QString &arg1)
 {
-    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc where ten_thuoc ilike '%"+arg1+"%'");
+    if(tkFocus)
+        dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
 }
 void managebenhvathuoc::xoa_benh()
 {
@@ -215,5 +228,16 @@ void managebenhvathuoc::xoa_thuoc()
 {
     query.exec("DELETE FROM thuoc "
                "WHERE ma_thuoc = '"+dsthuocmodel.index(ui->tableView_dsthuoc->currentIndex().row(),0).data().toString()+"'");
-    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc");
+    dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
+
+}
+
+void managebenhvathuoc::on_pushButton_capnhatgia_clicked()
+{
+    if(!query.exec("insert into don_gia(ma_thuoc, ngay, gia) values('"+dsthuocmodel.index(ui->tableView_dsthuoc->currentIndex().row(),0).data().toString()+"', current_date , '"+ui->lineEdit_capnhatgia->text()+"')"))
+    qDebug()<<query.lastError().text();
+    else
+    query.exec("update don_gia set gia_ap_dung='"+ui->lineEdit_capnhatgia->text()+"' where ma_thuoc='"+dsthuocmodel.index(ui->tableView_dsthuoc->currentIndex().row(),0).data().toString()+"'");
+    dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
+
 }
