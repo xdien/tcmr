@@ -40,6 +40,8 @@ private slots:
     void xoa_benh();
     void xoa_thuoc();
 
+    void on_pushButton_capnhatgia_clicked();
+
 private:
     Ui::managebenhvathuoc *ui;
     QSqlQueryModel dsbenhmodel;
@@ -47,6 +49,7 @@ private:
     QSqlQueryModel benhdcchonmodel;
     QSqlQueryModel dotuoimodel;
 
+    bool tkFocus;
 
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
