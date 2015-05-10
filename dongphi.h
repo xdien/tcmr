@@ -26,7 +26,7 @@ private slots:
     void on_treeView_clicked(const QModelIndex &index);
 
     void on_pushButton_6_clicked();
-    void capnhatDScho();
+    void capnhatDScho(QString notiName);
 
     void on_lineEdit_textChanged(const QString &arg1);
 

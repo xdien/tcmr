@@ -3,13 +3,14 @@
 #include "dialog_setting.h"
 #include <QMessageBox>
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
 
     ui->setupUi(this);
-    //db = QSqlDatabase::database("qt_sql_default_connection");
+    db = QSqlDatabase::database("qt_sql_default_connection");
     //connect(db.driver()->,SIGNAL(disconnectNotify()),this,SLOT(trangthaiSQL()));
 //    ui->actionPhieu_DK->setEnabled(false);
 //    ui->actionKham_SB->setEnabled(false);
@@ -18,6 +19,20 @@ MainWindow::MainWindow(QWidget *parent) :
 //    ui->menuBao_cao->setEnabled(false);
 //    ui->actionTrC_phieu_hen->setEnabled(false);
     //ui->menuHe_thong->setEnabled(false);//Comment de bao tri
+    /*status bar*/
+    statusLabel = new QLabel(this);
+    tinhtrangsql = new QLabel(this);
+    //statusLabel->setText("adsdas");
+    //tinhtrangsql->setText("tinh tranf");
+    if(db.isOpen())
+    {
+        tinhtrangsql->setText("Thiết lập kêt nối thành công |");
+    }else{
+        tinhtrangsql->setText("Không thể kết nối tới máy chủ, xem lại tùy chỉnh kết nối");
+    }
+    ui->statusBar->addPermanentWidget(tinhtrangsql);
+    ui->statusBar->addPermanentWidget(statusLabel);
+
     /*Khoi dong cac form*/
     moi = new login();
     khamsb = new khamsobo();
@@ -26,7 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     qlbenhthuoc = new managebenhvathuoc();
     qlGia = new ManageGia();
     modangkyphieutiem = new Dangkyphieutiem();
-    connect(moi,SIGNAL(nvdangnhap(QString)),this,SLOT(capnhatPhanQuyen(QString)));
+    connect(moi,SIGNAL(nvdangnhap(QString,QString)),this,SLOT(capnhatPhanQuyen(QString,QString)));
+    //connect(moi,)
     //connect(dpmoi,SIGNAL(destroyed(QObject*)),this,SLOT(test(QObject*)));
     //subwindowList = new QList<subwindowList>();
 }
@@ -35,6 +51,13 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete moi;
+    delete khamsb;
+    delete dpmoi;
+    delete tiemn;
+    delete modangkyphieutiem;
+    delete qlbenhthuoc;
+    delete statusLabel;
+    delete tinhtrangsql;
 }
 
 void MainWindow::on_actionSQL_triggered()
@@ -78,7 +101,7 @@ void MainWindow::on_actionDong_Phi_triggered()
     {
         //dpmoi = new dongphi();
         ui->mdiArea->addSubWindow(dpmoi);
-        //connect(&dpmoi,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
+        connect(dpmoi,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
     }
     dpmoi->showMaximized();
 }
@@ -88,6 +111,7 @@ void MainWindow::on_actionTiem_triggered()
     if(!tiemn->isActiveWindow())
     {
         ui->mdiArea->addSubWindow(tiemn);
+        connect(tiemn,SIGNAL(setThongBao(QString)),ui->statusBar,SLOT(showMessage(QString)));
     }
     tiemn->showMaximized();
 }
@@ -150,7 +174,7 @@ void MainWindow::on_actionAbout_Qt_triggered()
     aa.aboutQt(parentWidget(), aas);
     aa.show();
 }
-void MainWindow::capnhatPhanQuyen(QString macv)//cap nhat phan quyen dua theo macv
+void MainWindow::capnhatPhanQuyen(QString macv, QString manv)//cap nhat phan quyen dua theo macv
 {
     query.exec("SELECT dang_ky_tt, kham_so_bo, dong_phi, tiem, bao_cao, he_thong "
                "FROM phan_quyen where ma_cv = '"+macv+"'");
@@ -163,7 +187,14 @@ void MainWindow::capnhatPhanQuyen(QString macv)//cap nhat phan quyen dua theo ma
         ui->actionTiem->setEnabled(query.value(3).toBool());
         ui->menuBao_cao->setEnabled(query.value(4).toBool());
         ui->menuHe_thong->setEnabled(query.value(5).toBool());
+        //ui->statusBar->showMessage("Danh nhap thanh cong");
+        query.exec("select ten_nv from nhan_vien where ma_nv = '"+manv+"'");
+        if(query.next())
+        {
+            statusLabel->setText(query.value(0).toString()+" đã đăng nhập");
+        }
     }else{
+        ui->statusBar->showMessage("Dang nhap that bai, xin kiem tra thong tin dang nhap");
         qDebug() << "Loi: " <<query.lastError().text();
     }
 }
@@ -185,4 +216,10 @@ void MainWindow::on_actionQuan_ly_gia_triggered()
         ui->mdiArea->addSubWindow(qlGia);
     }
     qlGia->showMaximized();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    about *a = new about();
+    a->show();
 }

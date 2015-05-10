@@ -62,6 +62,7 @@ private:
     manageIndex id;
     managerSTT *stt;
     void keyReleaseEvent(QKeyEvent *e);
+
 };
 
 #endif // DANGKYPHIEUTIEM_H

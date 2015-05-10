@@ -17,7 +17,8 @@ public:
     explicit login(QWidget *parent = 0);
     ~login();
 signals:
-    void nvdangnhap(QString macv);
+    void nvdangnhap(QString macv, QString manv);
+    void setThongBao(QString thongBao);
 
 private slots:
     void on_buttonBox_accepted();

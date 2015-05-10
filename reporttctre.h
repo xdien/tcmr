@@ -70,6 +70,7 @@ private:
     QString tongSoNguoiTiem(int somui, QString mathuoc, QString madc, int sothangtuoinhohon);
     QString tongsoTreTiemTheothuoc(QString mathuoc, QString madc, int sothangtuoinhohon);
     QString tongsodoiTuongVNNB(QString mathuoc, QString madc, int sothangtuoinhohon);
+    QDate tu, den;
 };
 
 #endif // REPORTTCTRE_H

@@ -207,6 +207,10 @@ bool ManageNV::eventFilter(QObject *obj, QEvent *event)
     {
         qDebug() << "CLICK";
     }
+    if(event->type() == QEvent::FocusIn)
+    {
+        qDebug() << "leave";
+    }
 //    if(event->type() == QEvent::MouseMove)
 //    {
 //        qDebug() << "MOUSE OVER";

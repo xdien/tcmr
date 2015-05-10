@@ -43,6 +43,7 @@ private slots:
     void on_danhsanhcho_clicked(const QModelIndex &index);
 
     void on_tableView_clicked(const QModelIndex &index);
+    void capnhatDScho(QString notiName);
 
 
 private:
@@ -71,7 +72,9 @@ private:
                                                     const QString &third);
     QSqlQueryModel danhsachbenh;
     QString strquery;
-
+    QSqlDatabase db;
+signals:
+    void setThongBao(QString thongbao);
 };
 
 #endif // TIEMNGUA_H

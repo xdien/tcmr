@@ -10,6 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = module
 TEMPLATE = app
+QTPLUGIN += qwindows
 #include(../QtRPT/QtRPT.pri)
 linux{
 INCLUDEPATH += /home/xdien/QtSDK/NCReport/include
@@ -21,6 +22,24 @@ export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
 }
 
+CONFIG (debug, debug|release) {
+ mac: TARGET = $$join(TARGET,,,_debug)
+ win32: TARGET = $$join(TARGET,,,d)
+}
+static { # everything below takes effect with CONFIG = static
+ CONFIG+= static
+ CONFIG += staticlib # this is needed if you create a static library, not a static executable
+ DEFINES+= STATIC
+ message("~~~ static build ~~~") # this is for information, that the static build is done
+ mac: TARGET = $$join(TARGET,,,_static) #this adds an _static in the end, so you can seperate static build
+#from non static build
+ win32:
+{
+TARGET = $$join(TARGET,,,s)
+INCLUDEPATH += -$(QTDIR)\plugins\platforms\
+}
+#non static build
+}
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -45,7 +64,8 @@ SOURCES += main.cpp\
     reportbenhtruyennhiem.cpp \
     qlbenhthuoc.cpp \
     managebenhvathuoc.cpp \
-    managegia.cpp
+    managegia.cpp \
+    about.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -68,7 +88,8 @@ HEADERS  += mainwindow.h \
     htmltemp.h \
     reportbenhtruyennhiem.h \
     managebenhvathuoc.h \
-    managegia.h
+    managegia.h \
+    about.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -86,4 +107,5 @@ FORMS    += mainwindow.ui \
     reporttctre.ui \
     reportbenhtruyennhiem.ui \
     managebenhvathuoc.ui \
-    managegia.ui
+    managegia.ui \
+    about.ui
