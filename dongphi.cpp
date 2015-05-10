@@ -46,14 +46,14 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
     tongsotien = 0;
     ma_bn = ui->treeView->model()->index(index.row(),0).data().toString();
     ma_phieu = ui->treeView->model()->index(index.row(),3).data().toString();
-    danhsachthuoc.setQuery("select thuoc.ten_thuoc,don_gia.gia from phieu_tiem "
+    danhsachthuoc.setQuery("select distinct thuoc.ten_thuoc,don_gia.gia_ap_dung from phieu_tiem "
                            "right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu "
                            "left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc "
                            "left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc "
                            "where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
     danhsachthuoc.setHeaderData(0,Qt::Horizontal,"Tên thuốc");
     danhsachthuoc.setHeaderData(1,Qt::Horizontal,"Giá");
-    query.exec("select sum(don_gia.gia) from phieu_tiem "
+    query.exec("select sum(distinct don_gia.gia_ap_dung) from phieu_tiem "
                "right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu "
                "left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc "
                "left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc "
@@ -61,7 +61,7 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
     if(query.next())
         tongsotien = query.value(0).toInt();
     //load du lieu cho dv
-    dsdichvu.setQuery("SELECT ten_phu_phi,gia "
+    dsdichvu.setQuery("SELECT ten_phu_phi,gia_ap_dung "
                       "FROM don_gia "
                        "right join (select ma_dm,max(ma_dongia) as ma_dg, max(ngay) from don_gia group by ma_dm) as aa "
                        "on aa.ma_dg = don_gia.ma_dongia right join gom on gom.ma_dm = aa.ma_dm "
@@ -69,7 +69,7 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
     dsdichvu.setHeaderData(0,Qt::Horizontal,"Tên phụ phí");
     dsdichvu.setHeaderData(1,Qt::Horizontal,"Giá");
 
-    query.exec("SELECT sum(gia) "
+    query.exec("SELECT sum(gia_ap_dung) "
                "FROM don_gia "
                "right join (select ma_dm,max(ma_dongia) as ma_dg, max(ngay) from don_gia group by ma_dm) as aa "
                "on aa.ma_dg = don_gia.ma_dongia right join gom on gom.ma_dm = aa.ma_dm  where gom.ma_phieu = '"+ma_phieu+"'");

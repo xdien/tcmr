@@ -34,8 +34,6 @@ private slots:
     void onCustomContextMenu_thuoc(const QPoint &point);
     void xoathuocthuocbenh();
 
-    void on_pushButton_timkiem_clicked();
-
     void on_lineEdit_tkthuoc_textChanged(const QString &arg1);
     void xoa_benh();
     void xoa_thuoc();
