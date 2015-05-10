@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     db = QSqlDatabase::database("qt_sql_default_connection");
-    connect(db.driver(),SIGNAL(disconnectNotify()),this,SLOT(trangthaiSQL()));
     ui->actionPhieu_DK->setEnabled(false);
     ui->actionKham_SB->setEnabled(false);
     ui->actionDong_Phi->setEnabled(false);

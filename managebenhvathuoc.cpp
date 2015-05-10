@@ -43,6 +43,10 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
     ui->lineEdit_tkthuoc->setText("Nhập thuốc cần tìm...");
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_tkthuoc->installEventFilter(this);
+    /*repx*/
+    QRegExp sdt_rx("\\d{1,8}");
+    QValidator *validator_sdt = new QRegExpValidator(sdt_rx, this);
+    ui->lineEdit_capnhatgia->setValidator(validator_sdt);
 
 
 }
