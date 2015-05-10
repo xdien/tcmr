@@ -16,6 +16,7 @@ khamsobo::khamsobo(QWidget *parent) :
     ui->danhsach_chonthuoc->setModel(&itemModel_thuocDChon);
     ui->treeView_DSPhiChon->setModel(&itemModel_dichvu);
     ui->treeView_dichVu->setModel(&danhsachDV);
+    ui->treeView_thuocgoiY->setModel(&danhsach_goiyThuoc);
     danhsachDV.setQuery("select ten_phu_phi,ma_dm from danh_muc");
     this->disableEdit(false);
     //lay ket noi database hien tai
@@ -25,17 +26,22 @@ khamsobo::khamsobo(QWidget *parent) :
         qDebug() << "chu y sqlDriver nay khong ho tro notifi";
     }else{
         db.driver()->subscribeToNotification("khamsobo");
-        connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(codkMoi()));
-   }
-
+        connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(codkMoi(QString)));
+    }
+    /*setheader*/
+    danhsachBenh.setHeaderData(0,Qt::Horizontal,"Tên bệnh");
+    danhsachBenh.setHeaderData(1,Qt::Horizontal,"Mã bệnh");
+    danhsachDV.setHeaderData(0,Qt::Horizontal, "Tên dịch vụ");
+    danhsachDV.setHeaderData(1,Qt::Horizontal,"Mã DV");
 }
 
 khamsobo::~khamsobo()
 {
+    delete stt;
     delete ui;
 }
 void khamsobo::loaddanhsach_chokham(){
-    danhsachCho.setQuery("select stt,ten,sn,ma_bn from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null order by stt limit 20");
+    danhsachCho.setQuery("select stt,ten,age(sn),ma_bn from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null order by stt limit 20");
 }
 
 void khamsobo::setcurentidx()
@@ -78,11 +84,9 @@ void khamsobo::on_pushButton_clicked()
                        ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham)\
                     VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', "+co_benh+",current_date)");
         }
-        //cap nhat ngay kham la hom nay
-        qDebug() << query.lastQuery();
         query.exec("UPDATE co_benh "
                    "SET ngay_kham=current_date "
-                 "WHERE ma_bn = '"+ma_bn+"'");
+                   "WHERE ma_bn = '"+ma_bn+"'");
         //lap phieu tiem
         ma_phieu = id.getNextIndexCode("phieu_tiem","PT");
         if(query.exec("INSERT INTO phieu_tiem( ma_phieu, ma_bn, ma_nv, ngay_lap_pt) VALUES "
@@ -107,6 +111,12 @@ void khamsobo::on_pushButton_clicked()
                                "ma_phieu, ma_dm) "
                                "VALUES ('"+ma_phieu+"', '"+itemModel_dichvu.index(i,1).data().toString()+"')");
                 }
+                //xoa cai lineedit
+                itemModel_benhDChon.clear();
+                itemModel_dichvu.clear();
+                itemModel_thuocDChon.clear();
+                danhsach_goiyThuoc.clear();
+                danhsachBenhdk.clear();
             }
             query.exec("NOTIFY dongphi");
             //cap nhat lai benh dang ky
@@ -174,8 +184,8 @@ void khamsobo::on_treeView_benh_doubleClicked(const QModelIndex &index)
 }
 //add item model
 QList<QStandardItem *> khamsobo::prepareRow(const QString &first,
-                                                const QString &second,
-                                                const QString &third)
+                                            const QString &second,
+                                            const QString &third)
 {
     QList<QStandardItem *> rowItems;
     rowItems << new QStandardItem(first);
@@ -198,13 +208,13 @@ void khamsobo::on_khongduak_clicked()
                 ma_benh = itemModel_benhDChon.index(i,1).data().toString();
                 query.exec("INSERT INTO co_benh( \
                            ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham) \
-VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'FALSE',current_date)");
+                        VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'FALSE',current_date)");
             }
         }else{
             ma_benh = "1";
             query.exec("INSERT INTO co_benh( \
                        ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham) \
-VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'FALSE',current_date)");
+                    VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'FALSE',current_date)");
 
         }
         this->loaddanhsach_chokham();
@@ -218,19 +228,26 @@ VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ 
 void khamsobo::on_treeView_benhdk_clicked(const QModelIndex &index)
 {
     ma_benh = this->danhsachBenhdk.index(index.row(),1).data().toString();
-    danhsach_goiyThuoc.setQuery("select thuoc.ten_thuoc,do_tuoi.do_tuoi,thuoc.ma_thuoc from benh right join phong_ngua on phong_ngua.ma_benh = benh.ma_benh \
-                                left join thuoc on thuoc.ma_thuoc = phong_ngua.ma_thuoc \
-            left join do_tuoi on do_tuoi.ma_dotuoi = thuoc.ma_dotuoi  where benh.ma_benh = '"+ma_benh+"'");
-            ui->treeView_thuocgoiY->setModel(&danhsach_goiyThuoc);
+    danhsach_goiyThuoc.setQuery("select thuoc.ten_thuoc,do_tuoi.do_tuoi,thuoc.ma_thuoc from benh right join phong_ngua on phong_ngua.ma_benh = benh.ma_benh "
+                                "left join thuoc on thuoc.ma_thuoc = phong_ngua.ma_thuoc "
+                                "left join do_tuoi on do_tuoi.ma_dotuoi = thuoc.ma_dotuoi  where benh.ma_benh = '"+ma_benh+"'");
+    danhsach_goiyThuoc.setHeaderData(0,Qt::Horizontal,"Tên thuốc");
+    danhsach_goiyThuoc.setHeaderData(0,Qt::Horizontal,"Độ tuổi");
+    danhsach_goiyThuoc.setHeaderData(0,Qt::Horizontal,"Mã thuốc");
 }
 
 void khamsobo::on_treeView_thuocgoiY_clicked(const QModelIndex &index)
 {
-    mot = this->danhsach_goiyThuoc.index(index.row(),0).data().toString(); //lay ten thuoc tu model
-    hai = this->danhsach_goiyThuoc.index(index.row(),2).data().toString();//lay ma thuoc tu moel
-    ba = "";
-    //itemModel_benhDChon.findItems()
-    itemModel_thuocDChon.appendRow(this->prepareRow(mot,hai,ba));
+    ma_dv =danhsach_goiyThuoc.index(index.row(),2).data().toString();
+    tmp = itemModel_thuocDChon.findItems(ma_dv,Qt::MatchExactly,1);
+    if(tmp.count() <= 0)
+    {
+        mot = this->danhsach_goiyThuoc.index(index.row(),0).data().toString(); //lay ten thuoc tu model
+        hai = this->danhsach_goiyThuoc.index(index.row(),2).data().toString();//lay ma thuoc tu moel
+        ba = "";
+        itemModel_thuocDChon.appendRow(this->prepareRow(mot,hai,ba));
+    }
+
 }
 void khamsobo::lapphieuHen(QString mabn, QString manv,QString maPHIEUTIEM, QString mabenh)
 {
@@ -238,7 +255,7 @@ void khamsobo::lapphieuHen(QString mabn, QString manv,QString maPHIEUTIEM, QStri
     query.exec("INSERT INTO phieu_hen( \
                ma_phieuhen, ma_bn, ma_nv, ma_phieu, ma_benh, mui_thu, ngay_tai_hen, \
                ngay_lap, khong_the_tiem) \
-       VALUES ('"+ma_phieuhen+"', '"+mabn+"', '"+manv+"', '"+maPHIEUTIEM+"', '"+mabenh +"', ?, ?, current_date, ?)");
+            VALUES ('"+ma_phieuhen+"', '"+mabn+"', '"+manv+"', '"+maPHIEUTIEM+"', '"+mabenh +"', ?, ?, current_date, ?)");
 }
 QString khamsobo::tinh_ngayTaiHen(QString mathuoc)
 {
@@ -255,14 +272,17 @@ void khamsobo::loadchitietBN_M(QModelIndex indexx)
 {
     stt->setIDX(indexx.row());
     ui->ten->setText(this->danhsachCho.index(indexx.row(),1).data().toString());
-    ngay_sinh = this->danhsachCho.index(indexx.row(),2).data().toDate();
-    do_tuoi = ngay_sinh.daysTo(QDate::currentDate());
-    do_tuoi = do_tuoi / 365;
-    ui->tuoi->setText(QString::number(do_tuoi));
+//    ngay_sinh = this->danhsachCho.index(indexx.row(),2).data().toDate();
+//    do_tuoi = ngay_sinh.daysTo(QDate::currentDate());
+//    do_tuoi = do_tuoi / 365;
+//    ui->tuoi->setText(QString::number(do_tuoi));
+    ui->tuoi->setText(this->danhsachCho.index(indexx.row(),2).data().toString());
     //ma_phieu = this->danhsachCho.index(indexx.row(),2).data().toString();
-    danhsachBenhdk.setQuery("select ten_benh,benh.ma_benh from muon_tiem left join benh on benh.ma_benh = muon_tiem.ma_benh \
-                            where muon_tiem.ma_bn = '"+ma_bn+"'");
-            this->disableEdit(true);
+    danhsachBenhdk.setQuery("select ten_benh,benh.ma_benh from muon_tiem left join benh on benh.ma_benh = muon_tiem.ma_benh "
+                            "where muon_tiem.ma_bn = '"+ma_bn+"'");
+    this->disableEdit(true);
+    danhsachBenhdk.setHeaderData(0,Qt::Horizontal,"Tên bệnh");
+    danhsachBenhdk.setHeaderData(1,Qt::Horizontal,"Mã bệnh");
 }
 
 void khamsobo::loadchitietBN_C(QModelIndex indexx)
@@ -275,10 +295,12 @@ void khamsobo::loadchitietBN_C(QModelIndex indexx)
     do_tuoi = do_tuoi / 365;
     ui->tuoi->setText(QString::number(do_tuoi));
     //ma_phieu = this->danhsachCho.index(indexx.row(),2).data().toString();
-    danhsachBenhdk.setQuery("select ten_benh,benh.ma_benh from muon_tiem left join benh on benh.ma_benh = muon_tiem.ma_benh \
-                            where muon_tiem.ma_bn = '"+ma_bn+"'");
-            this->disableEdit(true);
- //           itemModel_thuocDChon.appendRow(this->prepareRow());
+    danhsachBenhdk.setQuery("select ten_benh,benh.ma_benh from muon_tiem left join benh on benh.ma_benh = muon_tiem.ma_benh "
+                            "where muon_tiem.ma_bn = '"+ma_bn+"'");
+    this->disableEdit(true);
+    danhsachBenhdk.setHeaderData(0,Qt::Horizontal,"Tên bệnh");
+    danhsachBenhdk.setHeaderData(1,Qt::Horizontal,"Mã bệnh");
+    //           itemModel_thuocDChon.appendRow(this->prepareRow());
     //lay danh sach thuoc ngay tai hen
     query.exec("select thuoc.ten_thuoc,thuoc.ma_thuoc from tiem left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc where ngay_dk_tai_hen = current_date and ma_bn = '"+ma_bn+"'");
     while(query.next()){
@@ -288,6 +310,7 @@ void khamsobo::loadchitietBN_C(QModelIndex indexx)
         //itemModel_benhDChon.findItems()
         itemModel_thuocDChon.appendRow(this->prepareRow(mot,hai,ba));
     }
+    //itemModel_thuocDChon.
 }
 
 void khamsobo::on_pushButton_2_clicked()
@@ -296,34 +319,47 @@ void khamsobo::on_pushButton_2_clicked()
     itemModel_thuocDChon.removeRow(ui->danhsach_chonthuoc->currentIndex().row());
 }
 
-void khamsobo::codkMoi()
+void khamsobo::codkMoi(QString notiName)
 {
-    //qDebug() << "co song";
-    query_notify.exec("select count(ma_bn) from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null");
-    if(query_notify.next())
-    {
-        //neu co nhieu hon 1 benh nhan thi k lam gi
-        qDebug() << query_notify.value(0).toInt();
-        if(query_notify.value(0).toInt() == 1 )
+    if(notiName == "khamsobo"){
+        query_notify.exec("select count(ma_bn) from tt_benh_nhan where ngay_lap = current_date and lap_phieu is null");
+        if(query_notify.next())
         {
-            //set idex dau tien va click
-            row = 0;
-            idx  = ui->listView_dsCho->model()->index(row,col);
-            ui->listView_dsCho->selectionModel()->select(idx, QItemSelectionModel::Select);
-            ui->listView_dsCho->setCurrentIndex(idx);
-            ui->listView_dsCho->setFocus();
-            //ui->listView_dsCho->clicked(idx);
+            //neu co nhieu hon 1 benh nhan thi k lam gi
+            qDebug() << query_notify.value(0).toInt();
+            if(query_notify.value(0).toInt() == 1 )
+            {
+                //set idex dau tien va click
+                row = 0;
+                idx  = ui->listView_dsCho->model()->index(row,col);
+                ui->listView_dsCho->selectionModel()->select(idx, QItemSelectionModel::Select);
+                ui->listView_dsCho->setCurrentIndex(idx);
+                ui->listView_dsCho->setFocus();
+                //ui->listView_dsCho->clicked(idx);
+            }
+            //gioi han 20
+            if(query_notify.value(0).toInt() <= 20 )
+            {
+                this->loaddanhsach_chokham();
+            }
+            emit setThongBao(QString::fromUtf8("Số lượng người chờ khám là :")+query_notify.value(0).toString());
         }
-        //gioi han 20
-        if(query_notify.value(0).toInt() <= 20 )
-        {
-            this->loaddanhsach_chokham();
-        }
-        emit setThongBao(QString::fromUtf8("Số lượng người chờ là :")+query_notify.value(0).toString());
     }
 }
 
 void khamsobo::on_treeView_dichVu_clicked(const QModelIndex &index)
 {
-    itemModel_dichvu.appendRow(this->prepareRow(danhsachDV.index(index.row(),0).data().toString(),danhsachDV.index(index.row(),1).data().toString(),""));
+    ma_dv =danhsachDV.index(index.row(),1).data().toString();
+    tmp = itemModel_dichvu.findItems(ma_dv,Qt::MatchExactly,1);
+    if(tmp.count() <= 0)
+    {
+        itemModel_dichvu.appendRow(this->prepareRow(danhsachDV.index(index.row(),0).data().toString(),danhsachDV.index(index.row(),1).data().toString(),""));
+        //itemtDSbenh.appendRow(this->prepareRow(danhsachgoiYBenh.index(index.row(),0).data().toString(),ma_benh,""));
+    }
+
+}
+
+void khamsobo::on_treeView_benh_clicked(const QModelIndex &index)
+{
+
 }

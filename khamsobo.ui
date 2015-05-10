@@ -143,11 +143,25 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>220</width>
-               <height>500</height>
+               <width>1000</width>
+               <height>1000</height>
               </size>
              </property>
             </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Dịch vụ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTreeView" name="treeView_dichVu"/>
+             </item>
+            </layout>
            </item>
           </layout>
          </item>
@@ -169,6 +183,20 @@
               </size>
              </property>
             </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Dịch vụ được chọn</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTreeView" name="treeView_DSPhiChon"/>
+             </item>
+            </layout>
            </item>
           </layout>
          </item>
@@ -257,43 +285,6 @@
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_4">
-        <property name="title">
-         <string>Phụ phí</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout_7">
-           <item>
-            <widget class="QLabel" name="label_14">
-             <property name="text">
-              <string>Dịch vụ</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTreeView" name="treeView_dichVu"/>
-           </item>
-          </layout>
-         </item>
-         <item row="0" column="1">
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>Dịch vụ được chọn</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTreeView" name="treeView_DSPhiChon"/>
-           </item>
-          </layout>
          </item>
         </layout>
        </widget>
@@ -427,5 +418,38 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>tuoi</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1002</x>
+     <y>623</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>47</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ten</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1052</x>
+     <y>627</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>481</x>
+     <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

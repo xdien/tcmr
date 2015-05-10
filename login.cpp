@@ -23,11 +23,15 @@ void login::on_buttonBox_accepted()
     query.exec("select MA_NV,TEN_DN,ma_cv from NHAN_VIEN where MAT_KHAU = '"+ui->password->text()+"' and  TEN_DN = '"+ui->user->text()+"'");
     if(query.next()){
         ma_nv = query.value(0).toString();
-        emit nvdangnhap(query.value(2).toString());
-        if(query.exec("insert into nv_dangnhap values('"+ma_nv+"')"))
+        emit nvdangnhap(query.value(2).toString(),ma_nv);
+
+        if(query.exec("insert into nv_dangnhap values('"+ma_nv+"')")){
             qDebug() << "Login succeed";
+            emit setThongBao("Dang nhap thanh cong");
+        }
         else{
-            qDebug() << query.lastError().text() ;
+            qDebug() << query.lastError().text();
+            emit setThongBao("Dang nhap that bai xin hay kiem tra lai");
         }
     }else{
         qDebug() << "Login failed";

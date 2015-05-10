@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QSqlQuery>
 #include <QMdiSubWindow>
+#include <QLabel>
 #include "login.h"
 #include "dongphi.h"
 #include <QtSql>
@@ -22,6 +23,7 @@
 #include <QObjectList>
 #include "managebenhvathuoc.h"
 #include "managegia.h"
+#include "about.h"
 
 
 namespace Ui {
@@ -66,11 +68,13 @@ private slots:
     void on_actionBenh_truyen_nhiem_triggered();
 
     void on_actionAbout_Qt_triggered();
-    void capnhatPhanQuyen(QString macv);
+    void capnhatPhanQuyen(QString macv, QString manv);
 
     void on_actionQL_B_nh_va_Thu_c_triggered();
 
     void on_actionQuan_ly_gia_triggered();
+
+    void on_actionAbout_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -85,6 +89,7 @@ private:
     QObjectList objl;
     managebenhvathuoc *qlbenhthuoc;
     ManageGia *qlGia;
+    QLabel *statusLabel, *tinhtrangsql;
 };
 
 #endif // MAINWINDOW_H

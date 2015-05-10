@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Lập phiếu đăng kí tiêmiêm</string>
+   <string>Lập phiếu đăng kí tiêm</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -168,14 +168,14 @@
              </font>
             </property>
             <property name="text">
-             <string>Xa/Phuong</string>
+             <string>Xã/Phường</string>
             </property>
            </widget>
           </item>
           <item row="0" column="2">
            <widget class="QRadioButton" name="radioButton_2">
             <property name="text">
-             <string>&amp;NU</string>
+             <string>NỮ</string>
             </property>
            </widget>
           </item>
@@ -187,7 +187,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Tinh/TP</string>
+             <string>Tỉnh/TP</string>
             </property>
            </widget>
           </item>
@@ -225,7 +225,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Quan/Huyen</string>
+             <string>Quân/Huyện</string>
             </property>
            </widget>
           </item>
@@ -316,7 +316,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Danh sach benh dk</string>
+             <string>Danh sách đăng ký tiêm</string>
             </property>
            </widget>
           </item>
