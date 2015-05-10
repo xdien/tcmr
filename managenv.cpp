@@ -44,6 +44,7 @@ ManageNV::ManageNV(QWidget *parent) :
     ui->checkBox_3h->setEnabled(false);
     ui->checkBox_4h->setEnabled(false);
     ui->checkBox_5h->setEnabled(false);
+    ui->checkBox_6h->setEnabled(false);
     /*bat buoc dung kieu so cho line_edit cmnd va sdt*/
     QRegExp rx("\\d{1,9}");
     QValidator *validator = new QRegExpValidator(rx, this);
@@ -100,13 +101,14 @@ QList<QStandardItem *> ManageNV::prepareRow(const QString &first,
     return rowItems;
 }
 
-void ManageNV::LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBox *c3, QCheckBox *c4, QCheckBox *c5)
+void ManageNV::LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBox *c3, QCheckBox *c4, QCheckBox *c5, QCheckBox *c6)
 {
     c1->setChecked(false);
     c2->setChecked(false);
     c3->setChecked(false);
     c4->setChecked(false);
     c5->setChecked(false);
+    c6->setChecked(false);
     query.exec("select * from phan_quyen where ma_cv = '" +macv+ "'");
     if(query.next())
     {
@@ -115,6 +117,7 @@ void ManageNV::LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBo
         c3->setChecked(query.value(3).toBool());
         c4->setChecked(query.value(4).toBool());
         c5->setChecked(query.value(5).toBool());
+        c6->setChecked(query.value(6).toBool());
     }
 }
 
@@ -127,7 +130,7 @@ void ManageNV::LoadChucvu()
 
 void ManageNV::on_comboBox_chucVu_currentIndexChanged(int index)
 {
-    this->LoadCheckbox(chucVuModel.index(index,1).data().toString(),ui->checkBox_1h,ui->checkBox_2h,ui->checkBox_3h,ui->checkBox_4h,ui->checkBox_5h);
+    this->LoadCheckbox(chucVuModel.index(index,1).data().toString(),ui->checkBox_1h,ui->checkBox_2h,ui->checkBox_3h,ui->checkBox_4h,ui->checkBox_5h,ui->checkBox_6h);
 }
 
 void ManageNV::LoadtableQuyen()

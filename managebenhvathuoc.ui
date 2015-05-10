@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>857</width>
-    <height>378</height>
+    <height>445</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Quản lý Bệnh và Thuốc</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -62,18 +62,15 @@
      </layout>
     </item>
     <item>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
-       <widget class="QGroupBox" name="groupBox">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QGroupBox" name="groupBox_2">
         <property name="title">
-         <string>Thêm độ tuổi</string>
+         <string>Thêm thuốc</string>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBox"/>
-           </item>
+          <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
             <widget class="QLabel" name="label_8">
              <property name="text">
@@ -84,27 +81,6 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Liều dùng</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1" colspan="3">
-            <widget class="QPushButton" name="pushButton_themdotuoi">
-             <property name="text">
-              <string>Thêm</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="4" colspan="2">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string>cc</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="2">
             <widget class="QLabel" name="label">
              <property name="text">
@@ -112,13 +88,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1" colspan="3">
-            <widget class="QLineEdit" name="lineEdit_lieudung"/>
-           </item>
-           <item row="0" column="3" colspan="2">
-            <widget class="QSpinBox" name="spinBox_2"/>
-           </item>
-           <item row="0" column="5">
+           <item row="0" column="4">
             <widget class="QComboBox" name="comboBox_thangnam">
              <item>
               <property name="text">
@@ -132,43 +102,60 @@
              </item>
             </widget>
            </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="2">
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="title">
-         <string>Thêm thuốc</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="3" column="4">
-            <widget class="QPushButton" name="pushButton_themthuoc">
+           <item row="0" column="5">
+            <widget class="QPushButton" name="pushButton_themdotuoi">
              <property name="text">
-              <string>Thêm</string>
+              <string>+</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_6">
+           <item row="0" column="3">
+            <widget class="QSpinBox" name="spinBox_2"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="spinBox"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_7">
              <property name="text">
-              <string>Vùng tiêm</string>
+              <string>Liều dùng</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="lineEdit_tenthuoc"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Dung tích</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="lineEdit_dungtich"/>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>ml</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_2"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Tên thuốc</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -185,16 +172,13 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="lineEdit_tenthuoc"/>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_2"/>
-           </item>
-           <item row="3" column="3">
-            <widget class="QLabel" name="label_10">
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_6">
              <property name="text">
-              <string>ml</string>
+              <string>Vùng tiêm</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -212,40 +196,40 @@
              </item>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_3">
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="lineEdit_lieudung"/>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_9">
              <property name="text">
-              <string>Tên thuốc</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <string>cc</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="lineEdit_dungtich"/>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_5">
+           <item row="4" column="3">
+            <widget class="QPushButton" name="pushButton_themthuoc">
              <property name="text">
-              <string>Dung tích</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <string>Thêm</string>
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QFormLayout" name="formLayout">
-           <property name="fieldGrowthPolicy">
-            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-           </property>
           </layout>
          </item>
         </layout>
        </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>

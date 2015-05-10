@@ -49,7 +49,7 @@ private:
     QList<QStandardItem *> prepareRow(const QString &first,
                                                     const QString &second,
                                                     const QString &third);
-   void LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBox *c3, QCheckBox *c4, QCheckBox *c5);
+   void LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBox *c3, QCheckBox *c4, QCheckBox *c5, QCheckBox *c6);
    QSqlQueryModel chucVuModel;
    void LoadtableQuyen();
    QSqlRelationalDelegate *dele;
