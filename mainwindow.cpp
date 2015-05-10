@@ -173,7 +173,7 @@ void MainWindow::on_actionQL_B_nh_va_Thu_c_triggered()
 {
     if(!qlbenhthuoc->isActiveWindow())
     {
-        ui->mdiArea->addSubWindow(qlbenhthuoc);
+        //ui->mdiArea->addSubWindow(qlbenhthuoc);
     }
     qlbenhthuoc->showMaximized();
 }
