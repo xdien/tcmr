@@ -30,11 +30,15 @@ private slots:
 
     void on_tableView_dsthuoc_doubleClicked(const QModelIndex &index);
     void onCustomContextMenu(const QPoint &point);
+    void onCustomContextMenu_benh(const QPoint &point);
+    void onCustomContextMenu_thuoc(const QPoint &point);
     void xoathuocthuocbenh();
 
     void on_pushButton_timkiem_clicked();
 
     void on_lineEdit_tkthuoc_textChanged(const QString &arg1);
+    void xoa_benh();
+    void xoa_thuoc();
 
 private:
     Ui::managebenhvathuoc *ui;

@@ -29,7 +29,12 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
                          "FROM do_tuoi");
     contextMenu = new QMenu();
     ui->treeView_benhdcchon->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->tableView_dsbenh->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->tableView_dsthuoc->setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(ui->treeView_benhdcchon,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(onCustomContextMenu(QPoint)));
+    connect(ui->tableView_dsbenh,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(onCustomContextMenu_benh(QPoint)));
+    connect(ui->tableView_dsthuoc,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(onCustomContextMenu_thuoc(QPoint)));
 
     ui->lineEdit->setText("Nhập bệnh mới...");
     ui->lineEdit_tkthuoc->setText("Nhập thuốc cần tìm...");
@@ -120,10 +125,32 @@ void managebenhvathuoc::onCustomContextMenu(const QPoint &point){
     if (index.isValid()) {
         mabenh = benhdcchonmodel.index(index.row(),0).data().toString();
         mathuoc = benhdcchonmodel.index(index.row(),1).data().toString();
-        QAction action1("Remove Data Point", this);
+        QAction action1("Xóa", this);
         connect(&action1, SIGNAL(triggered()), this, SLOT(xoathuocthuocbenh()));
         contextMenu->addAction(&action1);
         contextMenu->exec(ui->treeView_benhdcchon->mapToGlobal(point));
+    }
+}
+void managebenhvathuoc::onCustomContextMenu_benh(const QPoint &point){
+    index = ui->tableView_dsbenh->indexAt(point);
+    if (index.isValid()) {
+        mabenh = benhdcchonmodel.index(index.row(),0).data().toString();
+        mathuoc = benhdcchonmodel.index(index.row(),1).data().toString();
+        QAction action1("Xóa", this);
+        connect(&action1, SIGNAL(triggered()), this, SLOT(xoa_benh()));
+        contextMenu->addAction(&action1);
+        contextMenu->exec(ui->tableView_dsbenh->mapToGlobal(point));
+    }
+}
+void managebenhvathuoc::onCustomContextMenu_thuoc(const QPoint &point){
+    index = ui->tableView_dsthuoc->indexAt(point);
+    if (index.isValid()) {
+        mabenh = benhdcchonmodel.index(index.row(),0).data().toString();
+        mathuoc = benhdcchonmodel.index(index.row(),1).data().toString();
+        QAction action1("Xóa", this);
+        connect(&action1, SIGNAL(triggered()), this, SLOT(xoa_thuoc()));
+        contextMenu->addAction(&action1);
+        contextMenu->exec(ui->tableView_dsthuoc->mapToGlobal(point));
     }
 }
 void managebenhvathuoc::xoathuocthuocbenh()
@@ -176,4 +203,17 @@ void managebenhvathuoc::on_pushButton_timkiem_clicked()
 void managebenhvathuoc::on_lineEdit_tkthuoc_textChanged(const QString &arg1)
 {
     dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc where ten_thuoc ilike '%"+arg1+"%'");
+}
+void managebenhvathuoc::xoa_benh()
+{
+    query.exec("DELETE FROM benh "
+               "WHERE ma_benh = '"+dsbenhmodel.index(ui->tableView_dsbenh->currentIndex().row(),0).data().toString()+"'");
+    dsbenhmodel.setQuery("SELECT ma_benh, ten_benh, la_vx "
+                         "FROM benh");
+}
+void managebenhvathuoc::xoa_thuoc()
+{
+    query.exec("DELETE FROM thuoc "
+               "WHERE ma_thuoc = '"+dsthuocmodel.index(ui->tableView_dsthuoc->currentIndex().row(),0).data().toString()+"'");
+    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc");
 }
