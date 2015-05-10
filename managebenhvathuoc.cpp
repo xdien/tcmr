@@ -6,7 +6,6 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
     ui(new Ui::managebenhvathuoc)
 {
     ui->setupUi(this);
-    ui->lineEdit_lieudung->setVisible(true);
     dsbenhmodel.setQuery("SELECT ma_benh, ten_benh, la_vx "
                          "FROM benh");
     ui->tableView_dsbenh->hideColumn(0);
@@ -82,22 +81,27 @@ void managebenhvathuoc::on_pushButton_themdotuoi_clicked()
 {
     dotuoi = ui->spinBox->text() + " - " + ui->spinBox_2->text() + " " + ui->comboBox_thangnam->currentText();
     maBn = id.getNextIndexCode("do_tuoi","DT");
+    query.exec("select do_tuoi from do_tuoi where do_tuoi = '"+dotuoi+"'");
+    if(!query.next())
+    {
     if(query.exec("INSERT INTO do_tuoi("
                "ma_dotuoi, do_tuoi, dvt, tu, den) "
                "VALUES ('"+maBn+"', '"+dotuoi+"', '"+ui->comboBox_thangnam->currentText()+"', '"+ui->spinBox->text()+"', '"+ui->spinBox_2->text()+"')"))
         qDebug()<<query.lastError().text();
     dotuoimodel.setQuery("SELECT do_tuoi, ma_dotuoi "
                          "FROM do_tuoi");
+    }
 }
 
 void managebenhvathuoc::on_pushButton_themthuoc_clicked()
 {
     maBn = id.getNextIndexCode("thuoc","TH");
     dotuoi = dotuoimodel.index(ui->comboBox_2->currentIndex(),1).data().toString();
-    query.exec("INSERT INTO thuoc("
+    if(!query.exec("INSERT INTO thuoc("
                "ma_thuoc, ma_dotuoi, ten_thuoc, vung_tiem, dung_tich, lieu_dung) "
-               "VALUES ('"+maBn+"', '"+dotuoi+"', '"+ui->lineEdit_tenthuoc->text()+"', '"+ui->comboBox_vungtiem->currentText()+"', '"+ui->lineEdit_dungtich->text()+"', '"+ui->lineEdit_lieudung->text()+"')");
-    dsthuocmodel.setQuery("select ten_thuoc, vung_tiem, dung_tich from thuoc");
+               "VALUES ('"+maBn+"', '"+dotuoi+"', '"+ui->lineEdit_tenthuoc->text()+"', '"+ui->comboBox_vungtiem->currentText()+"', '"+ui->lineEdit_dungtich->text()+"', '"+ui->lineEdit_lieudung->text()+"')"))
+        qDebug()<<query.lastError().text();
+    dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc");
 
 }
 
@@ -155,7 +159,10 @@ bool managebenhvathuoc::eventFilter(QObject *obj, QEvent *event)
         else
         {
             if(ui->lineEdit_tkthuoc->text()=="")
+            {
                ui->lineEdit_tkthuoc->setText("Nhập thuốc cần tìm...");
+               dsthuocmodel.setQuery("select ma_thuoc, ten_thuoc, vung_tiem, dung_tich from thuoc");
+            }
         }
     }
     return false;
