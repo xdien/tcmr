@@ -263,5 +263,22 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lineEdit_capnhatgia</sender>
+   <signal>returnPressed()</signal>
+   <receiver>pushButton_capnhatgia</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>685</x>
+     <y>322</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>777</x>
+     <y>321</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

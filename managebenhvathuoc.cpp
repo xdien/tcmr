@@ -237,7 +237,9 @@ void managebenhvathuoc::on_pushButton_capnhatgia_clicked()
     if(!query.exec("insert into don_gia(ma_thuoc, ngay, gia) values('"+dsthuocmodel.index(ui->tableView_dsthuoc->currentIndex().row(),0).data().toString()+"', current_date , '"+ui->lineEdit_capnhatgia->text()+"')"))
     qDebug()<<query.lastError().text();
     else
-    query.exec("update don_gia set gia_ap_dung='"+ui->lineEdit_capnhatgia->text()+"' where ma_thuoc='"+dsthuocmodel.index(ui->tableView_dsthuoc->currentIndex().row(),0).data().toString()+"'");
-    dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
-
+    {
+        query.exec("update don_gia set gia_ap_dung='"+ui->lineEdit_capnhatgia->text()+"' where ma_thuoc='"+dsthuocmodel.index(ui->tableView_dsthuoc->currentIndex().row(),0).data().toString()+"'");
+        dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
+        ui->lineEdit_capnhatgia->clear();
+    }
 }
