@@ -119,6 +119,13 @@
          </item>
          <item>
           <layout class="QGridLayout" name="gridLayout">
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>ml</string>
+             </property>
+            </widget>
+           </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_7">
              <property name="text">
@@ -162,6 +169,15 @@
              </property>
             </widget>
            </item>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="comboBox_vungtiem">
+             <item>
+              <property name="text">
+               <string>Bắp</string>
+              </property>
+             </item>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_4">
              <property name="text">
@@ -182,34 +198,32 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QComboBox" name="comboBox_vungtiem">
-             <item>
-              <property name="text">
-               <string>Bắp</string>
-              </property>
-             </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="lineEdit_lieudung"/>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="lineEdit_gia"/>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Giá</string>
+             </property>
             </widget>
            </item>
-           <item row="4" column="3">
+           <item row="5" column="2">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>nghìn đồng</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="3">
             <widget class="QPushButton" name="pushButton_themthuoc">
              <property name="text">
               <string>Thêm</string>
              </property>
             </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit_lieudung"/>
-           </item>
-           <item row="4" column="2">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string>ml</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QLineEdit" name="lineEdit_gia"/>
            </item>
           </layout>
          </item>
@@ -262,6 +276,26 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>lineEdit_tkthuoc</tabstop>
+  <tabstop>tableView_dsbenh</tabstop>
+  <tabstop>treeView_benhdcchon</tabstop>
+  <tabstop>tableView_dsthuoc</tabstop>
+  <tabstop>spinBox</tabstop>
+  <tabstop>spinBox_2</tabstop>
+  <tabstop>comboBox_thangnam</tabstop>
+  <tabstop>pushButton_themdotuoi</tabstop>
+  <tabstop>comboBox_2</tabstop>
+  <tabstop>lineEdit_tenthuoc</tabstop>
+  <tabstop>comboBox_vungtiem</tabstop>
+  <tabstop>lineEdit_dungtich</tabstop>
+  <tabstop>lineEdit_lieudung</tabstop>
+  <tabstop>lineEdit_gia</tabstop>
+  <tabstop>lineEdit_capnhatgia</tabstop>
+  <tabstop>pushButton_capnhatgia</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
