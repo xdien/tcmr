@@ -203,7 +203,7 @@ void ManageNV::xoaMotNhanvien()
     testmodel->removeRow(ui->tableView->currentIndex().row());
     testmodel->submitAll();
 }
-
+/*su kien chuopt*/
 bool ManageNV::eventFilter(QObject *obj, QEvent *event)
 {
     if(event->type() == QEvent::MouseButtonPress)

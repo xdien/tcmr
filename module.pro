@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     qlbenhthuoc.cpp \
     managebenhvathuoc.cpp \
     managegia.cpp \
-    about.cpp
+    about.cpp \
+    managergiathuoc.cpp
 
 HEADERS  += mainwindow.h \
     dialog_setting.h \
@@ -89,7 +90,8 @@ HEADERS  += mainwindow.h \
     reportbenhtruyennhiem.h \
     managebenhvathuoc.h \
     managegia.h \
-    about.h
+    about.h \
+    managergiathuoc.h
 
 FORMS    += mainwindow.ui \
     dialog_setting.ui \
@@ -108,4 +110,5 @@ FORMS    += mainwindow.ui \
     reportbenhtruyennhiem.ui \
     managebenhvathuoc.ui \
     managegia.ui \
-    about.ui
+    about.ui \
+    managergiathuoc.ui

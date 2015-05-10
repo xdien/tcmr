@@ -71,7 +71,7 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
 
     query.exec("SELECT sum(gia) "
                "FROM don_gia "
-                "right join (select ma_dm,max(ma_dongia) as ma_dg, max(ngay) from don_gia group by ma_dm) as aa "
+               "right join (select ma_dm,max(ma_dongia) as ma_dg, max(ngay) from don_gia group by ma_dm) as aa "
                "on aa.ma_dg = don_gia.ma_dongia right join gom on gom.ma_dm = aa.ma_dm  where gom.ma_phieu = '"+ma_phieu+"'");
     if(query.next())
             tongsotien += query.value(0).toInt();
