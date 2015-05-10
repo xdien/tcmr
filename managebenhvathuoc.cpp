@@ -211,15 +211,10 @@ bool managebenhvathuoc::eventFilter(QObject *obj, QEvent *event)
     return false;
 }
 
-void managebenhvathuoc::on_pushButton_timkiem_clicked()
-{
-    dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
-}
-
 void managebenhvathuoc::on_lineEdit_tkthuoc_textChanged(const QString &arg1)
 {
     if(tkFocus)
-        dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
+        dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc where ilike '%"+ui->lineEdit_tkthuoc->text()+"%'");
 }
 void managebenhvathuoc::xoa_benh()
 {

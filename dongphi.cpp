@@ -53,7 +53,7 @@ void dongphi::on_treeView_clicked(const QModelIndex &index)
                            "where phieu_tiem.ma_phieu = '"+ma_phieu+"'");
     danhsachthuoc.setHeaderData(0,Qt::Horizontal,"Tên thuốc");
     danhsachthuoc.setHeaderData(1,Qt::Horizontal,"Giá");
-    query.exec("select sum(don_gia.gia) from phieu_tiem "
+    query.exec("select sum(distinct don_gia.gia_ap_dung) from phieu_tiem "
                "right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu "
                "left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc "
                "left join don_gia on thuoc.ma_thuoc = don_gia.ma_thuoc "
