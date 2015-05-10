@@ -186,12 +186,7 @@
             <widget class="QComboBox" name="comboBox_vungtiem">
              <item>
               <property name="text">
-               <string>Tay</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Mông</string>
+               <string>Bắp</string>
               </property>
              </item>
             </widget>
