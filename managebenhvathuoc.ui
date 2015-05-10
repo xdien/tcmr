@@ -280,5 +280,21 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tableView_dsthuoc</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>lineEdit_capnhatgia</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>644</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>629</x>
+     <y>332</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>
