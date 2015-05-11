@@ -29,7 +29,7 @@ ManageGia::ManageGia(QWidget *parent) :
 ManageGia::~ManageGia()
 {
     delete ui;
-
+    delete dele;
 }
 
 void ManageGia::on_lineEdit_gia_returnPressed()

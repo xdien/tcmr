@@ -38,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
     dpmoi = new dongphi();
     tiemn = new tiemngua();
     qlbenhthuoc = new managebenhvathuoc();
-    qlGia = new ManageGia();
     modangkyphieutiem = new Dangkyphieutiem();
     connect(moi,SIGNAL(nvdangnhap(QString,QString)),this,SLOT(capnhatPhanQuyen(QString,QString)));
     //connect(moi,)
@@ -210,11 +209,13 @@ void MainWindow::on_actionQL_B_nh_va_Thu_c_triggered()
 
 void MainWindow::on_actionQuan_ly_gia_triggered()
 {
-    if(!qlGia->isActiveWindow())
-    {
-        ui->mdiArea->addSubWindow(qlGia);
-    }
-    qlGia->showMaximized();
+//    if(!qlGia->isActiveWindow())
+//    {
+//        ui->mdiArea->addSubWindow(qlGia);
+//    }
+//    qlGia->showMaximized();
+    ManageGia *qlGia = new ManageGia();
+    qlGia->show();
 }
 
 void MainWindow::on_actionAbout_triggered()

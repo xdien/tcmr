@@ -88,7 +88,6 @@ private:
     QList<QMdiSubWindow*> subwindowList;
     QObjectList objl;
     managebenhvathuoc *qlbenhthuoc;
-    ManageGia *qlGia;
     QLabel *statusLabel, *tinhtrangsql;
 };
 

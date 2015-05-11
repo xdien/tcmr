@@ -15,6 +15,7 @@ khamsobo::khamsobo(QWidget *parent) :
     ui->listView_benhduocchon->setModel(&itemModel_benhDChon);
     ui->danhsach_chonthuoc->setModel(&itemModel_thuocDChon);
     ui->treeView_DSPhiChon->setModel(&itemModel_dichvu);
+    ui->treeView_DSPhiChon->hideColumn(2);
     ui->treeView_dichVu->setModel(&danhsachDV);
     ui->treeView_thuocgoiY->setModel(&danhsach_goiyThuoc);
     danhsachDV.setQuery("select ten_phu_phi,ma_dm from danh_muc");
@@ -246,8 +247,8 @@ void khamsobo::on_treeView_benhdk_clicked(const QModelIndex &index)
                                 "left join thuoc on thuoc.ma_thuoc = phong_ngua.ma_thuoc "
                                 "left join do_tuoi on do_tuoi.ma_dotuoi = thuoc.ma_dotuoi  where benh.ma_benh = '"+ma_benh+"'");
     danhsach_goiyThuoc.setHeaderData(0,Qt::Horizontal,"Tên thuốc");
-    danhsach_goiyThuoc.setHeaderData(0,Qt::Horizontal,"Độ tuổi");
-    danhsach_goiyThuoc.setHeaderData(0,Qt::Horizontal,"Mã thuốc");
+    danhsach_goiyThuoc.setHeaderData(1,Qt::Horizontal,"Độ tuổi");
+    danhsach_goiyThuoc.setHeaderData(2,Qt::Horizontal,"Mã thuốc");
 }
 
 void khamsobo::on_treeView_thuocgoiY_clicked(const QModelIndex &index)
@@ -369,6 +370,10 @@ void khamsobo::on_treeView_dichVu_clicked(const QModelIndex &index)
     {
         itemModel_dichvu.appendRow(this->prepareRow(danhsachDV.index(index.row(),0).data().toString(),danhsachDV.index(index.row(),1).data().toString(),""));
         //itemtDSbenh.appendRow(this->prepareRow(danhsachgoiYBenh.index(index.row(),0).data().toString(),ma_benh,""));
+        itemModel_dichvu.setHeaderData(0,Qt::Horizontal,"Tên dịch vụ");
+        itemModel_dichvu.setHeaderData(1,Qt::Horizontal,"Mã DV");
+        ui->treeView_DSPhiChon->hideColumn(2);
+
     }
 
 }
