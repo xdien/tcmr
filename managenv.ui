@@ -177,7 +177,7 @@
            <item>
             <widget class="QCheckBox" name="checkBox_4h">
              <property name="text">
-              <string>Tiêm</string>
+              <string>Báo cáo</string>
              </property>
             </widget>
            </item>
@@ -198,7 +198,7 @@
            <item>
             <widget class="QCheckBox" name="checkBox_5h">
              <property name="text">
-              <string>Hệ thống</string>
+              <string>Tiêm</string>
              </property>
             </widget>
            </item>
@@ -305,7 +305,7 @@
            <item row="2" column="0">
             <widget class="QCheckBox" name="checkBox_6">
              <property name="text">
-              <string>Hê thống</string>
+              <string>Hệ thống</string>
              </property>
             </widget>
            </item>
