@@ -21,6 +21,8 @@ tracuuPhieuHen::~tracuuPhieuHen()
 
 void tracuuPhieuHen::on_pushButton_2_clicked()
 {
+    this->itemtDSbenh.clear();
+    //this->thuocModel.clear();
     ui->kq->setText("");
     //hien thi thong tin benh dk
     //hien thi danh sach benh dang ky
@@ -88,6 +90,8 @@ void tracuuPhieuHen::on_pushButton_clicked()
     query.exec("update tt_benh_nhan set ngay_lap = current_date,lap_phieu = NULL,tai_hen =TRUE, stt = '"+QString::number(stt_benh)+"' where ma_bn ='"+ma_bn+"'");
     stt->next();
     query.exec("NOTIFY khamsobo");
+    this->itemtDSbenh.clear();
+    this->thuocModel.clear();
 }
 
 void tracuuPhieuHen::on_dsbenh_clicked(const QModelIndex &index)
@@ -115,3 +119,8 @@ void tracuuPhieuHen::on_pushButton_3_clicked()
     }
 }
 
+
+void tracuuPhieuHen::on_ma_bn_textChanged(const QString &arg1)
+{
+    this->thuocModel.clear();
+}
