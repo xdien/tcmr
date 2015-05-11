@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     statusLabel->setText("Bạn chưa đăng nhập");
     if(db.isOpen())
     {
-        tinhtrangsql->setText("Thiết lập kêt nối thành công |");
+        tinhtrangsql->setText("Thiết lập kết nối thành công |");
     }else{
         tinhtrangsql->setText("Không thể kết nối tới máy chủ, xem lại tùy chỉnh kết nối");
     }

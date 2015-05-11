@@ -374,8 +374,18 @@
  <tabstops>
   <tabstop>ten</tabstop>
   <tabstop>dateEdit</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>radioButton</tabstop>
+  <tabstop>radioButton_2</tabstop>
+  <tabstop>comboBox_tp</tabstop>
+  <tabstop>comboBox_qh</tabstop>
+  <tabstop>comboBox_xp</tabstop>
+  <tabstop>lineEdit_diachi</tabstop>
   <tabstop>listView_benh</tabstop>
+  <tabstop>listView_duocchon</tabstop>
+  <tabstop>pushButton_2</tabstop>
   <tabstop>luu_tt</tabstop>
+  <tabstop>pushButton_3</tabstop>
  </tabstops>
  <resources/>
  <connections/>

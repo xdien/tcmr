@@ -330,10 +330,6 @@
      </layout>
     </item>
    </layout>
-   <zorder>lineEdit_2</zorder>
-   <zorder>tableView</zorder>
-   <zorder>label_12</zorder>
-   <zorder>tableView</zorder>
   </widget>
  </widget>
  <tabstops>
@@ -353,6 +349,9 @@
   <tabstop>lineEdit_dungtich</tabstop>
   <tabstop>lineEdit_lieudung</tabstop>
   <tabstop>lineEdit_gia</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>pushButton_themthuoc</tabstop>
   <tabstop>lineEdit_capnhatgia</tabstop>
   <tabstop>pushButton_capnhatgia</tabstop>
  </tabstops>
