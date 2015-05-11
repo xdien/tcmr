@@ -149,6 +149,7 @@ void managebenhvathuoc::on_pushButton_themthuoc_clicked()
         ui->lineEdit_gia->clear();
         ui->lineEdit_lieudung->clear();
         itemLichhen.clear();
+        ui->lineEdit_2->setText("Số ngày của lần tiêm thứ 1:");
     }
 }
 
