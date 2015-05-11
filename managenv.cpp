@@ -137,7 +137,6 @@ void ManageNV::on_comboBox_chucVu_currentIndexChanged(int index)
 
 void ManageNV::LoadtableQuyen()
 {
-<<<<<<< Updated upstream
 //    chuc_vumodel->setTable("phan_quyen");
 //    chuc_vumodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
 //    chuc_vumodel->setRelation(0,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
@@ -151,15 +150,7 @@ void ManageNV::LoadtableQuyen()
     phanquyenModel.select();
     ui->tableView_phanquyen->setModel(&phanquyenModel);
     ui->tableView_phanquyen->hideColumn(0);
-=======
-    chuc_vumodel->setTable("phan_quyen");
-    chuc_vumodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    chuc_vumodel->setRelation(0,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
-    chuc_vumodel->select();
-    ui->tableView_phanquyen->setModel(chuc_vumodel);
-    //this->chuc_vumodel->setEditStrategy(QSqlTableModel::OnRowChange);
-    //ui->tableView_phanquyen->hideColumn(0);
->>>>>>> Stashed changes
+
     ui->tableView_phanquyen->setItemDelegate(new QSqlRelationalDelegate);
 }
 
