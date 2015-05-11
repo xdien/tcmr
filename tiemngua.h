@@ -4,7 +4,7 @@
 #include <QtWebKit>
 #include <QWebView>
 #include <QPrinter>
-#include <htmltemp.h>
+
 #endif
 #include <QMainWindow>
 #include <QtSql>
@@ -14,6 +14,7 @@
 #include "danhsachboqua.h"
 #include <QKeyEvent>
 #include <QStandardItemModel>
+#include <htmltemp.h>
 
 namespace Ui {
 class tiemngua;
