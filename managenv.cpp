@@ -207,7 +207,7 @@ void ManageNV::on_pushButton_3_clicked()
 void ManageNV::onCustomContextMenu(const QPoint &point){
     index = ui->tableView->indexAt(point);
     if (index.isValid()) {
-        QAction action1("Remove Data Point", this);
+        QAction action1("Xóa", this);
         connect(&action1, SIGNAL(triggered()), this, SLOT(xoaMotNhanvien()));
         contextMenu->addAction(&action1);
         contextMenu->exec(ui->tableView->mapToGlobal(point));

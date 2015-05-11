@@ -13,8 +13,8 @@ tiemngua::tiemngua(QWidget *parent) :
     {
         qDebug() << "chu y sqlDriver nay khong ho tro notifi";
     }else{
-        if(db.driver()->subscribeToNotification("tiem"))
-            connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(capnhatDScho(QString)));
+        db.driver()->subscribeToNotification("tiem");
+        connect(db.driver(),SIGNAL(notification(QString)),this,SLOT(capnhatDScho(QString)));
     }
     //this->update();
     stt = new managerSTT("tiemngua");
@@ -83,7 +83,7 @@ void tiemngua::infothuoc(QString maphieu, QString mabn)
     dsthuoc.setQuery("select thuoc.ten_thuoc,lieu_dung,thuoc.ma_thuoc from phieu_tiem \
                      right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu \
                      left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
-                     left join do_tuoi on do_tuoi.ma_dotuoi =thuoc.ma_dotuoi where phieu_tiem.ma_phieu ='"+maphieu+"'");
+                     where phieu_tiem.ma_phieu ='"+maphieu+"'");
     //hien thi danh dach ngay hen cua tung thuoc
     for(int i=0; i< dsthuoc.rowCount();i++)
     {
