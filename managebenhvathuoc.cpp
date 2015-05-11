@@ -57,6 +57,8 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
     dsthuocmodel.setHeaderData(3,Qt::Horizontal,QString::fromUtf8("Dung tích"));
     dsthuocmodel.setHeaderData(4,Qt::Horizontal,QString::fromUtf8("Giá áp dụng"));
 
+    ui->tableView->setModel(&itemLichhen);
+    tuTang = 0;
 }
 managebenhvathuoc::~managebenhvathuoc()
 {
@@ -119,15 +121,32 @@ void managebenhvathuoc::on_pushButton_themdotuoi_clicked()
 void managebenhvathuoc::on_pushButton_themthuoc_clicked()
 {
     maBn = id.getNextIndexCode("thuoc","TH");
+    maLh = id.getNextIndexCode("lich_hen","LH");
     dotuoi = dotuoimodel.index(ui->comboBox_2->currentIndex(),1).data().toString();
     if(!query.exec("INSERT INTO thuoc("
                "ma_thuoc, ma_dotuoi, ten_thuoc, vung_tiem, dung_tich, lieu_dung) "
                "VALUES ('"+maBn+"', '"+dotuoi+"', '"+ui->lineEdit_tenthuoc->text()+"', '"+ui->comboBox_vungtiem->currentText()+"', '"+ui->lineEdit_dungtich->text()+"', '"+ui->lineEdit_lieudung->text()+"')"))
         qDebug()<<query.lastError().text();
-    query.exec("insert into don_gia(ma_thuoc, gia, ngay, gia_ap_dung) values('"+maBn+"', '"+ui->lineEdit_gia->text()+"', current_date,'"+ui->lineEdit_gia->text()+"')");
-    dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
+    else
+    {
+        query.exec("insert into don_gia(ma_thuoc, gia, ngay, gia_ap_dung) values('"+maBn+"', '"+ui->lineEdit_gia->text()+"', current_date,'"+ui->lineEdit_gia->text()+"')");
+        dsthuocmodel.setQuery("select distinct thuoc.ma_thuoc, ten_thuoc, vung_tiem, dung_tich, gia_ap_dung from thuoc left join don_gia on don_gia.ma_thuoc = thuoc.ma_thuoc");
 
+        for(int i=0;i<=itemLichhen.rowCount();i++)
+        {
+            query.exec("INSERT INTO lich_hen( "
+                       "ma_thuoc, ma_lich_hen, lan_thu, so_ngay) "
+                       "VALUES ('"+maBn+"', '"+maLh+"', '"+QString::number(i+1)+"', '"+itemLichhen.index(i,1).data().toString()+"')");
+        }
 
+        tuTang = 0;
+        ui->comboBox_2->setCurrentIndex(-1);
+        ui->lineEdit_tenthuoc->clear();
+        ui->comboBox_vungtiem->setCurrentIndex(-1);
+        ui->lineEdit_dungtich->clear();
+        ui->lineEdit_gia->clear();
+        ui->lineEdit_lieudung->clear();
+    }
 }
 
 void managebenhvathuoc::on_tableView_dsthuoc_doubleClicked(const QModelIndex &index)
@@ -251,3 +270,12 @@ void managebenhvathuoc::on_pushButton_capnhatgia_clicked()
         ui->lineEdit_capnhatgia->clear();
     }
 }
+
+void managebenhvathuoc::on_lineEdit_2_returnPressed()
+{
+    tuTang=tuTang+1;
+    itemLichhen.appendRow(this->prepareRow(QString::number(tuTang),ui->lineEdit_2->text(),""));
+    ui->label_12->setText("Số ngày của lần tiêm thứ "+QString::number(tuTang+1)+":");
+    ui->lineEdit_2->setText("");
+}
+

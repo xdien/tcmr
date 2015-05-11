@@ -230,3 +230,4 @@ void ManageNV::on_pushButton_5_clicked()
             qDebug()<<phanquyenModel.lastError().text();
     }
 }
+

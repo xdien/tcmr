@@ -36,7 +36,7 @@ private slots:
     void onCustomContextMenu(const QPoint &point);
     void xoaMotNhanvien();
     void on_pushButton_5_clicked();
-
+    
 signals:
     void focussed(bool hasFocus);
 private:
