@@ -158,9 +158,6 @@ void tiemngua::on_actionChon_nguoi_khong_theo_tt_triggered()
 /*
  * Ham viet su kien khi nguoi dung nhan nut tren ban phim
 */
-void tiemngua::keyReleaseEvent(QKeyEvent *e)
-{
-}
 /*
  * nhan tin hieu tu danhSachBoQua
 */
@@ -272,4 +269,8 @@ void tiemngua::capnhatDScho(QString notiName)
             emit setThongBao("Số lượng người chờ tiêm là: " + query.value(0).toString());
         }
     }
+}
+void tiemngua::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
 }

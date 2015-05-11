@@ -378,10 +378,6 @@ void khamsobo::on_treeView_dichVu_clicked(const QModelIndex &index)
 
 }
 
-void khamsobo::on_treeView_benh_clicked(const QModelIndex &index)
-{
-
-}
 
 /*them menu chuot phai*/
 void khamsobo::onCustomContextMenu_benh(const QPoint &point){
@@ -432,4 +428,8 @@ void khamsobo::xoa_thuoc()
     {
         this->itemModel_thuocDChon.removeRow(ui->danhsach_chonthuoc->currentIndex().row());
     }
+}
+void khamsobo::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
 }

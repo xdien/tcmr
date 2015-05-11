@@ -1,6 +1,7 @@
 #ifndef KHAMSOBO_H
 #define KHAMSOBO_H
 
+#include <QCloseEvent>
 #include <QMainWindow>
 #include <QMenu>
 #include <QStandardItemModel>
@@ -44,7 +45,6 @@ private slots:
 
         void on_treeView_dichVu_clicked(const QModelIndex &index);
 
-        void on_treeView_benh_clicked(const QModelIndex &index);
         void onCustomContextMenu_thuoc(const QPoint &point);
         void onCustomContextMenu_benh(const QPoint &point);
         void onCustomContextMenu_dv(const QPoint &point);
@@ -79,6 +79,7 @@ private:
     QSqlDatabase db;
     QMenu *contextMenu;
     QModelIndex index;
+    void closeEvent(QCloseEvent *event);
 
 
 QList<QStandardItem *> tmp;

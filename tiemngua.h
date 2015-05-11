@@ -36,7 +36,6 @@ private slots:
 
     void on_pushButton_clicked();
     //su kien nhan nut tren ban phim
-    void keyReleaseEvent(QKeyEvent *e);
     void on_actionChon_nguoi_khong_theo_tt_triggered();
     void getID();
 
@@ -73,6 +72,7 @@ private:
     QSqlQueryModel danhsachbenh;
     QString strquery;
     QSqlDatabase db;
+    void closeEvent(QCloseEvent *event);
 signals:
     void setThongBao(QString thongbao);
 };

@@ -283,3 +283,7 @@ void Dangkyphieutiem::keyReleaseEvent(QKeyEvent *e)
        qDebug()<< "enter";
 }
 
+void Dangkyphieutiem::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
+}
