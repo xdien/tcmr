@@ -25,6 +25,10 @@ private slots:
 
     void on_treeView_dm_clicked(const QModelIndex &index);
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     QSqlQuery query;
     manageIndex id;
@@ -32,7 +36,7 @@ private:
     Ui::ManageGia *ui;
     bool click;
     QSqlQueryModel dsdanhmuc,dsgiahientai;
-    qlbenhthuoc test;
+    QSqlRelationalTableModel test;
     QSqlRelationalDelegate *dele;
 protected:
 
