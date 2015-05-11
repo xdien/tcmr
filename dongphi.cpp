@@ -39,6 +39,7 @@ dongphi::dongphi(QWidget *parent) :
 dongphi::~dongphi()
 {
     delete ui;
+    delete stt_hd;
 }
 
 

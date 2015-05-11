@@ -61,6 +61,8 @@ ManageNV::~ManageNV()
 {
     delete ui;
     delete contextMenu;
+    delete testmodel;
+    delete dele;
 }
 
 void ManageNV::on_pushButton_clicked()

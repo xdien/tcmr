@@ -18,6 +18,8 @@ NhapThuoc::NhapThuoc(QWidget *parent) :
 NhapThuoc::~NhapThuoc()
 {
     delete ui;
+    delete table_thuoc;\
+    delete sqlde;
 }
 
 void NhapThuoc::loadTableDoTuoi()

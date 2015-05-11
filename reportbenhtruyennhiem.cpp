@@ -22,6 +22,7 @@ ReportBenhTruyenNhiem::ReportBenhTruyenNhiem(QWidget *parent) :
 ReportBenhTruyenNhiem::~ReportBenhTruyenNhiem()
 {
     delete ui;
+    delete htmltemp;
 }
 
 void ReportBenhTruyenNhiem::on_pushButton_clicked()

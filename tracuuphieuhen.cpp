@@ -16,6 +16,7 @@ tracuuPhieuHen::tracuuPhieuHen(QWidget *parent) :
 tracuuPhieuHen::~tracuuPhieuHen()
 {
     delete ui;
+    delete stt;
 }
 
 void tracuuPhieuHen::on_pushButton_2_clicked()

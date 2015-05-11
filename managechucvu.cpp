@@ -27,6 +27,8 @@ ManageChucVu::ManageChucVu(QWidget *parent) :
 ManageChucVu::~ManageChucVu()
 {
     delete ui;
+    delete chuc_vu;
+    delete tablemodel;
 }
 
 void ManageChucVu::keyPressEvent(QKeyEvent *e)

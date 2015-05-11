@@ -35,6 +35,10 @@ ReportTCTRE::ReportTCTRE(QWidget *parent) :
 ReportTCTRE::~ReportTCTRE()
 {
     delete ui;
+    delete htmltemp;
+    delete diachi;
+    delete diachiDC;
+    delete diachiComBox;
 }
 
 
