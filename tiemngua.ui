@@ -32,7 +32,7 @@
     <item>
      <widget class="QGroupBox" name="groupBox_2">
       <property name="title">
-       <string>Thông tin người bệnh</string>
+       <string>Thông tin Người bệnh</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
@@ -61,7 +61,7 @@
               </font>
              </property>
              <property name="text">
-              <string>CS TIM</string>
+              <string>Chỉ Số Tim</string>
              </property>
             </widget>
            </item>
@@ -85,7 +85,7 @@
               </font>
              </property>
              <property name="text">
-              <string>CS HA</string>
+              <string>Chỉ Số Huyết Áp</string>
              </property>
             </widget>
            </item>
@@ -135,7 +135,7 @@
     <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
-       <string>TT Thuốc</string>
+       <string>Thông tin Thuốc</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
@@ -173,7 +173,7 @@
          <item>
           <widget class="QPushButton" name="pushButton_2">
            <property name="text">
-            <string>Kế tiêp</string>
+            <string>Kế tiếp</string>
            </property>
           </widget>
          </item>

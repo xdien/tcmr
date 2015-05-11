@@ -22,6 +22,7 @@ Dangkyphieutiem::Dangkyphieutiem(QWidget *parent) :
     //load do tuoi
 
     stt = new managerSTT("dangkytt");
+    ui->pushButton_3->hide();
 }
 
 Dangkyphieutiem::~Dangkyphieutiem()

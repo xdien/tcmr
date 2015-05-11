@@ -152,6 +152,13 @@ void ManageNV::LoadtableQuyen()
     ui->tableView_phanquyen->hideColumn(0);
 
     ui->tableView_phanquyen->setItemDelegate(new QSqlRelationalDelegate);
+    phanquyenModel.setHeaderData(1,Qt::Horizontal,QString::fromUtf8("Tên nhân viên"));
+    phanquyenModel.setHeaderData(2,Qt::Horizontal,QString::fromUtf8("Đăng ký TT"));
+    phanquyenModel.setHeaderData(3,Qt::Horizontal,QString::fromUtf8("Khám sơ bộ"));
+    phanquyenModel.setHeaderData(4,Qt::Horizontal,QString::fromUtf8("Đóng phí"));
+    phanquyenModel.setHeaderData(5,Qt::Horizontal,QString::fromUtf8("Tiêm"));
+    phanquyenModel.setHeaderData(6,Qt::Horizontal,QString::fromUtf8("Báo cáo"));
+    phanquyenModel.setHeaderData(7,Qt::Horizontal,QString::fromUtf8("Hệ thống"));
 }
 
 void ManageNV::on_pushButton_4_clicked()

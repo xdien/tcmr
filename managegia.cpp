@@ -18,6 +18,12 @@ ManageGia::ManageGia(QWidget *parent) :
     test.select();
     ui->tableView_giaia->setItemDelegate(dele);
     //qDebug() <<test.selectStatement() << test.lastError().text();
+
+    dsdanhmuc.setHeaderData(0,Qt::Horizontal,QString::fromUtf8("Tên phụ phí"));
+    dsdanhmuc.setHeaderData(1,Qt::Horizontal,QString::fromUtf8("Mã danh mục"));
+
+    test.setHeaderData(0,Qt::Horizontal,QString::fromUtf8("Mã danh mục"));
+    test.setHeaderData(1,Qt::Horizontal,QString::fromUtf8("Giá"));
 }
 
 ManageGia::~ManageGia()
