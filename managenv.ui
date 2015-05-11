@@ -44,7 +44,7 @@
        <item>
         <widget class="QPushButton" name="pushButton">
          <property name="text">
-          <string>Update</string>
+          <string>Cập nhật</string>
          </property>
         </widget>
        </item>
@@ -205,11 +205,6 @@
           </layout>
          </item>
         </layout>
-        <zorder>checkBox_1h</zorder>
-        <zorder>checkBox_2h</zorder>
-        <zorder>checkBox_4h</zorder>
-        <zorder>checkBox_5h</zorder>
-        <zorder>checkBox_3h</zorder>
        </widget>
       </item>
       <item>
@@ -384,7 +379,7 @@
            <item>
             <widget class="QPushButton" name="pushButton_4">
              <property name="text">
-              <string>update</string>
+              <string>Cập nhật</string>
              </property>
             </widget>
            </item>
