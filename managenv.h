@@ -35,6 +35,8 @@ private slots:
     void on_pushButton_3_clicked();
     void onCustomContextMenu(const QPoint &point);
     void xoaMotNhanvien();
+    void on_pushButton_5_clicked();
+
 signals:
     void focussed(bool hasFocus);
 private:
@@ -51,6 +53,7 @@ private:
                                                     const QString &third);
    void LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBox *c3, QCheckBox *c4, QCheckBox *c5, QCheckBox *c6);
    QSqlQueryModel chucVuModel;
+   QSqlRelationalTableModel phanquyenModel;
    void LoadtableQuyen();
    QSqlRelationalDelegate *dele;
    QMenu *contextMenu;
