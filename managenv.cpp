@@ -109,7 +109,7 @@ void ManageNV::LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBo
     c4->setChecked(false);
     c5->setChecked(false);
     c6->setChecked(false);
-    query.exec("select * from phan_quyen where ma_cv = '" +macv+ "'");
+    query.exec("select * from chuc_vu where ma_cv = '" +macv+ "'");
     if(query.next())
     {
         c1->setChecked(query.value(1).toBool());
@@ -135,21 +135,28 @@ void ManageNV::on_comboBox_chucVu_currentIndexChanged(int index)
 
 void ManageNV::LoadtableQuyen()
 {
-    chuc_vumodel->setTable("phan_quyen");
-    chuc_vumodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    chuc_vumodel->setRelation(0,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
-    chuc_vumodel->select();
-    ui->tableView_phanquyen->setModel(chuc_vumodel);
-    //ui->tableView_phanquyen->hideColumn(0);
+//    chuc_vumodel->setTable("phan_quyen");
+//    chuc_vumodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+//    chuc_vumodel->setRelation(0,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
+//    chuc_vumodel->select();
+//    ui->tableView_phanquyen->setModel(chuc_vumodel);
+//    //ui->tableView_phanquyen->hideColumn(0);
+//    ui->tableView_phanquyen->setItemDelegate(new QSqlRelationalDelegate);
+    //phanquyenModel.setQuery("select * from chuc_vu");
+    phanquyenModel.setTable("chuc_vu");
+    phanquyenModel.setEditStrategy(QSqlTableModel::OnManualSubmit);
+    phanquyenModel.select();
+    ui->tableView_phanquyen->setModel(&phanquyenModel);
+    ui->tableView_phanquyen->hideColumn(0);
     ui->tableView_phanquyen->setItemDelegate(new QSqlRelationalDelegate);
 }
 
 void ManageNV::on_pushButton_4_clicked()
 {
-    if(!this->chuc_vumodel->submitAll())
+    if(!this->phanquyenModel.submitAll())
     {
-        chuc_vumodel->relationModel(0);
-        qDebug() << "Loi submit: " << chuc_vumodel->lastError().text();
+        //phanquyenModel->relationModel(0);
+        qDebug() << "Loi submit: " << phanquyenModel.lastError().text();
     }
     else
     this->on_comboBox_chucVu_currentIndexChanged(ui->comboBox_chucVu->currentIndex());
@@ -160,12 +167,9 @@ void ManageNV::on_pushButton_2_clicked()
 
     ma_cv = id.getNextIndexCode("chuc_vu","CV");
     query.exec("INSERT INTO chuc_vu(\
-               ma_cv, ten_cv)\
-       VALUES ('"+ma_cv+"', '"+ui->lineEdit_tencv->text()+"')");
-    query.exec("INSERT INTO phan_quyen(\
-               ma_cv, dang_ky_tt, kham_so_bo, dong_phi, tiem, bao_cao, he_thong)\
-       VALUES ('"+ma_cv+"',"+boolToString(ui->checkBox_1->isChecked())+", "+boolToString(ui->checkBox_2->isChecked())+", "+boolToString(ui->checkBox_3->isChecked())+", "+boolToString(ui->checkBox_4->isChecked())+","+boolToString(ui->checkBox_5->isChecked())+", "+boolToString(ui->checkBox_6->isChecked())+")");
-            qDebug() << query.lastError().text();
+               ma_cv, ten_cv, dang_ky_tt, kham_so_bo, dong_phi, tiem, bao_cao, he_thong)\
+       VALUES ('"+ma_cv+"', '"+ui->lineEdit_tencv->text()+"',"+boolToString(ui->checkBox_1->isChecked())+", "+boolToString(ui->checkBox_2->isChecked())+", "+boolToString(ui->checkBox_3->isChecked())+", "+boolToString(ui->checkBox_4->isChecked())+","+boolToString(ui->checkBox_5->isChecked())+", "+boolToString(ui->checkBox_6->isChecked())+")");
+    qDebug() << query.lastError().text();
     this->LoadChucvu();
     this->LoadtableQuyen();
     //them thong tien chuc vu va quyen cua chuc vu do
@@ -219,4 +223,15 @@ bool ManageNV::eventFilter(QObject *obj, QEvent *event)
 //        qDebug() << "MOUSE OVER";
 //    }
     return false;
+}
+
+void ManageNV::on_pushButton_5_clicked()
+{
+   // ma_cv = phanquyenModel.index(ui->tableView_phanquyen->currentIndex().row(),0).data().toString();
+    if(phanquyenModel.removeRow(ui->tableView_phanquyen->currentIndex().row()))
+    {
+        qDebug()<<phanquyenModel.lastError().text();
+        if(!phanquyenModel.submitAll())
+            qDebug()<<phanquyenModel.lastError().text();
+    }
 }
