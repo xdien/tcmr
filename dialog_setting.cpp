@@ -21,6 +21,7 @@ Dialog_setting::Dialog_setting(QWidget *parent) :
     ui->linedialog_db->setText(loadSet.value("db").toString());
     this->setFixedSize(this->maximumSize());
     diaDB = QSqlDatabase::database("qt_sql_default_connection");//lay ket noi toi server hien tai
+    ui->toolButton->setVisible(false);
 }
 
 Dialog_setting::~Dialog_setting()

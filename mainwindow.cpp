@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tinhtrangsql = new QLabel(this);
     //statusLabel->setText("adsdas");
     //tinhtrangsql->setText("tinh tranf");
+    statusLabel->setText("Bạn chưa đăng nhập");
     if(db.isOpen())
     {
         tinhtrangsql->setText("Thiết lập kêt nối thành công |");

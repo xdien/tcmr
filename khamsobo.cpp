@@ -73,10 +73,8 @@ void khamsobo::on_pushButton_clicked()
     query.exec("select * from nv_dangnhap");
     if(query.next() && ui->csha->text().toInt() > 0)
     {
-        if(ui->checkBox_khogtimdc->isChecked())
-            co_benh = "FALSE";
-        else
-            co_benh = "TRUE";
+
+        co_benh = "TRUE";
         ma_nv = query.value(0).toString();
         sodong = itemModel_benhDChon.rowCount();
         if(sodong > 0)
@@ -211,9 +209,12 @@ QList<QStandardItem *> khamsobo::prepareRow(const QString &first,
 
 void khamsobo::on_khongduak_clicked()
 {
+    //lay ma benh ra
     query.exec("select * from nv_dangnhap");
-    if(query.next())
+    if(query.next() && ui->csha->text().toInt() > 0)
     {
+
+        co_benh = "FALSE";
         ma_nv = query.value(0).toString();
         sodong = itemModel_benhDChon.rowCount();
         if(sodong > 0)
@@ -223,18 +224,56 @@ void khamsobo::on_khongduak_clicked()
                 ma_benh = itemModel_benhDChon.index(i,1).data().toString();
                 query.exec("INSERT INTO co_benh( \
                            ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham) \
-                        VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'FALSE',current_date)");
+                        VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', '"+co_benh+"',current_date)");
             }
         }else{
-            ma_benh = "1";
+            ma_benh = "BH_00000000";
             query.exec("INSERT INTO co_benh( \
-                       ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham) \
-                    VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', 'FALSE',current_date)");
-
+                       ma_benh, ma_bn, ma_nv, cs_tim, cs_ha, chu_y, du_tc, ngay_kham)\
+                    VALUES ('"+ma_benh+"', '"+ ma_bn+ "','"+ma_nv+"', '"+ui->cs_tim->text()+"', '"+ ui->csha->text() +"', '"+ui->chuy->document()->toPlainText()+"', "+co_benh+",current_date)");
         }
-        this->loaddanhsach_chokham();
-        //tra ve benh nhan ke tiep
-        this->setcurentidx();
+        query.exec("UPDATE co_benh "
+                   "SET ngay_kham=current_date "
+                   "WHERE ma_bn = '"+ma_bn+"'");
+        //lap phieu tiem
+        ma_phieu = id.getNextIndexCode("phieu_tiem","PT");
+        if(query.exec("INSERT INTO phieu_tiem( ma_phieu, ma_bn, ma_nv, ngay_lap_pt) VALUES "
+                      "('"+ ma_phieu +"', '"+ma_bn+"', '"+ma_nv+"', current_date)"))
+        {
+            //Nhap vao danh sach thuoc duoc chon
+            thuoc_num = itemModel_thuocDChon.rowCount();
+            for(int i =0;i<thuoc_num;i++){
+                ma_thuoc = itemModel_thuocDChon.index(i,1).data().toString();
+                query.exec("INSERT INTO tiem(\
+                           ma_thuoc, ma_phieu, ma_nv, ma_bn) values('"+ma_thuoc+"','"+ma_phieu+"','"+ma_nv+"','"+ma_bn+"')");
+            }
+            if(!query.exec("update tt_benh_nhan set lap_phieu = 'TRUE' where ma_bn = '"+ma_bn+"'"))
+            {
+                qDebug() << query.lastError().text();
+            }else{
+                //Cap nhat cac phu phi
+                thuoc_num = itemModel_dichvu.rowCount();
+                for(int i =0;i<thuoc_num;i++)
+                {
+                    query.exec("INSERT INTO gom( "
+                               "ma_phieu, ma_dm) "
+                               "VALUES ('"+ma_phieu+"', '"+itemModel_dichvu.index(i,1).data().toString()+"')");
+                }
+                //xoa cai lineedit
+                itemModel_benhDChon.clear();
+                itemModel_dichvu.clear();
+                itemModel_thuocDChon.clear();
+                danhsach_goiyThuoc.clear();
+                danhsachBenhdk.clear();
+            }
+            query.exec("NOTIFY dongphi");
+            //cap nhat lai benh dang ky
+            this->loaddanhsach_chokham();
+            //tra ve benh nhan ke tiep
+            this->setcurentidx();
+        }else{
+            qDebug() << "khong the lap phieu: " << query.lastError().text();
+        }
     }else{
         qDebug() << "Can't get id NHAN_VIEN";
     }

@@ -22,7 +22,6 @@ ManageNV::ManageNV(QWidget *parent) :
     chuc_vumodel->setJoinMode(QSqlRelationalTableModel::LeftJoin);
     testmodel->select();
     /*-----------------*/
-    ui->lineEdit_cmnd->installEventFilter(this);
     //testmodel->set
 
     ui->tableView->setModel(testmodel);
@@ -220,22 +219,7 @@ void ManageNV::xoaMotNhanvien()
     testmodel->submitAll();
 }
 /*su kien chuopt*/
-bool ManageNV::eventFilter(QObject *obj, QEvent *event)
-{
-    if(event->type() == QEvent::MouseButtonPress)
-    {
-        qDebug() << "CLICK";
-    }
-    if(event->type() == QEvent::FocusIn)
-    {
-        qDebug() << "leave";
-    }
-//    if(event->type() == QEvent::MouseMove)
-//    {
-//        qDebug() << "MOUSE OVER";
-//    }
-    return false;
-}
+
 
 void ManageNV::on_pushButton_5_clicked()
 {

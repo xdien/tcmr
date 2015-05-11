@@ -59,7 +59,6 @@ private:
    QMenu *contextMenu;
    QString boolToString(bool t);
    QModelIndex index;
-   bool eventFilter(QObject *obj, QEvent *event);
 protected:
 };
 
