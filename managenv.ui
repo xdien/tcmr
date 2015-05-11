@@ -298,7 +298,7 @@
            <item row="1" column="1">
             <widget class="QCheckBox" name="checkBox_5">
              <property name="text">
-              <string>Tiêm</string>
+              <string>Báo cáo</string>
              </property>
             </widget>
            </item>
@@ -312,7 +312,7 @@
            <item row="2" column="1">
             <widget class="QCheckBox" name="checkBox_4">
              <property name="text">
-              <string>Báo cáo</string>
+              <string>Tiêm</string>
              </property>
             </widget>
            </item>
