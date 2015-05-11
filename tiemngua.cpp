@@ -1,6 +1,7 @@
 #include "tiemngua.h"
 #include "ui_tiemngua.h"
 #include <QMessageBox>
+#include <QPrintPreviewDialog>
 #include <QTime>
 tiemngua::tiemngua(QWidget *parent) :
     QMainWindow(parent),
@@ -8,6 +9,7 @@ tiemngua::tiemngua(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    htmltemp = new HtmlTemp();
     db = QSqlDatabase::database("qt_sql_default_connection");
     if(!db.driver()->hasFeature(QSqlDriver::EventNotifications))
     {
@@ -24,7 +26,7 @@ tiemngua::tiemngua(QWidget *parent) :
     ui->tableView->setModel(&dsthuoc);
     ui->treeView_ngayhen->setModel(&item_ngayhen);
     ui->danhsachbenh->setModel(&danhsachbenh);
-    ui->pushButton_3->setVisible(false);
+    //ui->pushButton_3->setVisible(false);
     danhsachchomodel.setHeaderData(0,Qt::Horizontal,"STT");
     danhsachchomodel.setHeaderData(1,Qt::Horizontal,"Tên");
 
@@ -278,4 +280,34 @@ void tiemngua::capnhatDScho(QString notiName)
 void tiemngua::closeEvent(QCloseEvent *event)
 {
     event->ignore();
+}
+
+void tiemngua::on_pushButton_3_clicked()
+{
+    QString mau;
+    mau = "<b>Mã bệnh nhân: "+ma_bn+"</b>";
+    for(int i=0; i< dsthuoc.rowCount();i++)
+    {
+        ma_thuoc = dsthuoc.index(i,2).data().toString();
+        stt_lieu = this->tinhSoTTLieu(ma_thuoc,ma_bn);
+        mau =mau+ "<p>Mã Thuốc: "+ma_thuoc+"</p>"
+              "<p>STT Liều: "+stt_lieu+"</p></br>";
+        //item_ngayhen.appendRow(this->prepareRow(dsthuoc.index(i,0).data().toString(),this->tinh_ngayTaiHen(ma_thuoc,stt_lieu),stt_lieu));
+    }
+#ifdef __MINGW32__
+    QTextDocument *document = new QTextDocument();
+    QTextCursor cursor(document);
+    cursor.insertHtml(mau);
+    //thu su dung webview tren windows
+    QWebView *view = new QWebView();
+    view->setHtml(document->toHtml());
+    QPrinter  printer(QPrinter::HighResolution);
+    printer.setPaperSize(QPrinter::A7);
+    //printer.setOrientation(QPrinter::);//giay nam ngang
+    QPrintPreviewDialog *preview = new QPrintPreviewDialog(&printer,this);
+    connect( preview, SIGNAL(paintRequested(QPrinter*)),view, SLOT(print(QPrinter*)));
+    preview->exec();
+    delete preview;
+    delete view;
+#endif
 }

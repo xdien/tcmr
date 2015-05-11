@@ -78,7 +78,13 @@ HtmlTemp::HtmlTemp()
                 <td>M/C</td>\
                 <td>M/C</td>\
             </tr>";
+
+            header2 = "<table border=1>";
+
+
 }
+
+
 
 HtmlTemp::~HtmlTemp()
 {

@@ -5,7 +5,7 @@
 class HtmlTemp
 {
 public:
-    QString header,footer,conntent,header1;
+    QString header,footer,conntent,header1,header2;
     HtmlTemp();
     ~HtmlTemp();
 };

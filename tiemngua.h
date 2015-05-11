@@ -1,6 +1,11 @@
 #ifndef TIEMNGUA_H
 #define TIEMNGUA_H
-
+#ifdef __MINGW32__
+#include <QtWebKit>
+#include <QWebView>
+#include <QPrinter>
+#include <htmltemp.h>
+#endif
 #include <QMainWindow>
 #include <QtSql>
 #include <QDate>
@@ -45,7 +50,11 @@ private slots:
     void capnhatDScho(QString notiName);
 
 
+    void on_pushButton_3_clicked();
+
 private:
+
+    HtmlTemp *htmltemp;
     QSqlQuery query,query_tmp,query_ham;
     Ui::tiemngua *ui;
     QDate ngay;
@@ -76,6 +85,9 @@ private:
     int tmpi;
 signals:
     void setThongBao(QString thongbao);
+
+
+
 };
 
 #endif // TIEMNGUA_H
