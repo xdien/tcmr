@@ -95,10 +95,18 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="tuoi"/>
+            <widget class="QLineEdit" name="tuoi">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLineEdit" name="ten"/>
+            <widget class="QLineEdit" name="ten">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_9">
@@ -123,7 +131,7 @@
            <item>
             <widget class="QLabel" name="label_12">
              <property name="text">
-              <string>DS Bệnh</string>
+              <string>Danh sách bệnh</string>
              </property>
             </widget>
            </item>
@@ -335,7 +343,7 @@
          <item row="0" column="3">
           <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Bênh ĐK</string>
+            <string>Bênh đăng ký</string>
            </property>
           </widget>
          </item>

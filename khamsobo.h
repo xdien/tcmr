@@ -2,6 +2,7 @@
 #define KHAMSOBO_H
 
 #include <QMainWindow>
+#include <QMenu>
 #include <QStandardItemModel>
 #include <QtSql>
 #include "managerstt.h"
@@ -44,6 +45,12 @@ private slots:
         void on_treeView_dichVu_clicked(const QModelIndex &index);
 
         void on_treeView_benh_clicked(const QModelIndex &index);
+        void onCustomContextMenu_thuoc(const QPoint &point);
+        void onCustomContextMenu_benh(const QPoint &point);
+        void onCustomContextMenu_dv(const QPoint &point);
+        void xoa_thuoc();
+        void xoa_dv();
+        void xoa_benh();
 
 private:
     void loaddanhsach_chokham();
@@ -70,6 +77,10 @@ private:
     void loadchitietBN_M(QModelIndex indexx);
     void loadchitietBN_C(QModelIndex indexx);
     QSqlDatabase db;
+    QMenu *contextMenu;
+    QModelIndex index;
+
+
 QList<QStandardItem *> tmp;
 
 };

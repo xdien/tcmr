@@ -33,6 +33,15 @@ khamsobo::khamsobo(QWidget *parent) :
     danhsachBenh.setHeaderData(1,Qt::Horizontal,"Mã bệnh");
     danhsachDV.setHeaderData(0,Qt::Horizontal, "Tên dịch vụ");
     danhsachDV.setHeaderData(1,Qt::Horizontal,"Mã DV");
+    /*menu*/
+    contextMenu =new QMenu();
+    ui->listView_benhduocchon->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->treeView_DSPhiChon->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->danhsach_chonthuoc->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listView_benhduocchon, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(onCustomContextMenu_benh(QPoint)));
+    connect(ui->treeView_DSPhiChon, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(onCustomContextMenu_dv(QPoint)));
+    connect(ui->danhsach_chonthuoc, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(onCustomContextMenu_thuoc(const QPoint &)));
+
 }
 
 khamsobo::~khamsobo()
@@ -176,11 +185,16 @@ void khamsobo::disableEdit(bool state)
 
 void khamsobo::on_treeView_benh_doubleClicked(const QModelIndex &index)
 {
+
     mot = this->danhsachBenh.index(index.row(),0).data().toString(); //lay ten thuoc tu model
     hai = this->danhsachBenh.index(index.row(),1).data().toString();//lay ma thuoc tu moel
     ba = "";
-    //itemModel_benhDChon.findItems()
-    itemModel_benhDChon.appendRow(this->prepareRow(mot,hai,ba));
+    tmp = itemModel_benhDChon.findItems(hai,Qt::MatchExactly,1);
+    if(tmp.count() <= 0 )
+    {
+        //itemModel_benhDChon.findItems()
+        itemModel_benhDChon.appendRow(this->prepareRow(mot,hai,ba));
+    }
 }
 //add item model
 QList<QStandardItem *> khamsobo::prepareRow(const QString &first,
@@ -362,4 +376,55 @@ void khamsobo::on_treeView_dichVu_clicked(const QModelIndex &index)
 void khamsobo::on_treeView_benh_clicked(const QModelIndex &index)
 {
 
+}
+
+/*them menu chuot phai*/
+void khamsobo::onCustomContextMenu_benh(const QPoint &point){
+    index = ui->listView_benhduocchon->indexAt(point);
+    if (index.isValid()) {
+        QAction action1("Xóa", this);
+        connect(&action1, SIGNAL(triggered()), this, SLOT(xoa_benh()));
+        contextMenu->addAction(&action1);
+        contextMenu->exec(ui->listView_benhduocchon->mapToGlobal(point));
+    }
+}
+void khamsobo::onCustomContextMenu_dv(const QPoint &point){
+    index = ui->treeView_DSPhiChon->indexAt(point);
+    if (index.isValid()) {
+        QAction action1("Xóa", this);
+        connect(&action1, SIGNAL(triggered()), this, SLOT(xoa_dv()));
+        contextMenu->addAction(&action1);
+        contextMenu->exec(ui->treeView_DSPhiChon->mapToGlobal(point));
+    }
+}
+void khamsobo::onCustomContextMenu_thuoc(const QPoint &point){
+    index = ui->danhsach_chonthuoc->indexAt(point);
+    if (index.isValid()) {
+        QAction action1("Xóa", this);
+        connect(&action1, SIGNAL(triggered()), this, SLOT(xoa_thuoc()));
+        contextMenu->addAction(&action1);
+        contextMenu->exec(ui->danhsach_chonthuoc->mapToGlobal(point));
+    }
+}
+/*ham xoa cac benh, thuoc, dv*/
+void khamsobo::xoa_benh()
+{
+    if(ui->listView_benhduocchon->currentIndex().isValid())
+    {
+        this->itemModel_benhDChon.removeRow(ui->listView_benhduocchon->currentIndex().row());
+    }
+}
+void khamsobo::xoa_dv()
+{
+    if(ui->treeView_DSPhiChon->currentIndex().isValid())
+    {
+        this->itemModel_dichvu.removeRow(ui->treeView_DSPhiChon->currentIndex().row());
+    }
+}
+void khamsobo::xoa_thuoc()
+{
+    if(ui->danhsach_chonthuoc->currentIndex().isValid())
+    {
+        this->itemModel_thuocDChon.removeRow(ui->danhsach_chonthuoc->currentIndex().row());
+    }
 }
