@@ -115,12 +115,12 @@ void ManageNV::LoadCheckbox(QString macv, QCheckBox *c1, QCheckBox *c2, QCheckBo
     query.exec("select * from chuc_vu where ma_cv = '" +macv+ "'");
     if(query.next())
     {
-        c1->setChecked(query.value(1).toBool());
-        c2->setChecked(query.value(2).toBool());
-        c3->setChecked(query.value(3).toBool());
-        c4->setChecked(query.value(4).toBool());
-        c5->setChecked(query.value(5).toBool());
-        c6->setChecked(query.value(6).toBool());
+        c1->setChecked(query.value(2).toBool());
+        c2->setChecked(query.value(3).toBool());
+        c3->setChecked(query.value(4).toBool());
+        c4->setChecked(query.value(5).toBool());
+        c5->setChecked(query.value(6).toBool());
+        c6->setChecked(query.value(7).toBool());
     }
 }
 
