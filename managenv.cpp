@@ -17,7 +17,9 @@ ManageNV::ManageNV(QWidget *parent) :
     dele = new QSqlRelationalDelegate();
     this->LoadtableQuyen();
     //testmodel->set;
+
     testmodel->setRelation(1,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
+    chuc_vumodel->setJoinMode(QSqlRelationalTableModel::LeftJoin);
     testmodel->select();
     /*-----------------*/
     ui->lineEdit_cmnd->installEventFilter(this);
@@ -135,6 +137,7 @@ void ManageNV::on_comboBox_chucVu_currentIndexChanged(int index)
 
 void ManageNV::LoadtableQuyen()
 {
+<<<<<<< Updated upstream
 //    chuc_vumodel->setTable("phan_quyen");
 //    chuc_vumodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
 //    chuc_vumodel->setRelation(0,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
@@ -148,6 +151,15 @@ void ManageNV::LoadtableQuyen()
     phanquyenModel.select();
     ui->tableView_phanquyen->setModel(&phanquyenModel);
     ui->tableView_phanquyen->hideColumn(0);
+=======
+    chuc_vumodel->setTable("phan_quyen");
+    chuc_vumodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    chuc_vumodel->setRelation(0,QSqlRelation("chuc_vu","ma_cv","ten_cv"));
+    chuc_vumodel->select();
+    ui->tableView_phanquyen->setModel(chuc_vumodel);
+    //this->chuc_vumodel->setEditStrategy(QSqlTableModel::OnRowChange);
+    //ui->tableView_phanquyen->hideColumn(0);
+>>>>>>> Stashed changes
     ui->tableView_phanquyen->setItemDelegate(new QSqlRelationalDelegate);
 }
 
@@ -227,7 +239,6 @@ bool ManageNV::eventFilter(QObject *obj, QEvent *event)
 
 void ManageNV::on_pushButton_5_clicked()
 {
-   // ma_cv = phanquyenModel.index(ui->tableView_phanquyen->currentIndex().row(),0).data().toString();
     if(phanquyenModel.removeRow(ui->tableView_phanquyen->currentIndex().row()))
     {
         qDebug()<<phanquyenModel.lastError().text();
