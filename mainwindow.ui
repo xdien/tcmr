@@ -123,7 +123,7 @@
   </action>
   <action name="actionQl_nv">
    <property name="text">
-    <string>&amp;Quản lý NV</string>
+    <string>&amp;Quản lý Nhân Viên</string>
    </property>
   </action>
   <action name="actionQl_benh">

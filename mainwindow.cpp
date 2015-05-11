@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionTiem->setEnabled(false);
     ui->menuBao_cao->setEnabled(false);
     ui->actionTrC_phieu_hen->setEnabled(false);
-    //ui->menuHe_thong->setEnabled(false);//Comment de bao tri
+    ui->menuHe_thong->setEnabled(false);//Comment de bao tri
     /*status bar*/
     statusLabel = new QLabel(this);
     tinhtrangsql = new QLabel(this);
