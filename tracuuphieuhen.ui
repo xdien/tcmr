@@ -58,7 +58,7 @@
         <item row="2" column="1">
          <widget class="QPushButton" name="pushButton_2">
           <property name="text">
-           <string>Tiềm kiếm</string>
+           <string>Tìm kiếm</string>
           </property>
          </widget>
         </item>
