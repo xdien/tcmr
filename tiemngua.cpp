@@ -40,7 +40,8 @@ tiemngua::~tiemngua()
 void tiemngua::updateMainContent(int stt)
 {
     item_ngayhen.clear();
-    query.exec("select phieu_tiem.ma_phieu,stt,phieu_tiem.ma_bn,ma_hd from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where date(ngay_lap) = current_date and stt ='"+QString::number(stt) +"'");
+    query.exec("select phieu_tiem.ma_phieu,stt,phieu_tiem.ma_bn,ma_hd from hoa_don left join phieu_tiem on phieu_tiem.ma_phieu = hoa_don.ma_phieu where ngay_lap = current_date and stt ='"+QString::number(stt) +"'  order by ma_phieu desc");
+    qDebug() << query.lastQuery();
     if(query.next()){
         ui->pushButton_2->setEnabled(true);
         maphieu = query.value(0).toString();
