@@ -40,6 +40,8 @@ private slots:
 
     void on_pushButton_capnhatgia_clicked();
 
+    void on_lineEdit_2_returnPressed();
+
 private:
     Ui::managebenhvathuoc *ui;
     QSqlQueryModel dsbenhmodel;
@@ -63,6 +65,9 @@ private:
     QModelIndex index;
     QString mathuoc;
 
+    QStandardItemModel itemLichhen;
+    int tuTang;
+    QString maLh;
 
 };
 
