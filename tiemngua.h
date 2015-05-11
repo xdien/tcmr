@@ -73,6 +73,7 @@ private:
     QString strquery;
     QSqlDatabase db;
     void closeEvent(QCloseEvent *event);
+    int tmpi;
 signals:
     void setThongBao(QString thongbao);
 };

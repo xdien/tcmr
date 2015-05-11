@@ -84,6 +84,7 @@ void tiemngua::infothuoc(QString maphieu, QString mabn)
                      right join tiem on tiem.ma_phieu = phieu_tiem.ma_phieu \
                      left join thuoc on thuoc.ma_thuoc = tiem.ma_thuoc \
                      where phieu_tiem.ma_phieu ='"+maphieu+"'");
+   qDebug() << this->dsthuoc.lastError().text();
     //hien thi danh dach ngay hen cua tung thuoc
     for(int i=0; i< dsthuoc.rowCount();i++)
     {
@@ -209,8 +210,10 @@ void tiemngua::updateDScho()
 QString tiemngua::tinh_ngayTaiHen(QString mathuoc,QString sttlieu)
 {
     /*sua lai o day sl_nhac_lai tinh truc tiep ben bang lich hen*/
-    query_ham.exec("select so_ngay,sl_nhac_lai from thuoc right join lich_hen on lich_hen.ma_thuoc = thuoc.ma_thuoc where lan_thu = '"+sttlieu+"' and thuoc.ma_thuoc = '"+mathuoc+"'" );
-    //qDebug() << query_ham.lastQuery();
+    tmpi = sttlieu.toInt();
+    tmpi = tmpi+1;
+    sttlieu = QString::number(tmpi);
+    query_ham.exec("select so_ngay,lan_thu from lich_hen where lan_thu = '"+sttlieu+"' and ma_thuoc = '"+mathuoc+"'" );
     if(query_ham.next())
     {
         sl_nhac_lai = query_ham.value(1).toInt();
@@ -255,7 +258,9 @@ void tiemngua::cleanFroms()
     ui->cstim->clear();
     dsthuoc.clear();
     querymodel.clear();
+    ui->tableView->repaint();
     item_ngayhen.clear();
+    ui->treeView_ngayhen->repaint();
 }
 void tiemngua::capnhatDScho(QString notiName)
 {
