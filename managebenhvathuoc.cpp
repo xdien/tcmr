@@ -134,9 +134,11 @@ void managebenhvathuoc::on_pushButton_themthuoc_clicked()
 
         for(int i=0;i<=itemLichhen.rowCount();i++)
         {
-            query.exec("INSERT INTO lich_hen( "
+            if(!query.exec("INSERT INTO lich_hen( "
                        "ma_thuoc, ma_lich_hen, lan_thu, so_ngay) "
-                       "VALUES ('"+maBn+"', '"+maLh+"', '"+QString::number(i+1)+"', '"+itemLichhen.index(i,1).data().toString()+"')");
+                       "VALUES ('"+maBn+"', '"+maLh+"', '"+QString::number(i+1)+"', '"+itemLichhen.index(i,1).data().toString()+"')"))
+                qDebug() << query.lastError().text();
+            qDebug() << i;
         }
 
         tuTang = 0;
@@ -146,6 +148,8 @@ void managebenhvathuoc::on_pushButton_themthuoc_clicked()
         ui->lineEdit_dungtich->clear();
         ui->lineEdit_gia->clear();
         ui->lineEdit_lieudung->clear();
+        itemLichhen.clear();
+        ui->lineEdit_2->setText("Số ngày của lần tiêm thứ 1:");
     }
 }
 
