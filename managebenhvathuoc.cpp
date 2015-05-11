@@ -61,6 +61,7 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
 managebenhvathuoc::~managebenhvathuoc()
 {
     delete ui;
+    delete contextMenu;
 }
 
 void managebenhvathuoc::on_tableView_dsbenh_clicked(const QModelIndex &index)
