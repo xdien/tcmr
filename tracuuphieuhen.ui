@@ -58,7 +58,7 @@
         <item row="2" column="1">
          <widget class="QPushButton" name="pushButton_2">
           <property name="text">
-           <string>Tiềm kiếm</string>
+           <string>Tìm kiếm</string>
           </property>
          </widget>
         </item>
@@ -134,7 +134,6 @@
        </layout>
        <zorder></zorder>
        <zorder></zorder>
-       <zorder>layoutWidget</zorder>
       </widget>
      </item>
     </layout>
@@ -157,24 +156,15 @@
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="text">
-        <string>Tiếp tục khám</string>
+        <string>Lập phiếu tiêm</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
   </layout>
-  <zorder>label</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>ma_bn</zorder>
-  <zorder>lineEdit_mathuoc</zorder>
-  <zorder>label_4</zorder>
   <zorder>kq</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>horizontalSpacer</zorder>
   <zorder>groupBox</zorder>
-  <zorder>label_4</zorder>
-  <zorder>groupBox_2</zorder>
  </widget>
  <tabstops>
   <tabstop>ma_bn</tabstop>

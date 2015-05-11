@@ -48,6 +48,14 @@ managebenhvathuoc::managebenhvathuoc(QWidget *parent) :
     QValidator *validator_sdt = new QRegExpValidator(sdt_rx, this);
     ui->lineEdit_capnhatgia->setValidator(validator_sdt);
 
+    dsbenhmodel.setHeaderData(0,Qt::Horizontal,QString::fromUtf8("Mã bệnh"));
+    dsbenhmodel.setHeaderData(1,Qt::Horizontal,QString::fromUtf8("Tên bệnh"));
+    dsbenhmodel.setHeaderData(2,Qt::Horizontal,QString::fromUtf8("là thuốc"));
+
+    dsthuocmodel.setHeaderData(1,Qt::Horizontal,QString::fromUtf8("Tên thuốc"));
+    dsthuocmodel.setHeaderData(2,Qt::Horizontal,QString::fromUtf8("Vùng tiêm"));
+    dsthuocmodel.setHeaderData(3,Qt::Horizontal,QString::fromUtf8("Dung tích"));
+    dsthuocmodel.setHeaderData(4,Qt::Horizontal,QString::fromUtf8("Giá áp dụng"));
 
 }
 managebenhvathuoc::~managebenhvathuoc()

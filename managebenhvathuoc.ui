@@ -173,7 +173,27 @@
             <widget class="QComboBox" name="comboBox_vungtiem">
              <item>
               <property name="text">
-               <string>Bắp</string>
+               <string>Tiêm bắp</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Tiêm trong da</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Tiêm dưới da</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Qua đường miệng</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Qua đường mũi</string>
               </property>
              </item>
             </widget>

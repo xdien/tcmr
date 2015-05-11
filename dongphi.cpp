@@ -31,6 +31,7 @@ dongphi::dongphi(QWidget *parent) :
     qrmodel.setHeaderData(1,Qt::Horizontal,"Tên");
     qrmodel.setHeaderData(2,Qt::Horizontal,"Giới tính");
     qrmodel.setHeaderData(3,Qt::Horizontal,"Mã Phiếu");
+    ui->treeView->hideColumn(4);
 
 
 }

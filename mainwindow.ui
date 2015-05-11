@@ -158,12 +158,12 @@
   </action>
   <action name="actionQL_B_nh_va_Thu_c">
    <property name="text">
-    <string>QL Bệnh &amp;và Thuốc</string>
+    <string>Quản lý Bệnh &amp;và Thuốc</string>
    </property>
   </action>
   <action name="actionQuan_ly_gia">
    <property name="text">
-    <string>Quan &amp;ly gia</string>
+    <string>Quản &amp;lý Giá</string>
    </property>
   </action>
   <action name="actionAbout">
