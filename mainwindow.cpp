@@ -176,7 +176,7 @@ void MainWindow::on_actionAbout_Qt_triggered()
 void MainWindow::capnhatPhanQuyen(QString macv, QString manv)//cap nhat phan quyen dua theo macv
 {
     query.exec("SELECT dang_ky_tt, kham_so_bo, dong_phi, tiem, bao_cao, he_thong "
-               "FROM phan_quyen where ma_cv = '"+macv+"'");
+               "FROM chuc_vu where ma_cv = '"+macv+"'");
     if(query.next())
     {
         ui->actionPhieu_DK->setEnabled(query.value(0).toBool());
