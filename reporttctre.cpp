@@ -128,20 +128,20 @@ void ReportTCTRE::on_pushButton_2_clicked()
 
         ma_dc = item_tinhthanh.index(i,1).data().toString();
         mau = mau + "<tr><td>"+QString::number(i+1)+"</td>\
-                                <td>"+ item_tinhthanh.index(i,0).data().toString() +"</td><!-- hen thi stt-->\
+                                <td>"+ item_tinhthanh.index(i,0).data().toString() +"</td><!-- hen thi stt 120 thang = 10tuoi-->\
                                 <!-- danh cho khoi 1-->\
                                 <td>"+this->tongsoTreTheoThang(18,ma_dc)+"</td>\
                                 <td>"+QString::number(this->tongsotre("0",ma_dc,"TH_00000001"))+"</td>\
-                                <td>"+this->tongsoTreTiemTheoThuoc("TH_00000000",ma_dc,200)+"</td>\
+                                <td>"+this->tongsoTreTiemTheoThuoc("TH_00000000",ma_dc,120)+"</td>\
                                 <!-- danh cho khoi 2 dua vao do tuoi tinh so doi tuong vd: 1-2,4-10 la 2-->\
-                                <td>"+tongsoDoiTuongTheoThuoc2("TH_00000001",ma_dc,200)+"</td>\
-                                <td>"+tongSoNguoiTiem(1, "TH_00000001",ma_dc,200)+"</td>\
-                                <td>"+tongSoNguoiTiem(2, "TH_00000001",ma_dc,200)+"</td>\
-                                 <td>"+tongsoDoiTuongTheoThuoc3("TH_00000001",ma_dc,200)+"</td>\
-                                <td>"+tongSoNguoiTiem(3, "TH_00000001",ma_dc,200)+"</td>\
+                                <td>"+tongsoDoiTuongTheoThuoc2("TH_00000001",ma_dc,120)+"</td>\
+                                <td>"+tongSoNguoiTiem(1, "TH_00000001",ma_dc,120)+"</td>\
+                                <td>"+tongSoNguoiTiem(2, "TH_00000001",ma_dc,120)+"</td>\
+                                 <td>"+tongsoDoiTuongTheoThuoc3("TH_00000001",ma_dc,120)+"</td>\
+                                <td>"+tongSoNguoiTiem(3, "TH_00000001",ma_dc,120)+"</td>\
                                 <!-- khoi 3-->\
-                                <td>"+tongsodoiTuongVNNB("TH_00000001",ma_dc,200)+"</td>\
-                                <td>"+this->tongsoTreTiemTheothuoc("TH_00000001",ma_dc,200)+"</td>\
+                                <td>"+tongsodoiTuongVNNB("TH_00000001",ma_dc,120)+"</td>\
+                                <td>"+this->tongsoTreTiemTheothuoc("TH_00000001",ma_dc,120)+"</td>\
                                 </tr>";
     }
     cursor.insertHtml(htmltemp->header+mau);

@@ -26,21 +26,24 @@ MainWindow::MainWindow(QWidget *parent) :
     statusLabel->setText("Bạn chưa đăng nhập");
     if(db.isOpen())
     {
+        /*Khoi dong cac form*/
+        moi = new login();
+        khamsb = new khamsobo();
+        dpmoi = new dongphi();
+        tiemn = new tiemngua();
+        qlbenhthuoc = new managebenhvathuoc();
+        modangkyphieutiem = new Dangkyphieutiem();
+        connect(moi,SIGNAL(nvdangnhap(QString,QString)),this,SLOT(capnhatPhanQuyen(QString,QString)));
         tinhtrangsql->setText("Thiết lập kết nối thành công |");
     }else{
+        ui->actionDan_nhap->setEnabled(false);
         tinhtrangsql->setText("Không thể kết nối tới máy chủ, xem lại tùy chỉnh kết nối");
     }
     ui->statusBar->addPermanentWidget(tinhtrangsql);
     ui->statusBar->addPermanentWidget(statusLabel);
 
-    /*Khoi dong cac form*/
-    moi = new login();
-    khamsb = new khamsobo();
-    dpmoi = new dongphi();
-    tiemn = new tiemngua();
-    qlbenhthuoc = new managebenhvathuoc();
-    modangkyphieutiem = new Dangkyphieutiem();
-    connect(moi,SIGNAL(nvdangnhap(QString,QString)),this,SLOT(capnhatPhanQuyen(QString,QString)));
+
+
     //connect(moi,)
     //connect(dpmoi,SIGNAL(destroyed(QObject*)),this,SLOT(test(QObject*)));
     //subwindowList = new QList<subwindowList>();

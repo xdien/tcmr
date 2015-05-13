@@ -31,6 +31,10 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_comboBox_tp_currentIndexChanged(int index);
+
+    void on_comboBox_qh_currentIndexChanged(int index);
+
 private:
     HtmlTemp *htmltemp;
     QString tcdd(QString mathuoc, QString madc, QString tu, QString den);
@@ -46,6 +50,9 @@ private:
     QList<QStandardItem *> tmp;
     QString ktc(QString mabenh, QString madc, QString tu, QString den);
     QString kr(QString mathuoc, QString madc, QString tu, QString den);
+    void setcombobox(QString madc);
+    QSqlQueryModel *cmb_tp;
+    QString getAdrrCode();
 };
 
 #endif // REPORTBENHTRUYENNHIEM_H
