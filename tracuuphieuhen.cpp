@@ -11,6 +11,12 @@ tracuuPhieuHen::tracuuPhieuHen(QWidget *parent) :
     ui->benhdk->setModel(&itemtDSbenh);
     ui->thuoc->setModel(&thuocModel);
     stt = new managerSTT("dangkytt");
+    contextMenu = new QMenu();
+
+    ui->thuoc->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    connect(ui->thuoc,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(onCustomContextMenu(QPoint)));
+
 }
 
 tracuuPhieuHen::~tracuuPhieuHen()
@@ -123,4 +129,22 @@ void tracuuPhieuHen::on_pushButton_3_clicked()
 void tracuuPhieuHen::on_ma_bn_textChanged(const QString &arg1)
 {
     this->thuocModel.clear();
+}
+
+void tracuuPhieuHen::onCustomContextMenu(const QPoint &point){
+    index = ui->thuoc->indexAt(point);
+    if (index.isValid()) {
+        //mabenh = thuocModel.index(index.row(),0).data().toString();
+        //mathuoc = thuocModel.index(index.row(),1).data().toString();
+        QAction action1("Xóa", this);
+        connect(&action1, SIGNAL(triggered()), this, SLOT(xoaThuoc()));
+        contextMenu->addAction(&action1);
+        contextMenu->exec(ui->thuoc->mapToGlobal(point));
+    }
+}
+
+void tracuuPhieuHen::xoaThuoc()
+{
+    thuocModel.removeRow(ui->thuoc->currentIndex().row());
+    //thuocModel.setQuery("select * from phong_ngua where ma_benh = '"+ mabenh +"'");
 }

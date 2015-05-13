@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QtSql>
 #include <QDebug>
+#include <QMenu>
 #include "managerstt.h"
 
 namespace Ui {
@@ -30,6 +31,9 @@ private slots:
 
     void on_ma_bn_textChanged(const QString &arg1);
 
+    void onCustomContextMenu(const QPoint &point);
+    void xoaThuoc();
+
 private:
     Ui::tracuuPhieuHen *ui;
     QSqlQuery query;
@@ -43,6 +47,8 @@ private:
     managerSTT *stt;
     QList<QStandardItem *> tmp;
     QStringList dsbenhmoi;
+    QModelIndex index;
+    QMenu *contextMenu;
 };
 
 #endif // TRACUUPHIEUHEN_H
