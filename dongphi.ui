@@ -98,7 +98,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Số Tiền</string>
+              <string>Số Tiền (ĐVT nghìn đồng):</string>
              </property>
             </widget>
            </item>
