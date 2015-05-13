@@ -14,6 +14,9 @@ ReportBenhTruyenNhiem::ReportBenhTruyenNhiem(QWidget *parent) :
 {
     ui->setupUi(this);
     htmltemp = new HtmlTemp();
+    cmb_tp = new QSqlQueryModel();
+    cmb_tp->setQuery("select name,provinceid from province");
+    ui->comboBox_tp->setModel(cmb_tp);
    table_benh.setQuery("select ten_benh,ma_benh from benh where la_vx = FALSE");
    ui->treeView_benh->setModel(&table_benh);
    ui->treeView_benhDChon->setModel(&itemModel_benhDChon);
@@ -28,38 +31,39 @@ ReportBenhTruyenNhiem::~ReportBenhTruyenNhiem()
 void ReportBenhTruyenNhiem::on_pushButton_clicked()
 {
     QString mau;
-    //this->tcdd("TH_00000001","00001",200);
+    //this->tcdd("TH_00000001",ma_dc,200);
     QTextDocument *document = new QTextDocument();
     QTextCursor cursor(document);
     //truyen tr td vao bien conntent
+    ma_dc = this->getAdrrCode();
     for(int i =0;i<itemModel_benhDChon.rowCount();i++)
     {
         ma_benh = itemModel_benhDChon.index(i,1).data().toString();
         ma_thuoc = "TH_00000001";
         mau = mau + "<tr>"
                     "<td>"+itemModel_benhDChon.index(i,0).data().toString()+"</td>"
-                    "<td>"+tcdd(ma_thuoc,"00001","1","11")+"</td>"
-                    "<td>"+this->ktc(ma_thuoc,"00001","1","11")+"</td>"
-                    "<td>"+this->kr(ma_thuoc,"00001","1","11")+"</td>"
+                    "<td>"+tcdd(ma_thuoc,ma_dc,"1","11")+"</td>"
+                    "<td>"+this->ktc(ma_thuoc,ma_dc,"1","11")+"</td>"
+                    "<td>"+this->kr(ma_thuoc,ma_dc,"1","11")+"</td>"
                     "<!-- khoi 2 1-4tuoi-->"
-                "<td>"+tcdd(ma_thuoc,"00001","12","60")+"</td>"
-                "<td>"+this->ktc(ma_thuoc,"00001","12","60")+"</td>"
-                "<td>"+this->kr(ma_thuoc,"00001","12","60")+"</td>"
+                "<td>"+tcdd(ma_thuoc,ma_dc,"12","60")+"</td>"
+                "<td>"+this->ktc(ma_thuoc,ma_dc,"12","60")+"</td>"
+                "<td>"+this->kr(ma_thuoc,ma_dc,"12","60")+"</td>"
                 "<!-- khoi 3 tu 5 den 9 tuoi-->"
-            "<td>"+tcdd(ma_thuoc,"00001","60","120")+"</td>"
-            "<td>"+this->ktc(ma_thuoc,"00001","60","120")+"</td>"
-            "<td>"+this->kr(ma_thuoc,"00001","60","120")+"</td>"
+            "<td>"+tcdd(ma_thuoc,ma_dc,"60","120")+"</td>"
+            "<td>"+this->ktc(ma_thuoc,ma_dc,"60","120")+"</td>"
+            "<td>"+this->kr(ma_thuoc,ma_dc,"60","120")+"</td>"
                 "<!-- khoi 4 10-14tuoi-->"
-            "<td>"+tcdd(ma_thuoc,"00001","120","180")+"</td>"
-            "<td>"+this->ktc(ma_thuoc,"00001","120","180")+"</td>"
-            "<td>"+this->kr(ma_thuoc,"00001","120","180")+"</td>"
+            "<td>"+tcdd(ma_thuoc,ma_dc,"120","180")+"</td>"
+            "<td>"+this->ktc(ma_thuoc,ma_dc,"120","180")+"</td>"
+            "<td>"+this->kr(ma_thuoc,ma_dc,"120","180")+"</td>"
                 "<!-- khoi 5 > 15t-->"
-            "<td>"+tcdd(ma_thuoc,"00001","180","999999")+"</td>"
-            "<td>"+this->ktc(ma_thuoc,"00001","180","999999")+"</td>"
-            "<td>"+this->kr(ma_thuoc,"00001","180","999999")+"</td>"
+            "<td>"+tcdd(ma_thuoc,ma_dc,"180","999999")+"</td>"
+            "<td>"+this->ktc(ma_thuoc,ma_dc,"180","999999")+"</td>"
+            "<td>"+this->kr(ma_thuoc,ma_dc,"180","999999")+"</td>"
                     "</tr>";
     }
-    //qDebug() << this->kiemtraDungHen(22,"TH_00000001","00001");
+    //qDebug() << this->kiemtraDungHen(22,"TH_00000001",ma_dc);
     cursor.insertHtml(htmltemp->header1+mau);
 #ifdef __MINGW32__
     //thu su dung webview tren windows
@@ -165,4 +169,94 @@ QString ReportBenhTruyenNhiem::kr(QString mathuoc, QString madc, QString tu, QSt
         return query_tmp.value(0).toString();
     }else
         return "LOI: "+query_tmp.lastError().text();
+}
+
+void ReportBenhTruyenNhiem::setcombobox(QString madc)
+{
+    int lent;
+    lent = madc.length();
+    QString luu, disid;
+    switch (lent) {
+    case 2:
+    {
+        ui->comboBox_tp->setCurrentIndex(ui->comboBox_tp->findData(madc));
+        ui->comboBox_qh->setCurrentIndex(-1);
+        ui->comboBox_xp->setCurrentIndex(-1);
+        break;
+    }
+    case 3:
+    {
+        query.exec("SELECT * FROM district where districtid = '"+madc+"'");
+        while(query.next())
+        {
+            ui->comboBox_qh->addItem(query.value(1).toString(), query.value(0).toString());
+            luu = query.value(4).toString();//luu gia ma tinh thanh
+        }
+
+        query.exec("select * from provice where provinceid = '"+luu+"'");
+        ui->comboBox_tp->setCurrentIndex(ui->comboBox_tp->findData(luu));
+        ui->comboBox_qh->setCurrentIndex(ui->comboBox_qh->findData(madc));
+        ui->comboBox_xp->setCurrentIndex(-1);
+        break;
+    }
+    default:
+    {
+        query.exec("SELECT * FROM ward where wardid = '"+madc+"'");
+        while(query.next())
+        {
+            ui->comboBox_xp->addItem(query.value(1).toString(), query.value(0).toString());
+            disid = query.value(4).toString();
+        }
+        //set gia tri cho qh
+        query.exec("select * from district where districtid = '"+disid+"'");
+        if(query.next())
+        {
+            luu = query.value(4).toString();//luu gia ma tinh thanh
+        }
+        ui->comboBox_tp->setCurrentIndex(ui->comboBox_tp->findData(luu));
+        ui->comboBox_qh->setCurrentIndex(ui->comboBox_qh->findData(disid));
+        ui->comboBox_xp->setCurrentIndex(ui->comboBox_xp->findData(madc));
+        break;
+    }
+    }
+}
+
+void ReportBenhTruyenNhiem::on_comboBox_tp_currentIndexChanged(int index)
+{
+    ui->comboBox_qh->clear();
+//    query.exec("select * from district where provinceid = '"+ui->comboBox_tp->itemData(index).toString()+"'");
+    //lay gia tri tu model khong lay gia tri tu cmb_
+    query.exec("select * from district where provinceid = '"+ui->comboBox_tp->model()->index(index,1).data().toString() +"'");
+    while (query.next()) {
+        ui->comboBox_qh->addItem(query.value(1).toString(),query.value(0).toString());
+    }
+    //them gia tri rong
+    ui->comboBox_qh->addItem("");
+}
+
+void ReportBenhTruyenNhiem::on_comboBox_qh_currentIndexChanged(int index)
+{
+    QSqlQuery xaphuong;
+    ui->comboBox_xp->clear();
+    xaphuong.exec("SELECT * FROM ward where districtid = '"+ui->comboBox_qh->itemData(index).toString()+"'");
+    while(xaphuong.next())
+    {
+        ui->comboBox_xp->addItem(xaphuong.value(1).toString(),xaphuong.value(0).toString());
+    }
+    //them fia tri rong
+    ui->comboBox_xp->addItem("");
+}
+
+QString ReportBenhTruyenNhiem::getAdrrCode()
+{
+    if(ui->comboBox_xp->itemData(ui->comboBox_xp->currentIndex()).toString().isEmpty())
+    {
+        //neu province khong rong thi do la qh
+        if(!ui->comboBox_qh->itemData(ui->comboBox_qh->currentIndex()).toString().isEmpty())
+            return ui->comboBox_qh->itemData(ui->comboBox_qh->currentIndex()).toString();
+        else
+            return ui->comboBox_tp->model()->index(ui->comboBox_tp->currentIndex(),1).data().toString();
+    }
+    else
+        return ui->comboBox_xp->itemData(ui->comboBox_xp->currentIndex()).toString();
 }
