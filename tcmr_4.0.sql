@@ -688,13 +688,14 @@ create  index RELATIONSHIP_22_FK on tiem (
 ma_bn
 );
 
+CREATE TYPE mood AS ENUM ('Nam', 'Nu', 'None');
 /*==============================================================*/
 /* Table: tt_benh_nhan                                          */
 /*==============================================================*/
 create table tt_benh_nhan (
    ma_bn                VARCHAR(15)          not null,
    ten                  VARCHAR(50)          null,
-   gioi_tinh            enum('Nam','Nu','None') null,
+   gioi_tinh            mood null,
    ma_dc                CHAR(5)              null,
    dc_chi_tiet          CHAR(200)            null,
    sn                   DATE                 null,
